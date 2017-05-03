@@ -1,0 +1,16 @@
+.logo {
+  width: 38px;
+  height: auto;
+
+  @include media-breakpoint-up(lg) {
+    width: 60px;
+  }
+
+  &-emblem {
+    display: block;
+  }
+
+  &-logotype {
+    display: block;
+  }
+}

@@ -9,21 +9,35 @@
   <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css" />
   <link rel="stylesheet" href="./css/main.css" />
 </head>
-<body>
+<body style="background: #CCC">
 
-<header>
+<header class="header header-light">
   <div class="logo">
-    <img class="logo-emblem" src="./imgs/emblem.svg" alt="Redvike emblem" width="38" height="33" />
-    <img class="logo-logotype" src="./imgs/logotype.svg" alt="Redvike logotype" width="104" height="30" />
+    <svg class="logo-emblem" width="38" height="33" viewBox="0 0 60 52">
+        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polygon fill="#F1183C" points="0 0 30.181157 52 40 35.0621252 19.6942555 0"></polygon>
+            <polygon fill="#F44336" points="40.7142857 0 50.3581348 16.3835616 60 0"></polygon>
+        </g>
+    </svg>
+
+    <svg class="logo-logotype" width="104" height="30" viewBox="0 0 102 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g stroke="none" stroke-width="1" fill="#F44336" fill-rule="evenodd" font-weight="bold" font-family="FuturaBT-Bold, Futura Md BT" letter-spacing="-0.586206913" font-size="25">
+            <text><tspan x="0" y="18">REDVIKE</tspan></text>
+        </g>
+    </svg>
   </div>
 
-  <div class="menubar-toggler">
-    <span class="menubar-toggler-stick-1"><span>
-    <span class="menubar-toggler-stick-2"><span>
-    <span class="menubar-toggler-text">menu</span>
+  <div class="menu-burger" id="menuBurger">
+    <span class="menu-burger-stick"></span>
+    <span class="menu-burger-stick"></span>
+    <svg class="menu-burger-label" width="35" version="1.1" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
+    	<g class="menu-burger-label-g" fill="#212121" style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
+    		<text class="st0 st1 st2 st3">MENU</text>
+    	</g>
+    </svg>
   </div>
 
-  <nav class="menubar">
+  <nav class="menubar" style="display: none;">
     <ul class="menubar-nav">
       <li class="menubar-item"><a href="" class="menubar-link"></a></li>
       <li class="menubar-item"><a href="" class="menubar-link"></a></li>
@@ -35,6 +49,9 @@
 </header>
 
 <main>
+  <section>
+    <div class="menubar-offset"></div>
+  </section>
 </main>
 
 <footer>
