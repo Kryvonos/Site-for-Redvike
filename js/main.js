@@ -1,7 +1,9 @@
 'use strict';
 
 ;(function( $ ) {
-	var $menuBurger = $('#menuBurger'),
+	var $logo = $('#logo'),
+			$logotype = $('#logotype'),
+			$menuBurger = $('#menuBurger'),
 			menuBurgerClickTimeoutId = null;
 
 	function init() {
@@ -14,10 +16,22 @@
 
 	function initEventListeners() {
 		$menuBurger.click( onMenuBurgerClick );
+		$logo.mouseenter( onLogoMouseEnter );
+		$logo.on('transitionend webkitTransitionEnd', onLogoTransitionEnd);
+	}
+
+	function onLogoMouseEnter( event ) {
+		$logotype.removeClass('logo-logotype-hidden');
+	}
+
+	function onLogoTransitionEnd( event ) {
+		if ( ! $logotype.hasClass('hidden') &&  $logotype.css('opacity') == 0 ) {
+			$logotype.addClass('logo-logotype-hidden');
+		}
 	}
 
 	function onMenuBurgerClick( event ) {
-		var clickDelay = 500;
+		var clickDelay = 400;
 
 		if ( menuBurgerClickTimeoutId === null ) {
 
