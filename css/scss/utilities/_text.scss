@@ -1,3 +1,34 @@
+@each $font-size in map-keys($font-sizes) {
+	.fs-#{$font-size} {
+		font-size: font-size($font-size) !important;
+	}
+}
+
+@each $font-size in map-keys($header-sizes) {
+	.hs-#{$font-size} {
+		font-size: font-size($font-size) !important;
+	}
+}
+
+.text {
+  &-lg {
+    color: blue;
+    font-size: font-size(sm);
+
+    @include media-breakpoint-up(lg) {
+      font-size: font-size(lg)
+    }
+  }
+
+  &-xl {
+    font-size: font-size(md);
+
+    @include media-breakpoint-up(lg) {
+      font-size: font-size(xl);
+    }
+  }
+}
+
 @font-face {
   font-family: 'Bebas Neue';
   font-weight: 500;
@@ -7,6 +38,7 @@
        url('../fonts/Bebas-Neue/BebasNeueRegular.ttf') format('truetype')
 }
 
-.heading {
-  
+html {
+  font: normal font-size(sm) Arial, Helvetica, sans-serif;
+  line-height: 1.3;
 }

@@ -1,0 +1,3 @@
+@function border-radius($size, $br: $border-radius-sizes) {
+  @return map-get($br, $size);
+}

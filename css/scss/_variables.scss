@@ -1,0 +1,114 @@
+$colors: (
+  dark: #212121,
+  text: #757575,
+  light-text: #BDBDBD,
+  menu-text: #EEE,
+  section: #DDD,
+  brand: #F44336,
+  brand-accent: #F1183C,
+  accent: #FF4081
+);
+
+$font-sizes: (
+  xs: 12px,
+  sm: 14px,
+  md: 16px,
+  lg: 20px,
+  xl: 25px
+);
+
+$header-sizes: (
+  xs: 15px,
+  sm: 30px,
+  md: 40px,
+  lg: 60px,
+  xl: 80px
+);
+
+// dark, text, section, text-accent, menu items, brand, brand-accent, accent
+
+/*
+212121 - темний, майже чорний
+212121 - темний, майже чорний - фон меню
+757575 - світло сірий - колір тексту
+DDDDDD - світло сірий - фон секції
+BDBDBD - сірий - колір посилання у меню
+EEEEEE - світло-сірий - колір пунків меню
+F44336 - томатний
+F44336 - томатний - колір посилань у футері
+D32F2F -> F44336 - томатний на слові "LOVE"
+F1183C - рожевий - томатний - початкова точка градієнт секції "HIRE US"
+F1183C - рожевий
+FF4081 - рожевий - колір кнопки
+FF4081 - рожевий - заливка рядка пошуку у меню
+FF4081 - рожевий - колір назви "DESIGN" у "BUILD IT FOR YOU"
+FF4081 - рожевий - кінцева точка градієнта секції "HIRE US"
+
+212121 - heading, primary text, dark primary, dark
+757575 - text, secondary text
+DDDDDD - light-gray, section color
+BDBDBD - text accent
+EEEEEE - menu items color
+F44336 - primary, brand, brand-primary
+F1183C - primary accent, brand-other, brand-secondary
+FF4081 - accent
+
+dark, text, section, text-accent, menu items, brand, brand-accent, accent
+
+
+FONT SIZES
+
+10px - MENU
+
+80px - заголовок першого рівня
+40px - заголовок першого рівня (мобільна версія)
+60px - заголовок другого рівня
+30px - заголовок другого рівня (мобільна версія)
+30px - заголовок третього рівня
+15px - заголовок третього рівня (мобільна версія)
+
+100px - дуже великий текст
+50px - дуже великий текст (мобільна версія)
+
+*** ФУТЕР ***
+18px - "REDVIKE" у футері
+16px - контактна інформація у футері
+14px - пункти меню у футері
+
+
+14px - підказка "---- services"
+14px - плаваюче меню
+
+20px - текст
+14px - текст (мобільна версія)
+20px - текст кнопки
+12px - текст кнопки (мобільна версія)
+
+[особливий] 50px - "HIRE US"
+30px - "HIRE US" (мобільна версія)
+14px - посилання у футері
+
+35px - Пункти меню
+30px - Пункти меню (мобільна версія)
+20px - hello@redvike.com
+
+25px - текст у секцій "BUILD IT FOR YOU"
+[особливий] 12px -> 16px - текст у секцій "BUILD IT FOR YOU" (мобільна версія)
+80px -> "заголовок другого рівня" - заголовок "BUILD IT FOR YOU"
+[особливий] 30px - заголовок "BUILD IT FOR YOU" (мобільна версія)
+
+30px -> 25px - текст у секціях "ABOUT US", "JOIN US"
+[невизначений] 30px -> 25px - текст у секціях "ABOUT US", "JOIN US"
+
+40px - текст форми для заявки
+[невизначено] 40px - текст форми для заявки (мобільна версія)
+70px - зфокусований текст форми для заявки
+[невизначено] 70px - зфокусований текст форми для заявки (мобільна версія)
+
+текст:
+12, 14, 16, 20, 25
+
+text-sm
+text-sm
+
+*/

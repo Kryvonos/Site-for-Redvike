@@ -1,0 +1,7 @@
+@function font-size($size, $fs: $font-sizes) {
+  @return map-get($fs, $size);
+}
+
+@function header-size($size, $fs: $header-sizes) {
+  @return map-get($fs, $size);
+}

@@ -29,11 +29,11 @@
   $header: &;
 
   &-dark {
-    @include header-style(#191919);
+    @include header-style( color(dark) );
 
     &-lg {
         @include media-breakpoint-up(lg) {
-          @include header-style(#191919);
+          @include header-style( color(dark) );
         }
     }
   }

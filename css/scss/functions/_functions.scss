@@ -1,0 +1,3 @@
+@function border-value() {
+	@return 1px solid transparentize(color(light-blue), .39);
+}
