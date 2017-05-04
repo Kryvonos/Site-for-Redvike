@@ -4,3 +4,7 @@
 @import 'functions';
 @import 'utilities';
 @import 'components';
+
+* {
+  box-sizing: border-box;
+}

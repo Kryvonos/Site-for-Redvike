@@ -1,0 +1,93 @@
+@mixin header-style($color) {
+  .header-logo {
+      .logo {
+        &-emblem-shape,
+        &-logotype {
+          fill: $color;
+        }
+      }
+  }
+
+  .header-menu-burger {
+      .menu-burger {
+        &-stick {
+          background: $color;
+        }
+
+        &-label {
+          color: $color;
+          fill: $color;
+        }
+      }
+  }
+}
+
+.header {
+  $header-padding-xs-x: 15px;
+  $header-padding-lg-x: 30px;
+  $header-padding-xs-y: 20px;
+  $header-padding-lg-y: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: $header-padding-xs-y $header-padding-xs-x;
+
+  @include media-breakpoint-up(lg) {
+    padding: $header-padding-lg-y $header-padding-lg-x;
+  }
+
+  &-logo {
+  }
+
+  &-menu-burger {
+    position: relative;
+    z-index: 20;
+  }
+
+  &-menubar {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: color(dark);
+  }
+
+  &-offset {
+    height: 73px;
+
+    @include media-breakpoint-up(lg) {
+      height: 112px;
+    }
+  }
+
+  &-dark {
+    @include header-style( color(dark) );
+
+    &-lg {
+        @include media-breakpoint-up(lg) {
+          @include header-style( color(dark) );
+        }
+    }
+  }
+
+  &-light {
+    @include header-style(#FFF);
+
+    &-lg {
+        @include media-breakpoint-up(lg) {
+          @include header-style(#FFF);
+        }
+    }
+  }
+
+}

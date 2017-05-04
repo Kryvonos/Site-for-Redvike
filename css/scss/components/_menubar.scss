@@ -1,143 +1,98 @@
-.menubar {
-  $menubar: &;
-
-  &-offset {
-    padding-top: 70px;
-  }
-
+@mixin menubar-simple-link() {
+  text-decoration: none;
+  font-size: font-size(lg);
+  color: color(light-text);
 }
 
-
-.menu-burger {
-  $menu-burger: &;
-  width: 38px;
-  cursor: pointer;
-
-  &.active {
-      #{$menu-burger}-stick:first-child {
-        animation: burger-open-top 400ms ease-out forwards;
-      }
-
-      #{$menu-burger}-stick:nth-child(2) {
-        animation: burger-open-bottom 400ms ease-out forwards;
-      }
-
-      #{$menu-burger}-label {
-        animation: burger-open-label 400ms ease-out forwards;
-      }
-  }
+.menubar {
+  // display: none;
+  left: -99999999px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  opacity: 1;
+  transform: translateX(100%);
+  transition: all 500ms ease-in-out;
 
   &.closing {
-    #{$menu-burger}-stick:first-child {
-      animation: burger-close-top 400ms ease-out forwards;
-    }
-
-    #{$menu-burger}-stick:nth-child(2) {
-      animation: burger-close-bottom 400ms ease-out forwards;
-    }
-
-    #{$menu-burger}-label {
-      animation: burger-close-label 400ms ease-out forwards;
-    }
+    transform: translateX(-100%);
+    opacity: 0;
   }
 
-  &-stick {
+  &.active {
+    transform: translateX(0);
+  }
+
+  &-nav {
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 100px;
+    padding-bottom: 50px;
+    list-style: none;
+
+    @include media-breakpoint-down(xs) {
+      padding-left: 40px;
+      padding-right: 20px;
+      width: 100%;
+    }
+
+  }
+
+  &-link:first-child, &-simple-link:first-child {
+    margin-top: 0;
+  }
+
+  &-link:last-child, &-simple-link:last-child {
+    margin-bottom: 0;
+  }
+
+  &-link, &-simple-link {
+    transform: translateX(0);
+    transition: all 300ms ease-in-out;
+    transition-delay: 40ms;
+  }
+
+  &-gap {
     display: block;
-    margin-bottom: 6px;
-    width: 100%;
-    height: 6px;
-    background: #191919;
-    border-radius: 100px;
-    // transition: all 400ms ease-in-out;
+    height: 10px;
   }
 
-  &-label {
+  &-link {
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    // transition: all 400ms ease-in-out;
+    margin-top: 26px;
+    margin-bottom: 26px;
+    font-family: 'Bebas';
+    font-size: 30px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: -0.82px;
+    color: color(menubar-text);
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 32px;
+      margin-bottom: 32px;
+      font-size: 35px;
+    }
+
+    &.active {
+      color: color(brand);
+    }
+
+    &:hover {
+      transform: translateX(1em);
+    }
   }
 
-}
+  &-simple-link {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include menubar-simple-link;
 
-
-@keyframes burger-open-top {
-  50% {
-    transform: translateY(12px);
+    a {
+      @include menubar-simple-link;
+    }
   }
 
-  60% {
-    transform: translateY(12px) rotate(0);
-  }
-
-  100% {
-    transform: translateY(12px) rotate(-45deg);
-  }
-}
-
-@keyframes burger-close-top {
-  0% {
-    transform: translateY(12px) rotate(-45deg);
-  }
-
-  40% {
-    transform: translateY(12px) rotate(0);
-  }
-
-  100% {
-    transform: translateY(0) rotate(0);
-  }
-}
-
-@keyframes burger-open-bottom {
-  60% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(45deg);
-  }
-}
-
-@keyframes burger-close-bottom {
-  0% {
-    transform: rotate(45deg);
-  }
-
-  40% {
-    transform: rotate(0);
-  }
-
-  100% {
-    transform: rotate(0);
-  }
-}
-
-@keyframes burger-open-label {
-  60% {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-}
-
-@keyframes burger-close-label {
-  0% {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-
-  40% {
-    opacity: 0;
-    transform: translateY(-12px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }

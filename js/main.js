@@ -1,9 +1,11 @@
 'use strict';
 
 ;(function( $ ) {
-	var $logo = $('#logo'),
+	var $header = $('#header'),
+			$logo = $('#logo'),
 			$logotype = $('#logotype'),
 			$menuBurger = $('#menuBurger'),
+			$menubar = $('#menubar'),
 			menuBurgerClickTimeoutId = null;
 
 	function init() {
@@ -37,9 +39,11 @@
 
 			if ( ! $menuBurger.hasClass('active') ) {
 				$menuBurger.addClass('active');
+				$menubar.addClass('active');
 			}
 			else {
 				$menuBurger.addClass('closing');
+				$menubar.addClass('closing');
 			}
 
 			menuBurgerClickTimeoutId = setTimeout( function() {
@@ -47,6 +51,7 @@
 
 				if ( $menuBurger.hasClass('closing') ) {
 					$menuBurger.removeClass('active closing');
+					$menubar.removeClass('active closing');
 				}
 			}, clickDelay );
 		}

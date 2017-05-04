@@ -1,0 +1,79 @@
+@mixin logo-style($trapezia-fill, $triangle-fill) {
+  .logo {
+      &-emblem-shape {
+        &:first-child {
+          fill: $trapezia-fill !important;
+        }
+
+        &:nth-child(2) {
+          fill: $triangle-fill !important;
+        }
+      }
+
+      &-logotype-shape {
+        fill: $triangle-fill !important;
+      }
+  }
+}
+
+.logo {
+  $logo-emblem-lg-width: 60px;
+
+  display: inline-block;
+  position: relative;
+
+  &-brand {
+    @include logo-style($trapezia-fill: #F1183C, $triangle-fill: #F44336);
+
+    &-lg {
+        @include media-breakpoint-up(lg) {
+          @include logo-style($trapezia-fill: #F1183C, $triangle-fill: #F44336);
+        }
+    }
+  }
+
+  &-emblem {
+    display: block;
+    width: 38px;
+    height: auto;
+
+    @include media-breakpoint-up(lg) {
+      width: $logo-emblem-lg-width;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+
+    &:hover &-logotype {
+      transform: translateX($logo-emblem-lg-width);
+      filter: blur(0);
+      opacity: 1;
+    }
+
+  }
+
+  &-logotype {
+    display: none;
+
+    @include media-breakpoint-up(lg) {
+      display: block;
+      transform: translateX($logo-emblem-lg-width - 30px);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+      border-left: 20px solid transparent;
+      opacity: 0;
+      filter: blur(2.5px);
+      transition: all 250ms ease-in-out;
+    }
+
+    &-hidden {
+      z-index: -1;
+      overflow: hidden;
+    }
+
+  }
+}
