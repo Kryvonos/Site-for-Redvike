@@ -1,3 +1,9 @@
+@each $color in map-keys($colors) {
+	.color-#{"" + $color} {
+		color: color($color);
+	}
+}
+
 .hidden {
   display: none !important;
 }

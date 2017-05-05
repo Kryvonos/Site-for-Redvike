@@ -1,0 +1,120 @@
+.container {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.section {
+  @extend .container;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-top: 50px;
+  padding-bottom: 75px;
+
+  @include media-breakpoint-up(lg) {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  &-wrapper {
+    @extend .container-fluid;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    max-height: 1200px;
+  }
+
+  &-bg {
+    background: color(section);
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    order: 99999;
+
+    p {
+      margin-top: .35em;
+      line-height: 1.1;
+    }
+  }
+
+  &-heading {
+    order: 999999;
+    margin-top: 1.15em;
+  }
+
+  &-text {
+    @at-root p#{&}, p {
+      margin-top: 0;
+      margin-bottom: 1em;
+    }
+
+    color: color(text);
+  }
+
+  &-btn-wrapper {
+    align-self: flex-end;
+
+
+    .btn {
+      @include media-breakpoint-down(md) {
+        margin-top: 2.5em;
+      }
+
+      @include media-breakpoint-up(lg) {
+        margin-bottom: 8px;
+      }
+    }
+
+
+  }
+}
+
+.start {
+  position: relative;
+  min-height: 400px;
+
+  &.header-offset {
+    @include media-breakpoint-down(md) {
+      padding-top: 0;
+    }
+  }
+
+  &-bg {
+    background-image: url('../imgs/first-section.png');
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center 25%;
+  }
+
+  &-section {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    @include media-breakpoint-down(md) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+
+    @include media-breakpoint-up(lg ) {
+      padding-top: 100px;
+      padding-bottom: 50px;
+
+      @media (min-height: 550px) {
+        padding-top: 170px;
+      }
+    }
+
+  }
+}

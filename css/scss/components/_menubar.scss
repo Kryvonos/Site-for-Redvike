@@ -5,22 +5,20 @@
 }
 
 .menubar {
-  // display: none;
   left: -99999999px;
   display: flex;
   flex-direction: column;
   overflow: auto;
   opacity: 1;
   transform: translateX(100%);
-  transition: all 500ms ease-in-out;
-
-  &.closing {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
+  transition: all 600ms ease-in-out;
 
   &.active {
     transform: translateX(0);
+  }
+
+  &.closing {
+    transform: translateX(100%);
   }
 
   &-nav {

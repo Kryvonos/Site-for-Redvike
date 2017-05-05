@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'Bebas Neue';
+  font-weight: 500;
+  src: url('../fonts/Bebas-Neue/BebasNeueRegular.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Bebas-Neue/BebasNeueRegular.otf') format('opentype'),
+	     url('../fonts/Bebas-Neue/BebasNeueRegular.woff') format('woff'),
+       url('../fonts/Bebas-Neue/BebasNeueRegular.ttf') format('truetype')
+}
+
+@font-face {
+  font-family: 'Bebas';
+  font-weight: 500;
+  src: url('../fonts/Bebas/Bebas.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Bebas/Bebas.otf') format('opentype'),
+	     url('../fonts/Bebas/Bebas.woff') format('woff'),
+       url('../fonts/Bebas/Bebas.ttf') format('truetype')
+}
+
+
 @each $font-size in map-keys($font-sizes) {
 	.fs-#{$font-size} {
 		font-size: font-size($font-size) !important;
@@ -9,6 +28,7 @@
 		font-size: font-size($font-size) !important;
 	}
 }
+
 
 .text {
   &-lg {
@@ -29,27 +49,54 @@
   }
 }
 
-@font-face {
-  font-family: 'Bebas Neue';
-  font-weight: 500;
-  src: url('../fonts/Bebas-Neue/BebasNeueRegular.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Bebas-Neue/BebasNeueRegular.otf') format('opentype'),
-	     url('../fonts/Bebas-Neue/BebasNeueRegular.woff') format('woff'),
-       url('../fonts/Bebas-Neue/BebasNeueRegular.ttf') format('truetype')
+.heading {
+  margin-top: 0;
+  margin-bottom: 0;
+	font-family: Bebas;
+	letter-spacing: 0.02px;
+	text-transform: uppercase;
+	color: color(dark);
 }
 
-@font-face {
-  font-family: 'Bebas';
-  font-weight: 500;
-  src: url('../fonts/Bebas/Bebas.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/Bebas/Bebas.otf') format('opentype'),
-	     url('../fonts/Bebas/Bebas.woff') format('woff'),
-       url('../fonts/Bebas/Bebas.ttf') format('truetype')
+.h1 {
+  @extend .heading;
+  font-size: heading-size(md);
+
+  @include media-breakpoint-up(lg) {
+    font-size: heading-size(xl);
+  }
+}
+
+.h2 {
+  @extend .heading;
+  font-size: heading-size(sm);
+
+  @include media-breakpoint-up(lg) {
+    font-size: heading-size(lg);
+  }
+}
+
+.h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: heading-size(xs);
+  font-weight: 700;
+  letter-spacing: -0.7px;
+  color: color(dark);
+
+  @include media-breakpoint-up(lg) {
+    font-size: heading-size(sm);
+  }
 }
 
 html {
   font: normal font-size(sm) Arial, Helvetica, sans-serif;
   line-height: 1.3;
+  color: color(dark);
+
+  @include media-breakpoint-up(lg) {
+    font-size: font-size(lg);
+  }
 }
 
 * {

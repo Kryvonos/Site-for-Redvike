@@ -1,12 +1,21 @@
 'use strict';
 
 ;(function( $ ) {
-	var $header = $('#header'),
+	var $window = $(window),
+			$header = $('#header'),
 			$logo = $('#logo'),
 			$logotype = $('#logotype'),
 			$menuBurger = $('#menuBurger'),
 			$menubar = $('#menubar'),
-			menuBurgerClickTimeoutId = null;
+
+			menuBurgerClickTimeoutId = null,
+			breakpoints = {
+				  xs: 0,
+				  sm: 576,
+				  md: 768,
+				  lg: 992,
+				  xl: 1200
+			};
 
 	function init() {
   		if ( ! Modernizr.flexbox ) {
@@ -14,12 +23,18 @@
   		}
 
 			initEventListeners();
+			fitToViewportHeight();
 	};
 
 	function initEventListeners() {
+		$(window).resize( onWindowResize );
 		$menuBurger.click( onMenuBurgerClick );
 		$logo.mouseenter( onLogoMouseEnter );
 		$logo.on('transitionend webkitTransitionEnd', onLogoTransitionEnd);
+	}
+
+	function onWindowResize( event ) {
+		fitToViewportHeight();
 	}
 
 	function onLogoMouseEnter( event ) {
@@ -33,7 +48,7 @@
 	}
 
 	function onMenuBurgerClick( event ) {
-		var clickDelay = 400;
+		var clickDelay = 700;
 
 		if ( menuBurgerClickTimeoutId === null ) {
 
@@ -56,6 +71,61 @@
 			}, clickDelay );
 		}
 	}
+
+	function fitToViewportHeight() {
+		var $elems = $('[data-fit-to-viewport-height]'),
+				height = $(window).outerHeight();
+
+		$elems.each( function() {
+			var $this = $(this),
+					originalHeight = 0;
+
+			$this.css('height', '');
+			originalHeight = $this.outerHeight();
+
+			if ( isBreakpointDown('lg') ) return;
+
+			if ( originalHeight < height ) {
+				$this.css('height', height + 'px');
+			}
+		} );
+	}
+
+
+	function isBreakpointUp(size) {
+	  var width = breakpoints[size];
+
+	  if ( isNumeric(size) ) {
+	  	width = size;
+	  }
+	  else if ( ! breakpoints.hasOwnProperty(size) ) {
+	  	return false;
+	  }
+
+	  return $window.outerWidth() >= width;
+	}
+
+	function isBreakpointDown(size) {
+		if ( size === null ) {
+	  	return true;
+	  }
+
+	  var width = breakpoints[size];
+
+	  if ( isNumeric(size) ) {
+	  	width = size;
+	  }
+	  else if ( ! breakpoints.hasOwnProperty(size) ) {
+	  	return false;
+	  }
+
+	  return $window.outerWidth() < width;
+	}
+
+	function isNumeric(n) {
+	  return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+
 
   init();
 
