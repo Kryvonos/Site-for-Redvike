@@ -3,6 +3,13 @@
 //   padding-right: 30px;
 // }
 
+.container-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: $container-wrapper-max-width;
+}
+
 .section {
   @extend .container;
   margin-top: auto;
@@ -286,13 +293,25 @@ a {
 .floating-menu {
   $floating-menu-link-padding-y: .15em;
 
-  position: fixed;
-  top: 0;
-  left: -999999px;
   display: inline-block;
+  position: fixed;
+  top: 0px;
+  left: -999999px;
+  padding-top: 100px;
+  min-height: 50vh;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
 
-  @media (min-width: 1360px) {
-    left: 0;
+  // &.hidden {
+  //   left: -9999999px;
+  // }
+
+  &.visible:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: $container-wrapper-max-width - 1px) {
+    left: -9999999px !important;
   }
 
   &-emblem {

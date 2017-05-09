@@ -27,10 +27,11 @@ $header-sizes: (
 
 
 // Container
-$container-padding-x-xs: 30px;
+$container-wrapper-max-width: 1360px !default;
+$container-padding-x-xs: 30px !default;
 
 // Section
-$section-text-max-width: 650px;
+$section-text-max-width: 650px !default;
 
 // dark, text, section, text-accent, menu items, brand, brand-accent, accent
 

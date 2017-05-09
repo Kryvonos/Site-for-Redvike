@@ -3763,6 +3763,12 @@ html {
 * {
   -webkit-font-smoothing: antialiased; }
 
+.container-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1360px; }
+
 .section {
   margin-top: auto;
   margin-bottom: auto;
@@ -3948,13 +3954,19 @@ a {
     padding-right: 0; }
 
 .floating-menu {
+  display: inline-block;
   position: fixed;
-  top: 0;
+  top: 0px;
   left: -999999px;
-  display: inline-block; }
-  @media (min-width: 1360px) {
+  padding-top: 100px;
+  min-height: 50vh;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out; }
+  .floating-menu.visible:hover {
+    opacity: 1; }
+  @media (max-width: 1359px) {
     .floating-menu {
-      left: 0; } }
+      left: -9999999px !important; } }
   .floating-menu-emblem {
     margin-bottom: 0.8rem; }
   .floating-menu-nav {
@@ -4126,7 +4138,6 @@ a {
   right: 0;
   margin-left: auto;
   margin-right: auto;
-  max-width: 1360px;
   padding: 20px 15px; }
   @media (min-width: 992px) {
     .header {
