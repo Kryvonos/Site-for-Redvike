@@ -32,6 +32,13 @@
     }
   }
 
+  &.logo-dark {
+      .logo-emblem-shape,
+      .logo-logotype {
+        fill: color(dark);
+      }
+  }
+
   &-emblem {
     display: block;
     width: 38px;

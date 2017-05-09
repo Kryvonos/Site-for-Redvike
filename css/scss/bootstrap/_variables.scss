@@ -232,8 +232,9 @@ $container-max-widths: (
 
 $grid-columns:               12 !default;
 $grid-gutter-width-base:     30px !default;
+$grid-gutter-width-base-xs:  60px !default;
 $grid-gutter-widths: (
-  xs: $grid-gutter-width-base,
+  xs: $grid-gutter-width-base-xs,
   sm: $grid-gutter-width-base,
   md: $grid-gutter-width-base,
   lg: $grid-gutter-width-base,
