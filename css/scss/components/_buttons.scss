@@ -10,6 +10,8 @@
   color: #FFF;
   background: color(accent);
   transition: all 300ms ease-in-out;
+  cursor: pointer;
+  outline: none;
 
   @include media-breakpoint-up(lg) {
     font-size: font-size(lg);
@@ -33,6 +35,17 @@
     &:hover {
       border-color: color(dark);
       background: color(dark);
+      color: #FFF;
+    }
+  }
+
+  &-info {
+    color: color(accent);
+    border-color: color(accent);
+    background: transparent;
+
+    &:hover {
+      background: color(accent);
       color: #FFF;
     }
   }

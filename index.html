@@ -56,11 +56,10 @@
 </header>
 
 <main>
-  <div class="container-wrapper" id="mainContainerWrapper">
-      <div class="start section-wrapper header-offset" data-fit-to-viewport-height style="height: 580px;">
-          <div class="start-bg"></div>
+      <div class="first section-wrapper header-offset" data-fit-to-viewport-height style="height: 580px;">
+          <div class="first-bg"></div>
 
-          <section class="start-section section">
+          <section class="first-section section">
             <h1 class="h1">
               Creating &nbsp;&nbsp;Software &nbsp;&nbsp;<br>People &nbsp;&nbsp;<span class="color-brand">Love</span>
               <!-- <span class="">
@@ -173,35 +172,37 @@
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-          <div class="footer-contacts col-12 col-md-auto">
-            <img class="mb-3" src="./imgs/logo.svg" width="" height="" alt="Redvike logo" />
+  <div class="container-wrapper footer-content-wrapper">
+      <div class="footer-content container">
+          <div class="row">
+            <div class="footer-contacts col-12 col-md-auto">
+              <img class="mb-3" src="./imgs/logo.svg" width="" height="" alt="Redvike logo" />
 
-            <p class="footer-nav fs-md">
-              <span class="nav-link">
-                <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
-              </span>
-              <span class="nav-link">
-                <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
-              </span>
-              <span class="nav-link">Świętej Teresy 2, 31-162</span>
-              <span class="nav-link">Kraków, Poland</span>
-            </p>
+              <p class="footer-nav fs-md">
+                <span class="nav-link">
+                  <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
+                </span>
+                <span class="nav-link">
+                  <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
+                </span>
+                <span class="nav-link">Świętej Teresy 2, 31-162</span>
+                <span class="nav-link">Kraków, Poland</span>
+              </p>
+            </div>
+
+            <div class="col-12 col-md-auto">
+              <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
+
+              <p class="footer-nav fs-sm text-uppercase">
+                <a class="nav-link" href="#">With you</a>
+                <a class="nav-link" href="#">For you</a>
+                <a class="nav-link" href="#">About us</a>
+                <a class="nav-link" href="#">Career</a>
+              </p>
+            </div>
           </div>
-
-          <div class="col-12 col-md-auto">
-            <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
-
-            <p class="footer-nav fs-sm text-uppercase">
-              <a class="nav-link" href="#">With you</a>
-              <a class="nav-link" href="#">For you</a>
-              <a class="nav-link" href="#">About us</a>
-              <a class="nav-link" href="#">Career</a>
-            </p>
-          </div>
-        </div>
-    </div>
+      </div>
+  </div>
 </footer>
 
 <script src="./js/modernizr-custom.js"></script>
@@ -217,7 +218,7 @@ var controller = new ScrollMagic.Controller(),
 
 
 function init() {
-  
+
 }
 
 function createFloatingNav() {

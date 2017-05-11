@@ -147,7 +147,7 @@ if (!String.prototype.format) {
 
 // Floating menuBurger
 ;(function() {
-
+  return;
 	var $mainContainerWrapper = $('#mainContainerWrapper'),
 	    $floatingMenu = $('#floatingMenu'),
 
