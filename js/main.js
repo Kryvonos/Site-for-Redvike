@@ -1,5 +1,17 @@
 'use strict';
 
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
 ;(function( $ ) {
 	var $window = $(window),
 			$header = $('#header'),
@@ -130,3 +142,49 @@
   init();
 
 })( jQuery );
+
+
+
+// Floating menuBurger
+;(function() {
+
+	var $mainContainerWrapper = $('#mainContainerWrapper'),
+	    $floatingMenu = $('#floatingMenu'),
+
+	    controller = new ScrollMagic.Controller(),
+	    scene = new ScrollMagic.Scene({
+	      triggerElement: $('[data-show-floating-menu]'),
+	      triggerHook: 'onLeave',
+	      duration: 0,
+	    }),
+	    needHideFloatingMenu = false;
+
+	$floatingMenu.on('transitionend webkitTransitionEnd', onFloatingMenuTransitionEnd);
+	scene
+	  .on('start', onSceneStart)
+	  .addIndicators()
+	  .addTo( controller );
+
+	function onSceneStart( event ) {
+	  var left = '',
+	      indent = 30; // px
+
+	  if ( event.scrollDirection === 'FORWARD' ) {
+	    $floatingMenu.addClass('visible');
+	    left = $mainContainerWrapper.offset().left;
+	    left += indent;
+
+	    $floatingMenu.css('left', left);
+	  }
+	  else {
+	    $floatingMenu.removeClass('visible');
+	  }
+	}
+
+	function onFloatingMenuTransitionEnd( event ) {
+	  if ( ! $floatingMenu.hasClass('visible') && $floatingMenu.css('opacity') == 0 ) {
+	    $floatingMenu.css('left', '');
+	  }
+	}
+
+}());

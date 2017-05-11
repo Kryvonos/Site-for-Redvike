@@ -70,7 +70,7 @@
           </section>
       </div>
 
-      <div class="section-wrapper" data-show-floating-menu data-fit-to-viewport-height>
+      <div class="section-wrapper" data-floating-nav="services" data-show-floating-menu data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -89,7 +89,7 @@
           </section>
       </div>
 
-      <div class="section-wrapper section-bg" data-fit-to-viewport-height>
+      <div class="section-wrapper section-bg" data-floating-nav="products" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -108,7 +108,7 @@
           </section>
       </div>
 
-      <div class="section-wrapper" data-fit-to-viewport-height>
+      <div class="section-wrapper" data-floating-nav="about us" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -135,7 +135,7 @@
           </section>
       </div>
 
-      <div class="section-wrapper bg-gradient-brand" data-fit-to-viewport-height>
+      <div class="section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-fit-to-viewport-height>
           <section class="section hire-us-section">
               <h2 class="hire-us-heading heading">Hire &nbsp;&nbsp;Us</h2>
 
@@ -162,6 +162,14 @@
     <a href="#" class="list-link">about us</a>
     <a href="#" class="list-link">career</a>
   </nav>
+</div>
+
+<div class="floating-nav" id="floatingNav">
+  <div class="floating-nav-item active"><span class="floating-nav-text">services</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
 </div>
 
 <footer class="footer">
@@ -204,44 +212,39 @@
 <script src="./js/main.js"></script>
 
 <script>
-var $mainContainerWrapper = $('#mainContainerWrapper'),
-    $floatingMenu = $('#floatingMenu'),
+var controller = new ScrollMagic.Controller(),
+    $elems = $('[data-floating-nav]');
 
-    controller = new ScrollMagic.Controller(),
-    scene = new ScrollMagic.Scene({
-      triggerElement: $('[data-show-floating-menu]'),
-      triggerHook: 'onLeave',
-      duration: 0,
-    }),
-    needHideFloatingMenu = false;
 
-$floatingMenu.on('transitionend webkitTransitionEnd', onFloatingMenuTransitionEnd);
-scene
-  .on('start', onSceneStart)
-  .addIndicators()
-  .addTo( controller );
-
-function onSceneStart( event ) {
-  var left = '',
-      indent = 30; // px
-
-  if ( event.scrollDirection === 'FORWARD' ) {
-    $floatingMenu.addClass('visible');
-    left = $mainContainerWrapper.offset().left;
-    left += indent;
-
-    $floatingMenu.css('left', left);
-  }
-  else {
-    $floatingMenu.removeClass('visible');
-  }
+function init() {
+  
 }
 
-function onFloatingMenuTransitionEnd( event ) {
-  if ( ! $floatingMenu.hasClass('visible') && $floatingMenu.css('opacity') == 0 ) {
-    $floatingMenu.css('left', '');
-    console.log('sdf');
-  }
+function createFloatingNav() {
+  var $container = $('<div>', {id: 'floatingNav', class: 'floating-nav'});
+
+}
+
+$elems.each( function() {
+  var $this = $(this),
+      scene = new ScrollMagic.Scene( {
+        triggerElement: $this,
+        triggerHook: 'onEnter'
+      });
+
+  scene
+    .on('enter', onSceneEnter)
+    .on('leave', onSceneLeave)
+    .addTo( controller )
+    .addIndicators();
+} );
+
+function onSceneEnter( event ) {
+
+}
+
+function onSceneLeave( event ) {
+
 }
 </script>
 </body>
