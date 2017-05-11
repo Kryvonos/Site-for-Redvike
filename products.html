@@ -96,7 +96,7 @@
   </div>
 
   <div class="section-wrapper products-wrapper" data-fit-to-viewport-height>
-    <div class="section products container">
+    <div class="section products container" id="products">
 
         <section class="product-item row">
           <div class="product-item-description flex-last col-12 col-lg-6">
@@ -115,7 +115,7 @@
           </div>
         </section>
 
-        <span class="products-label">Products</span>
+        <span class="products-label" id="productsLabel">Products</span>
 
     </div>
   </div>
@@ -174,10 +174,26 @@
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+<script src="bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
+<script src="bower_components/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 <script src="./js/main.js"></script>
 
+<script>
+  var controller = new ScrollMagic.Controller(),
+      scene = new ScrollMagic.Scene( {
+        triggerElement: '#products',
+        triggerHook: 'onEnter',
+        duration: '200%'
+      } );
+
+  scene
+    .setTween('#productsLabel', {y: '30%', ease: Linear.easeNone})
+    .addTo( controller );
+    // .addIndicators();
+</script>
 </body>
 </html>
