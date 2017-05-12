@@ -119,6 +119,65 @@
 
     </div>
   </div>
+
+  <div class="section-wrapper" data-floating-nav="about us" data-fit-to-viewport-height>
+      <section class="section">
+          <div class="row">
+              <div class="section-content col-12 col-lg">
+                  <header class="section-header">
+                    <h2 class="section-heading h2">Testimotionals</h2>
+                  </header>
+
+                  <div class="feedbacks">
+                        <blockquote class="quote">
+                          <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                          <p>They provided us with constant support (even on weekends) and feedback on the development process. Due to constant communication, it felt like they are a part of our technical team. They are more flexible than other contractors we have worked with. They understand challenges that start-ups are facing and trying o adapt their development process based on the requirements.</p>
+
+                          <footer>
+                            <p class="quote-author"><strong>Call Page</strong></p>
+                          </footer>
+                        </blockquote>
+                  </div>
+              </div>
+
+              <div class="col-12 col-lg-auto section-btn-wrapper">
+                <a class="btn btn-primary" href="#">Work with us</a>
+              </div>
+          </div>
+      </section>
+  </div>
+
+  <div class="section-wrapper bg-gradient-brand" data-fit-to-viewport-height>
+    <section class="section contacts">
+      <h2 class="out-of-page">Contacts form</h2>
+
+      <form name="contactsUs">
+          <p class="contacts-group">Hey! Let’s get aquainted:)</p>
+          <p class="contacts-group">Hello! My <label for="clientName">name</label> is <input id="clientName" class="contacts-input" type="text" name="name" /></p>
+          <p class="contacts-group">I represent <input class="contacts-input" type="text" name="name" /></p>
+
+          <p class="contacts-group">
+            Nice to meet you, Carlos.<br>
+            We can help you with <input class="contacts-input" type="text" name="name" />
+          </p>
+
+          <p class="contacts-group">
+            Awesome! We’ll be glad to help you with CRM.<br>When do you need it to be done?<br>
+            <input class="contacts-input" type="text" name="name" />
+          </p>
+
+          <p class="contacts-group">
+            No problem. Could you please leave your email?<br>
+            <input class="contacts-input" type="text" name="email" />
+          </p>
+
+          <p class="contacts-group">
+            Great. Thank you, Carlos!.<br>
+            We will get back to you ASAP :)
+          </p>
+      </form>
+    </section>
+  </div>
 </main>
 
 <div class="floating-menu" id="floatingMenu">
@@ -141,35 +200,37 @@
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-          <div class="footer-contacts col-12 col-md-auto">
-            <img class="mb-3" src="./imgs/logo.svg" width="" height="" alt="Redvike logo" />
+  <div class="container-wrapper footer-content-wrapper">
+      <div class="footer-content container">
+          <div class="row">
+            <div class="footer-contacts col-12 col-md-auto">
+              <img class="mb-3" src="./imgs/logo.svg" width="" height="" alt="Redvike logo" />
 
-            <p class="footer-nav fs-md">
-              <span class="nav-link">
-                <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
-              </span>
-              <span class="nav-link">
-                <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
-              </span>
-              <span class="nav-link">Świętej Teresy 2, 31-162</span>
-              <span class="nav-link">Kraków, Poland</span>
-            </p>
+              <p class="footer-nav fs-md">
+                <span class="nav-link">
+                  <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
+                </span>
+                <span class="nav-link">
+                  <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
+                </span>
+                <span class="nav-link">Świętej Teresy 2, 31-162</span>
+                <span class="nav-link">Kraków, Poland</span>
+              </p>
+            </div>
+
+            <div class="col-12 col-md-auto">
+              <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
+
+              <p class="footer-nav fs-sm text-uppercase">
+                <a class="nav-link" href="#">With you</a>
+                <a class="nav-link" href="#">For you</a>
+                <a class="nav-link" href="#">About us</a>
+                <a class="nav-link" href="#">Career</a>
+              </p>
+            </div>
           </div>
-
-          <div class="col-12 col-md-auto">
-            <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
-
-            <p class="footer-nav fs-sm text-uppercase">
-              <a class="nav-link" href="#">With you</a>
-              <a class="nav-link" href="#">For you</a>
-              <a class="nav-link" href="#">About us</a>
-              <a class="nav-link" href="#">Career</a>
-            </p>
-          </div>
-        </div>
-    </div>
+      </div>
+  </div>
 </footer>
 
 <script src="./js/modernizr-custom.js"></script>
@@ -194,6 +255,16 @@
     .setTween('#productsLabel', {y: '30%', ease: Linear.easeNone})
     .addTo( controller );
     // .addIndicators();
+
+
+$('.contacts-input').focusin( onContactsInputFocus );
+$('.contacts-input').blur( onContactsInputFocus );
+
+function onContactsInputFocus( event ) {
+  var $target = $(event.target);
+
+  $target.closest('.contacts-group').toggleClass('contacts-group-focused');
+}
 </script>
 </body>
 </html>

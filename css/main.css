@@ -4165,6 +4165,25 @@ a {
     position: relative;
     height: 577px; }
 
+.contacts-group {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: #FFF;
+  transition: font-size 250ms ease-in-out; }
+  .contacts-group-focused {
+    font-size: 70px; }
+.contacts-input {
+  display: inline-block;
+  border: 0;
+  border-bottom: 3px solid;
+  padding: 0;
+  background: transparent;
+  outline: none;
+  color: #FFF; }
+
 .btn {
   display: inline-block;
   border: 3px solid #FF4081;
