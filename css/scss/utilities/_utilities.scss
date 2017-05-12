@@ -22,4 +22,8 @@
 		background: color(accent);
 	}
 
+	&-transparent-accent {
+		background: rgba(color(accent), 0.1);
+	}
+
 }
