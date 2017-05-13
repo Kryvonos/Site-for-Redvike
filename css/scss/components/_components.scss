@@ -178,6 +178,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    max-height: 800px;
   }
 
   &-heading {
@@ -657,28 +658,6 @@ a {
     color: #FFF;
 
   }
-}
-
-
-.about-us-section {
-
-  &-wrapper {
-    max-height: 800px;
-  }
-
-  &-bg {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('../imgs/photos/first-section.png');
-    background-size: cover;
-    background-position: center 30%;
-    opacity: .25;
-  }
-
 }
 
 
