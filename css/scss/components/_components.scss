@@ -493,6 +493,7 @@ a {
 .floating-nav {
   $floating-nav: &;
   $floating-nav-item-margin-y: 4px;
+  $floating-nav-transition-duration: 300ms;
 
   display: flex;
   flex-direction: column;
@@ -502,6 +503,12 @@ a {
   right: 0px;
   font-size: font-size(sm);
   color: color(dark);
+  opacity: 0;
+  transition: opacity $floating-nav-transition-duration ease-in-out;
+
+  &.shown {
+    opacity: 1;
+  }
 
   &-text {
     display: inline-block;
@@ -511,7 +518,7 @@ a {
     white-space: nowrap;
     opacity: 0;
 
-    transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity $floating-nav-transition-duration ease-in-out;//cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &-item {
@@ -520,7 +527,7 @@ a {
     margin-bottom: -11px;
     margin-left: auto;
     max-width: 1.8em;
-    transition: max-width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: max-width $floating-nav-transition-duration ease-in-out;//cubic-bezier(0.4, 0, 0.2, 1);
 
     &:before {
       content: '';

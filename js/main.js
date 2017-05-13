@@ -12,7 +12,7 @@ if ( ! String.prototype.format ) {
   };
 }
 
-;(function( $ ) {
+;$(function( $ ) {
 	var $window = $(window),
 			$header = $('#header'),
 			$logo = $('#logo'),
@@ -141,7 +141,7 @@ if ( ! String.prototype.format ) {
 
   init();
 
-})( jQuery );
+});
 
 
 
