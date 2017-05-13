@@ -2,6 +2,6 @@
   @return map-get($fs, $size);
 }
 
-@function heading-size($size, $fs: $header-sizes) {
+@function heading-size($size, $fs: $heading-sizes) {
   @return map-get($fs, $size);
 }

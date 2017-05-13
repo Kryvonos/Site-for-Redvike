@@ -37,6 +37,7 @@
     padding-left: 0;
     padding-right: 0;
     max-height: 1200px;
+    overflow: hidden;
   }
 
   &-bg {
@@ -365,14 +366,28 @@ a {
   text-decoration: none;
 }
 
-.list-link {
-  $list-link-padding-y: .2em;
 
-  display: block;
-  padding-top: $list-link-padding-y;
-  padding-bottom: $list-link-padding-y;
-  line-height: 1.2;
+.list {
+  margin: 0;
+  padding: 0;
+
+  &-link {
+    $list-link-padding-y: .2em;
+    $list-link-large-padding-y: .65em;
+
+    display: block;
+    padding-top: $list-link-padding-y;
+    padding-bottom: $list-link-padding-y;
+    line-height: 1.2;
+
+    @at-root .list-long & {
+      padding-top: $list-link-large-padding-y;
+      padding-bottom: $list-link-large-padding-y;
+    }
+  }
+
 }
+
 
 .brand-link {
   border-bottom: 2px solid color(brand);
@@ -706,4 +721,44 @@ a {
     }
   }
 
+}
+
+
+.career-contacts {
+  $career-contacts-col-padding-x: 2rem;
+  $career-contacts-col-margin-bottom: 1.2rem;
+
+  margin-top: 6rem;
+  margin-left: -$career-contacts-col-padding-x;
+  margin-bottom: -$career-contacts-col-margin-bottom;
+
+  &-contacts {
+    margin-top: 10rem;
+  }
+
+  &-link {
+
+    @include media-breakpoint-between(sm, lg) {
+      font-size: 40px;
+    }
+  }
+
+  .col {
+    margin-bottom: $career-contacts-col-margin-bottom;
+    padding-left: $career-contacts-col-padding-x;
+    padding-right: $career-contacts-col-padding-x;
+  }
+}
+
+
+.parallax-label {
+  position: absolute;
+  left: 50%;
+  bottom: -10%;
+  transform: translateX(-50%);
+  font-family: 'Bebas';
+  font-size: 360px;
+  text-transform: uppercase;
+  color: #FFF;
+  opacity: .1;
 }

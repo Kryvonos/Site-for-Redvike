@@ -23,9 +23,9 @@
 	}
 }
 
-@each $font-size in map-keys($header-sizes) {
+@each $font-size in map-keys($heading-sizes) {
 	.hs-#{$font-size} {
-		font-size: font-size($font-size) !important;
+		font-size: heading-size($font-size) !important;
 	}
 }
 
