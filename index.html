@@ -41,7 +41,7 @@
     </svg>
   </div>
 
-  <nav class="header-menubar menubar" style="display: none;" id="menubar">
+  <nav class="header-menubar menubar hidden-xs-up" id="menubar">
     <ul class="menubar-nav container">
       <a class="menubar-link active" href="./products.html">Products</a>
       <a class="menubar-link" href="./services.html">Services</a>
@@ -57,7 +57,7 @@
 
 <main>
       <div class="first section-wrapper header-offset" data-fit-to-viewport-height style="height: 580px;">
-          <div class="first-bg"></div>
+          <div class="bg-photo-1"></div>
 
           <section class="first-section section">
             <h1 class="h1">
@@ -69,7 +69,8 @@
           </section>
       </div>
 
-      <div class="section-wrapper" data-floating-nav="services" data-show-floating-menu data-fit-to-viewport-height>
+      <div data-floating-nav="services">
+        <div class="section-wrapper" data-show-floating-menu data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -86,6 +87,26 @@
                   </div>
               </div>
           </section>
+      </div>
+
+        <div class="section-wrapper" data-show-floating-menu data-fit-to-viewport-height>
+          <section class="section">
+              <div class="row">
+                  <div class="section-content col-12 col-lg">
+                      <header class="section-header">
+                        <h2 class="section-heading h2">Build It <span class="color-brand">For</span> You</h2>
+                        <p class="h3">Customized Product Development To <br class="hidden-lg-down">Make Your Vision A Reality</p>
+                      </header>
+
+                      <p class="section-text">Have an idea for a software product but you aren’t sure how to make it a reality? Rest assured, we’ve got you covered. Our expert team will help you build engaging, secure and high-performance web applications using the latest technologies and frameworks to promote your success.</p>
+                  </div>
+
+                  <div class="col-12 col-lg-auto section-btn-wrapper">
+                    <a class="btn btn-primary" href="#">Learn more</a>
+                  </div>
+              </div>
+          </section>
+      </div>
       </div>
 
       <div class="section-wrapper section-bg" data-floating-nav="products" data-fit-to-viewport-height>
@@ -107,7 +128,7 @@
           </section>
       </div>
 
-      <div class="section-wrapper" data-floating-nav="about us" data-fit-to-viewport-height>
+      <div class="section-wrapper" data-floating-nav="about us and something else" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -163,13 +184,12 @@
   </nav>
 </div>
 
-<div class="floating-nav" id="floatingNav">
+<!-- <div class="floating-nav" id="floatingNav">
   <div class="floating-nav-item active"><span class="floating-nav-text">services</span></div>
-  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
-  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
-  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
-  <div class="floating-nav-item"><span class="floating-nav-text">services</span></div>
-</div>
+  <div class="floating-nav-item"><span class="floating-nav-text">about us</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">feedback</span></div>
+  <div class="floating-nav-item"><span class="floating-nav-text">contacts</span></div>
+</div> -->
 
 <footer class="footer">
   <div class="container-wrapper footer-content-wrapper">
@@ -222,8 +242,22 @@ function init() {
 }
 
 function createFloatingNav() {
-  var $container = $('<div>', {id: 'floatingNav', class: 'floating-nav'});
+  var $container = $('<div>', {id: 'floatingNav', class: 'floating-nav'}),
+      $elems = $('[data-floating-nav]');
 
+  $elems.each( function() {
+    var $this = $(this);
+
+    $container.append( floatingNavItemHtml( $this.data('floatingNav') ) );
+  } );
+
+  $(document.body).append( $container );
+}
+
+createFloatingNav();
+
+function floatingNavItemHtml( txt ) {
+  return '<div class="floating-nav-item"><span class="floating-nav-text">{0}</span></div>'.format( txt );
 }
 
 $elems.each( function() {

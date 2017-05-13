@@ -9,6 +9,12 @@
 }
 
 
+.no-scrolling {
+	overflow: hidden;
+	height: 100%;
+}
+
+
 .bg {
 	position: absolute;
 	z-index: -1;
