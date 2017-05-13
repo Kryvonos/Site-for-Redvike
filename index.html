@@ -34,7 +34,7 @@
   <div class="header-menu-burger menu-burger" id="menuBurger">
     <span class="menu-burger-stick"></span>
     <span class="menu-burger-stick"></span>
-    <svg class="menu-burger-label" width="35" version="1.1" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
+    <svg class="menu-burger-label" width="35" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
     	<g style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
     		<text class="st0 st1 st2 st3">MENU</text>
     	</g>
@@ -43,10 +43,10 @@
 
   <nav class="header-menubar menubar hidden-xs-up" id="menubar">
     <ul class="menubar-nav container">
-      <a class="menubar-link active" href="./products.html">Products</a>
-      <a class="menubar-link" href="./services.html">Services</a>
-      <a class="menubar-link" href="./about-us.html">About us</a>
-      <a class="menubar-link" href="./career.html">Career</a>
+      <a class="menubar-link active" data-menu-item href="./products.html">Products</a>
+      <a class="menubar-link" data-menu-item href="./services.html">Services</a>
+      <a class="menubar-link" data-menu-item href="./about-us.html">About us</a>
+      <a class="menubar-link" data-menu-item href="./career.html">Career</a>
       <span class="menubar-gap"></span>
       <span class="menubar-simple-link">
           <a href="mailto:hello@redvike.com">hello@redvike.com</a>
@@ -176,11 +176,8 @@
   </a>
 
   <nav class="floating-menu-nav fs-sm">
-    <a href="#" class="list-link">home</a>
-    <a href="#" class="list-link">service</a>
-    <a href="#" class="list-link">product</a>
-    <a href="#" class="list-link">about us</a>
-    <a href="#" class="list-link">career</a>
+    <!-- <a href="#" class="list-link">home</a>
+    <a href="#" class="list-link">career</a> -->
   </nav>
 </div>
 
@@ -234,128 +231,6 @@
 
 <script>
 
-$( function() {
-
-  var controller = new ScrollMagic.Controller(),
-      scenes = [],
-      timerId = null,
-
-      $window = $(window),
-      $floatingNav = null,
-      $elems = $('[data-floating-nav]');
-
-
-  function init() {
-    createFloatingNav();
-    initEventListeners();
-    initScenes();
-    updateScenesTriggerHook();
-  }
-
-  function createFloatingNav() {
-    $floatingNav = $('<div>', {id: 'floatingNav', class: 'floating-nav'});
-
-    $elems.each( function() {
-      var $this = $(this);
-
-      $floatingNav.append( floatingNavItemHtml( $this.data('floatingNav') ) );
-    } );
-
-    $(document.body).append( $floatingNav );
-  }
-
-  function floatingNavItemHtml( txt ) {
-    return '<div class="floating-nav-item" data-floating-nav-item="{0}"><span class="floating-nav-text">{0}</span></div>'.format( txt );
-  }
-
-  function initEventListeners() {
-    $window.resize( updateScenesDuration );
-  }
-
-  function initScenes() {
-    $elems.each( function() {
-      var $this = $(this),
-          scene = new ScrollMagic.Scene( {
-            triggerElement: $this,
-            triggerHook: .15,
-            duration: $this.outerHeight()
-          });
-
-      scene.addTo( controller )
-        .on('enter', onSceneEnter)
-        .on('leave', onSceneLeave);
-        // .addIndicators();
-
-      scenes.push( scene );
-    } );
-  }
-
-  function updateScenesDuration() {
-      scenes.forEach( function( scene ) {
-          var height = $( scene.triggerElement() ).outerHeight();
-
-          scene.duration( height );
-      } );
-  }
-
-  function updateScenesTriggerHook() {
-      var windowHeight = $window.outerHeight(),
-          $floatingNavItem = $floatingNav.find('.active'),
-          top = 0,
-          halfHeight = 0,
-          triggerHook = 0;
-
-      if ( ! $floatingNavItem.length ) {
-        $floatingNavItem = $floatingNav.children().first();
-      }
-
-      top = $floatingNavItem.get(0).getBoundingClientRect().top,
-      halfHeight = $floatingNavItem.outerHeight() / 2,
-      triggerHook = (top + halfHeight) / windowHeight;
-
-      scenes.forEach( function( scene ) {
-          scene.triggerHook( triggerHook );
-      } );
-  }
-
-  function onSceneEnter( event ) {
-    var $elem = $( event.target.triggerElement() ),
-        section = $elem.data('floatingNav'),
-        $floatingNavItem = getFloatingNavItem( section );
-
-    showFloatingNav();
-
-    timerId = setTimeout( function() {
-      timerId = null;
-
-      $floatingNavItem.addClass('active');
-
-      updateScenesTriggerHook();
-    }, 200 );
-  }
-
-  function getFloatingNavItem( section ) {
-    return $floatingNav.find( '[data-floating-nav-item="{0}"]'.format( section ) )
-  }
-
-  function onSceneLeave( event ) {
-    $floatingNav.find('.active').removeClass('active');
-    hideFloatingNav();
-
-    clearTimeout( timerId );
-  }
-
-  function showFloatingNav() {
-    $floatingNav.addClass('shown');
-  }
-
-  function hideFloatingNav() {
-    $floatingNav.removeClass('shown');
-  }
-
-  init();
-
-} );
 
 </script>
 </body>

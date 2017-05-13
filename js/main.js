@@ -145,25 +145,49 @@ if ( ! String.prototype.format ) {
 
 
 
-// Floating menuBurger
-;(function() {
-  return;
-	var $mainContainerWrapper = $('#mainContainerWrapper'),
+// Floating menu
+;$(function() {
+	var $header = $('#header'),
+      $menuItems = $('[data-menu-item]'),
 	    $floatingMenu = $('#floatingMenu'),
+      $floatingMenuNav = $floatingMenu.find('.floating-menu-nav'),
 
 	    controller = new ScrollMagic.Controller(),
-	    scene = new ScrollMagic.Scene({
-	      triggerElement: $('[data-show-floating-menu]'),
-	      triggerHook: 'onLeave',
-	      duration: 0,
-	    }),
+	    scene = null,
 	    needHideFloatingMenu = false;
 
-	$floatingMenu.on('transitionend webkitTransitionEnd', onFloatingMenuTransitionEnd);
-	scene
-	  .on('start', onSceneStart)
-	  .addIndicators()
-	  .addTo( controller );
+  function init() {
+    createFloatingMenuNav();
+    initScene();
+    initEventListeners();
+  }
+
+  function createFloatingMenuNav() {
+    $menuItems.each( function() {
+      var $this = $(this);
+      $floatingMenuNav.append( floatingMenuItemHtml( $this.attr('href'), $this.text() ) );
+    } );
+  }
+
+  function floatingMenuItemHtml(link, txt) {
+    return '<a href="{0}" class="list-link">{1}</a>'.format(link, txt);
+  }
+
+  function initScene() {
+    scene = new ScrollMagic.Scene({
+        triggerElement: $('[data-show-floating-menu]'),
+        triggerHook: 'onLeave',
+        duration: 0,
+      });
+
+    scene.addTo( controller )
+  	  .addIndicators();
+  }
+
+  function initEventListeners() {
+    $floatingMenu.on('transitionend webkitTransitionEnd', onFloatingMenuTransitionEnd);
+    scene.on('start', onSceneStart)
+  }
 
 	function onSceneStart( event ) {
 	  var left = '',
@@ -171,7 +195,7 @@ if ( ! String.prototype.format ) {
 
 	  if ( event.scrollDirection === 'FORWARD' ) {
 	    $floatingMenu.addClass('visible');
-	    left = $mainContainerWrapper.offset().left;
+	    left = $header.offset().left;
 	    left += indent;
 
 	    $floatingMenu.css('left', left);
@@ -187,4 +211,132 @@ if ( ! String.prototype.format ) {
 	  }
 	}
 
-}());
+  init();
+
+});
+
+
+
+// Floating nav
+$( function() {
+
+  var controller = new ScrollMagic.Controller(),
+      scenes = [],
+      timerId = null,
+
+      $window = $(window),
+      $floatingNav = null,
+      $elems = $('[data-floating-nav]');
+
+
+  function init() {
+    createFloatingNav();
+    initEventListeners();
+    initScenes();
+    updateScenesTriggerHook();
+  }
+
+  function createFloatingNav() {
+    $floatingNav = $('<div>', {id: 'floatingNav', class: 'floating-nav'});
+
+    $elems.each( function() {
+      var $this = $(this);
+
+      $floatingNav.append( floatingNavItemHtml( $this.data('floatingNav') ) );
+    } );
+
+    $(document.body).append( $floatingNav );
+  }
+
+  function floatingNavItemHtml( txt ) {
+    return '<div class="floating-nav-item" data-floating-nav-item="{0}"><span class="floating-nav-text">{0}</span></div>'.format( txt );
+  }
+
+  function initEventListeners() {
+    $window.resize( updateScenesDuration );
+  }
+
+  function initScenes() {
+    $elems.each( function() {
+      var $this = $(this),
+          scene = new ScrollMagic.Scene( {
+            triggerElement: $this,
+            triggerHook: .15,
+            duration: $this.outerHeight()
+          });
+
+      scene.addTo( controller )
+        .on('enter', onSceneEnter)
+        .on('leave', onSceneLeave);
+        // .addIndicators();
+
+      scenes.push( scene );
+    } );
+  }
+
+  function updateScenesDuration() {
+      scenes.forEach( function( scene ) {
+          var height = $( scene.triggerElement() ).outerHeight();
+
+          scene.duration( height );
+      } );
+  }
+
+  function updateScenesTriggerHook() {
+      var windowHeight = $window.outerHeight(),
+          $floatingNavItem = $floatingNav.find('.active'),
+          top = 0,
+          halfHeight = 0,
+          triggerHook = 0;
+
+      if ( ! $floatingNavItem.length ) {
+        $floatingNavItem = $floatingNav.children().first();
+      }
+
+      top = $floatingNavItem.get(0).getBoundingClientRect().top,
+      halfHeight = $floatingNavItem.outerHeight() / 2,
+      triggerHook = (top + halfHeight) / windowHeight;
+
+      scenes.forEach( function( scene ) {
+          scene.triggerHook( triggerHook );
+      } );
+  }
+
+  function onSceneEnter( event ) {
+    var $elem = $( event.target.triggerElement() ),
+        section = $elem.data('floatingNav'),
+        $floatingNavItem = getFloatingNavItem( section );
+
+    showFloatingNav();
+
+    timerId = setTimeout( function() {
+      timerId = null;
+
+      $floatingNavItem.addClass('active');
+
+      updateScenesTriggerHook();
+    }, 200 );
+  }
+
+  function getFloatingNavItem( section ) {
+    return $floatingNav.find( '[data-floating-nav-item="{0}"]'.format( section ) )
+  }
+
+  function onSceneLeave( event ) {
+    $floatingNav.find('.active').removeClass('active');
+    hideFloatingNav();
+
+    clearTimeout( timerId );
+  }
+
+  function showFloatingNav() {
+    $floatingNav.addClass('shown');
+  }
+
+  function hideFloatingNav() {
+    $floatingNav.removeClass('shown');
+  }
+
+  init();
+
+} );
