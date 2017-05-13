@@ -106,7 +106,7 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
 					if (this._svg) { //SVG text elements don't have an "innerHTML" in Microsoft browsers.
 						this._target.textContent = str;
 					} else {
-						this._target.innerHTML = (this._fillChar === "&nbsp;" && str.indexOf("  ") !== -1) ? str.split("  ").join("&nbsp;&nbsp;") : str;
+						this._target.innerHTML = (this._fillChar === "&nbsp;" && str.indexOf("  ") !== -1) ? str.split("  ").join("") : str;
 					}
 				}
 

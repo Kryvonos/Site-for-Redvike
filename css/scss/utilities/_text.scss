@@ -32,7 +32,6 @@
 
 .text {
   &-lg {
-    color: blue;
     font-size: font-size(sm);
 
     @include media-breakpoint-up(lg) {
@@ -53,7 +52,9 @@
   margin-top: 0;
   margin-bottom: 0;
 	font-family: Bebas;
+  font-weight: 300;
 	letter-spacing: 0.02px;
+  word-spacing: .15em;
 	text-transform: uppercase;
 	color: color(dark);
 }
@@ -80,7 +81,6 @@
   margin-top: 0;
   margin-bottom: 0;
   font-size: heading-size(xs);
-  font-weight: 700;
   letter-spacing: -0.7px;
   color: color(dark);
 

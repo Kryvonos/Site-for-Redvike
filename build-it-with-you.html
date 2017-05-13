@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>About Us - Redvike</title>
+  <title>Redvike</title>
 
   <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css" />
   <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
 
-<header class="header header-dark container-wrapper" id="header">
+<header class="header header-light container-wrapper" id="header">
   <div class="header-logo logo" id="logo">
       <a href="./">
         <svg class="logo-emblem" width="38" viewBox="0 0 60 52">
@@ -58,18 +58,74 @@
 
 <main>
 
-  <div class="start-section-wrapper about-us-section-wrapper bg-transparent-accent" data-fit-to-viewport-height>
-    <div class="about-us-section-bg"></div>
+  <div class="start-section-wrapper bg-accent" data-fit-to-viewport-height>
+    <div class="start-section start-section-theme-accent">
+      <h1 class="start-section-heading h1">Build It With You</h1>
 
-    <div class="start-section about-us-section">
-      <h1 class="start-section-heading h1">About Us</h1>
+      <p class="start-section-text">Give your technical team the support they need without the overheads that come with hiring in-house developers. We’re here to help you supercharge your growth becoming an out-of-house part of your technical team. By leveraging the latest frameworks and technologies, we’ll ensure that you have everything you need to succeed.</p>
 
-      <p class="start-section-text">Design and development are just the beginning.</p>
-
-      <a href="#" class="start-section-btn btn btn-primary">Meet REDVIKE</a>
+      <a href="#" class="start-section-btn btn btn-secondary">Products</a>
     </div>
   </div>
 
+  <div class="section-wrapper bg-dark" data-fit-to-viewport-height>
+    <section class="tech-section section">
+      <div class="tech-section-row row">
+        <h2 class="tech-section-heading h2 color-light col-12 col-lg-5">Our Tech</h2>
+
+        <section class="tech-section-item col-auto">
+            <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Tools</h3>
+
+            <ul class="tech-section-list">
+              <li class="list-link">npm</li>
+              <li class="list-link">Gulp</li>
+              <li class="list-link">Webpack</li>
+              <li class="list-link">Vagrant</li>
+              <li class="list-link">Bower</li>
+              <li class="list-link">Babel</li>
+              <li class="list-link">Require.js</li>
+              <li class="list-link">Yeoman</li>
+              <li class="list-link">Docker</li>
+            </ul>
+        </section>
+
+        <section class="tech-section-item text-lg col-auto">
+            <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Frontend</h3>
+
+            <ul class="tech-section-list">
+              <li class="list-link">Angular 1/2</li>
+              <li class="list-link">React</li>
+              <li class="list-link">React Native</li>
+              <li class="list-link">Vue</li>
+              <li class="list-link">Bootstrap</li>
+              <li class="list-link">SASS/LESS</li>
+              <li class="list-link">BEM</li>
+              <li class="list-link">D3.js</li>
+            </ul>
+        </section>
+
+        <section class="tech-section-item col-auto">
+          <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Backend</h3>
+
+          <ul class="tech-section-list">
+            <li class="list-link">Node.js</li>
+            <li class="list-link">Sails.js</li>
+            <li class="list-link">Hapi.js</li>
+            <li class="list-link">Adonis.js</li>
+            <li class="list-link">Meteor</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <div class="section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-fit-to-viewport-height>
+      <section class="section hire-us-section">
+          <h2 class="hire-us-heading heading">Hire Us</h2>
+
+          <a class="hire-us-mail heading" href="mailto:hello@redvike.com">hello@<br class="hidden-sm-up">redvike.com</a>
+      </section>
+  </div>
 </main>
 
 <div class="floating-menu" id="floatingMenu">
@@ -134,5 +190,6 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 <script src="./js/main.js"></script>
+
 </body>
 </html>

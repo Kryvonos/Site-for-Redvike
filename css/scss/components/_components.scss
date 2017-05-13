@@ -370,9 +370,7 @@ a {
   display: block;
   padding-top: $list-link-padding-y;
   padding-bottom: $list-link-padding-y;
-  font-size: font-size(sm);
   line-height: 1.2;
-  color: color(dark);
 }
 
 .brand-link {
@@ -679,6 +677,54 @@ a {
     background-size: cover;
     background-position: center 30%;
     opacity: .25;
+  }
+
+}
+
+
+.tech-section {
+  $tech-section-list-link-padding: 0.7em;
+  $tech-section-item-padding-x: 1.5rem;
+  $tech-section-item-margin-bottom: 1rem;
+
+  &-row {
+    margin-bottom: -$tech-section-item-margin-bottom;
+
+    @include media-breakpoint-up(lg) {
+      margin-right: -$tech-section-item-padding-x;
+    }
+  }
+
+  &-heading {
+    margin-bottom: 1.2em;
+  }
+
+  &-item {
+    margin-bottom: $tech-section-item-margin-bottom;
+    padding-left: $tech-section-item-padding-x;
+    padding-right: $tech-section-item-padding-x;
+  }
+
+  &-list-heading {
+    margin-top: .5em;
+    margin-bottom: 1em;
+  }
+
+  &-list {
+    margin: 0;
+    padding: 0;
+    font-size: font-size(md);
+    text-transform: uppercase;
+    color: color(text);
+
+    .list-link {
+      padding-top: $tech-section-list-link-padding;
+      padding-bottom: $tech-section-list-link-padding;
+    }
+
+    @include media-breakpoint-up(lg) {
+      font-size: font-size(lg);
+    }
   }
 
 }
