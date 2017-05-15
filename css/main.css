@@ -4206,6 +4206,9 @@ a {
   @media (max-width: 1359px) {
     .floating-menu {
       left: -9999999px !important; } }
+  .floating-menu .logo-emblem-shape {
+    fill: #212121;
+    transition: fill 300ms ease-in-out; }
   .floating-menu-emblem {
     margin-bottom: 0.8rem; }
   .floating-menu-nav {
@@ -4214,7 +4217,7 @@ a {
       font-weight: bold;
       transform: translateX(0);
       opacity: .8;
-      transition: transform 300ms ease-in-out, opacity 300ms ease-in-out; }
+      transition: transform 300ms ease-in-out, opacity 300ms ease-in-out, color 300ms ease-in-out; }
       .floating-menu-nav .list-link:hover {
         transform: translateX(0.5em);
         opacity: 1; }
@@ -4229,7 +4232,7 @@ a {
   font-size: 14px;
   color: #212121;
   opacity: 0;
-  transition: opacity 300ms ease-in-out; }
+  transition: opacity 300ms ease-in-out, color 300ms ease-in-out; }
   .floating-nav.shown {
     opacity: 1; }
   .floating-nav-text {
@@ -4257,7 +4260,8 @@ a {
       border-bottom-right-radius: 0;
       height: 2px;
       width: 100%;
-      background: #212121; }
+      background: #212121;
+      transition: background-color 300ms ease-in-out; }
     .floating-nav-item:last-child {
       margin-bottom: 0; }
     .floating-nav-item.active {
@@ -4400,6 +4404,15 @@ a {
   text-transform: uppercase;
   color: #FFF;
   opacity: .1; }
+
+.theme-light.floating-nav {
+  color: #FFF; }
+  .theme-light.floating-nav .floating-nav-item:before {
+    background: #FFF; }
+.theme-light.floating-menu .logo-emblem-shape {
+  fill: #FFF; }
+.theme-light.floating-menu .list-link {
+  color: #FFF; }
 
 .btn {
   display: inline-block;

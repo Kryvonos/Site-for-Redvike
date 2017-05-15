@@ -445,6 +445,8 @@ a {
 
 .floating-menu {
   $floating-menu-link-padding-y: .15em;
+  $floating-menu-transition-duration: 300ms;
+  $floating-menu-transition-timing-function: ease-in-out;
 
   display: inline-block;
   position: fixed;
@@ -455,16 +457,17 @@ a {
   opacity: 0;
   transition: opacity 500ms ease-in-out;
 
-  // &.hidden {
-  //   left: -9999999px;
-  // }
-
   &.visible:hover {
     opacity: 1;
   }
 
   @media (max-width: $container-wrapper-max-width - 1px) {
     left: -9999999px !important;
+  }
+
+  .logo-emblem-shape {
+    fill: color(dark);
+    transition: fill $floating-menu-transition-duration $floating-menu-transition-timing-function;
   }
 
   &-emblem {
@@ -478,7 +481,9 @@ a {
       font-weight: bold;
       transform: translateX(0);
       opacity: .8;
-      transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+      transition: transform $floating-menu-transition-duration $floating-menu-transition-timing-function,
+                  opacity $floating-menu-transition-duration $floating-menu-transition-timing-function,
+                  color $floating-menu-transition-duration $floating-menu-transition-timing-function;
 
       &:hover {
         transform: translateX(.5em);
@@ -504,7 +509,7 @@ a {
   font-size: font-size(sm);
   color: color(dark);
   opacity: 0;
-  transition: opacity $floating-nav-transition-duration ease-in-out;
+  transition: opacity $floating-nav-transition-duration ease-in-out, color $floating-nav-transition-duration ease-in-out;
 
   &.shown {
     opacity: 1;
@@ -540,6 +545,7 @@ a {
       height: 2px;
       width: 100%;
       background: color(dark);
+      transition: background-color $floating-nav-transition-duration ease-in-out;
     }
 
     &:last-child {
@@ -769,4 +775,29 @@ a {
   text-transform: uppercase;
   color: #FFF;
   opacity: .1;
+}
+
+
+.theme {
+
+  &-light {
+    &.floating-nav {
+      color: #FFF;
+
+      .floating-nav-item:before {
+        background: #FFF;
+      }
+    }
+
+    &.floating-menu {
+      .logo-emblem-shape {
+        fill: #FFF;
+      }
+
+      .list-link {
+        color: #FFF;
+      }
+    }
+  }
+
 }

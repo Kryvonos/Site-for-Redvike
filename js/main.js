@@ -223,9 +223,11 @@ $( function() {
   var controller = new ScrollMagic.Controller(),
       scenes = [],
       timerId = null,
+      triggerElementClass = '',
 
       $window = $(window),
       $floatingNav = null,
+      $floatingMenu = $('#floatingMenu'),
       $elems = $('[data-floating-nav]');
 
 
@@ -283,8 +285,8 @@ $( function() {
   }
 
   function updateScenesTriggerHook() {
-      var windowHeight = $window.outerHeight(),
-          $floatingNavItem = $floatingNav.find('.active'),
+      var $floatingNavItem = $floatingNav.find('.active'),
+          windowHeight = $window.outerHeight(),
           top = 0,
           halfHeight = 0,
           triggerHook = 0;
@@ -303,15 +305,18 @@ $( function() {
   }
 
   function onSceneEnter( event ) {
-    var $elem = $( event.target.triggerElement() ),
-        section = $elem.data('floatingNav'),
+    var $triggerElement = $( event.target.triggerElement() ),
+        section = $triggerElement.data('floatingNav'),
         $floatingNavItem = getFloatingNavItem( section );
 
+    triggerElementClass = $triggerElement.data('floating-element-class');
     showFloatingNav();
 
     timerId = setTimeout( function() {
       timerId = null;
 
+      $floatingMenu.addClass( triggerElementClass );
+      $floatingNav.addClass( triggerElementClass );
       $floatingNavItem.addClass('active');
 
       updateScenesTriggerHook();
@@ -324,6 +329,9 @@ $( function() {
 
   function onSceneLeave( event ) {
     $floatingNav.find('.active').removeClass('active');
+    $floatingNav.removeClass( triggerElementClass );
+    $floatingMenu.removeClass( triggerElementClass );
+
     hideFloatingNav();
 
     clearTimeout( timerId );
