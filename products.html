@@ -7,6 +7,8 @@
   <title>Redvike</title>
 
   <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css" />
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
   <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
@@ -58,7 +60,7 @@
 
 <main>
 
-  <div class="start-section-wrapper bg-accent" data-fit-to-viewport-height>
+  <div class="start-section-wrapper bg-accent" data-append-floating-nav-marker data-fit-to-viewport-height>
     <div class="start-section start-section-theme-accent">
       <h1 class="start-section-heading h1">Build It For You</h1>
 
@@ -68,7 +70,7 @@
     </div>
   </div>
 
-  <div class="section-wrapper" data-fit-to-viewport-height>
+  <div class="section-wrapper" data-floating-nav="process" data-fit-to-viewport-height>
     <section class="section process-section">
       <h2 class="out-of-page">Process description</h2>
 
@@ -95,17 +97,59 @@
     </section>
   </div>
 
-  <div class="section-wrapper products-wrapper" data-fit-to-viewport-height>
+  <div class="section-wrapper products-wrapper" data-floating-nav="products" data-floating-element-class="theme-light" data-fit-to-viewport-height>
     <div class="section products container" id="products">
 
         <section class="product-item row">
-          <div class="product-item-description flex-last col-12 col-lg-6">
-            <div class="product-item-header">
-              <h3 class="product-item-heading heading">CRM</h3>
-              <button type="button" class="product-item-btn btn btn-info">Order</button>
-            </div>
 
-            <p class="product-item-text">Build strong relationships with your customers with an effective Customer Relationship Management (CRM) system. We’ll leverage the factors that matter for your customers and strategically infuse them within a CRM that will fuel your business’s growth.</p>
+          <div class="flex-last col-12 col-lg-6" id="productItems">
+              <div>
+                <div class="product-item-description">
+
+                <div class="product-item-header">
+                  <h3 class="product-item-heading heading">CRM</h3>
+                  <button type="button" class="product-item-btn btn btn-info">Order</button>
+                </div>
+
+                <p class="product-item-text">Build strong relationships with your customers with an effective Customer Relationship Management (CRM) system. We’ll leverage the factors that matter for your customers and strategically infuse them within a CRM that will fuel your business’s growth.</p>
+              </div>
+              </div>
+
+              <div>
+                <div class="product-item-description">
+
+                <div class="product-item-header">
+                  <h3 class="product-item-heading heading">CMS</h3>
+                  <button type="button" class="product-item-btn btn btn-info">Order</button>
+                </div>
+
+                <p class="product-item-text">Working closely with you, we can help you develop a custom Content Management System (CMS) that is designed to address your unique needs. With the perfect blend of user experience and efficiency, we’ll help you simplify the management of your website’s content.</p>
+              </div>
+              </div>  
+
+              <div>
+                <div class="product-item-description">
+
+                <div class="product-item-header">
+                  <h3 class="product-item-heading heading">Dashboard</h3>
+                  <button type="button" class="product-item-btn btn btn-info">Order</button>
+                </div>
+
+                <p class="product-item-text">Our custom developed dashboards for reporting and data visualisation consistently deliver accurate and timely business data in a simplified visual format. From conversion rates to production levels, we make it easy to view the metrics that matter to you.</p>
+              </div>
+              </div>  
+
+              <div>
+                <div class="product-item-description">
+
+                <div class="product-item-header">
+                  <h3 class="product-item-heading heading">Single Page Application</h3>
+                  <button type="button" class="product-item-btn btn btn-info">Order</button>
+                </div>
+
+                <p class="product-item-text">Known for their elegant user experience, improved performance and reduced loading times, we’ll help you develop exceptional single page applications that your users will love.</p>
+              </div>
+              </div>  
           </div>
 
           <div class="product-item-img-col col-12 col-lg-6">
@@ -120,7 +164,7 @@
     </div>
   </div>
 
-  <div class="section-wrapper" data-floating-nav="about us" data-fit-to-viewport-height>
+  <div class="section-wrapper" data-floating-nav="feedback" data-floating-nav="about us" data-fit-to-viewport-height>
       <section class="section">
           <div class="row">
               <div class="section-content col-12 col-lg">
@@ -235,12 +279,14 @@
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
 <script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
 <script src="bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
 <script src="bower_components/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+<script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
 
 <script>
@@ -265,6 +311,25 @@ function onContactsInputFocus( event ) {
 
   $target.closest('.contacts-group').toggleClass('contacts-group-focused');
 }
+
+
+
+;$( function() {
+
+  var $productItems = $('#productItems'),
+
+      slickOptions = {
+          infinite: true,
+          fade: true,
+          autoplay: true,
+          autoplaySpeed: 5000,
+          speed: 500,
+      };
+
+
+  $productItems.slick( slickOptions );
+
+} );
 </script>
 </body>
 </html>

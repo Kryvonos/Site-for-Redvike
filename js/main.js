@@ -134,6 +134,7 @@ if ( ! String.prototype.format ) {
 
 // Floating menu
 ;$(function() {
+  return;
 	var $header = $('#header'),
       $menuItems = $('[data-menu-item]'),
 	    $floatingMenu = $('#floatingMenu'),
@@ -205,7 +206,6 @@ if ( ! String.prototype.format ) {
 
 // Floating nav
 $( function() {
-
   var controller = new ScrollMagic.Controller(),
       scenes = [],
       timerId = null,

@@ -4349,6 +4349,7 @@ a {
     color: #D0D0D0; }
   .product-item-img {
     position: absolute;
+    z-index: -1;
     top: 0;
     right: -56px;
     margin: 0;
