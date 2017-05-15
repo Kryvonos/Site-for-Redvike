@@ -14,20 +14,7 @@ if ( ! String.prototype.format ) {
 
 ;$(function( $ ) {
 	var $window = $(window),
-			$header = $('#header'),
-			$logo = $('#logo'),
-			$logotype = $('#logotype'),
-			$menuBurger = $('#menuBurger'),
-			$menubar = $('#menubar'),
-
-			menuBurgerClickTimeoutId = null,
-			breakpoints = {
-				  xs: 0,
-				  sm: 576,
-				  md: 768,
-				  lg: 992,
-				  xl: 1200
-			};
+      $html = $('html');
 
 	function init() {
   		if ( ! Modernizr.flexbox ) {
@@ -40,16 +27,62 @@ if ( ! String.prototype.format ) {
 
 	function initEventListeners() {
 		$(window).resize( onWindowResize );
-		$menuBurger.click( onMenuBurgerClick );
-		$logo.mouseenter( onLogoMouseEnter );
-		$logo.on('transitionend webkitTransitionEnd', onLogoTransitionEnd);
 	}
 
 	function onWindowResize( event ) {
 		fitToViewportHeight();
 	}
 
-	function onLogoMouseEnter( event ) {
+
+	function fitToViewportHeight() {
+		var $elems = $('[data-fit-to-viewport-height]'),
+				height = $(window).outerHeight();
+
+		$elems.each( function() {
+			var $this = $(this),
+					originalHeight = 0;
+
+			$this.css('height', '');
+			originalHeight = $this.outerHeight();
+
+			if ( Utility.isBreakpointDown('lg') ) return;
+
+			if ( originalHeight < height ) {
+				$this.css('height', height + 'px');
+			}
+		} );
+	}
+
+
+  init();
+
+});
+
+
+
+// Header
+;$(function() {
+
+  var $html = $('html'),
+      $header = $('#header'),
+      $logo = $('#logo'),
+      $logotype = $('#logotype'),
+      $menuBurger = $('#menuBurger'),
+  		$menubar = $('#menubar'),
+
+      menuBurgerClickTimeoutId = null;
+
+  function init() {
+    initEventListeners();
+  }
+
+  function initEventListeners() {
+    $menuBurger.click( onMenuBurgerClick );
+		$logo.mouseenter( onLogoMouseEnter );
+		$logo.on('transitionend webkitTransitionEnd', onLogoTransitionEnd);
+  }
+
+  function onLogoMouseEnter( event ) {
 		$logotype.removeClass('logo-logotype-hidden');
 	}
 
@@ -65,8 +98,13 @@ if ( ! String.prototype.format ) {
 		if ( menuBurgerClickTimeoutId === null ) {
 
 			if ( ! $menuBurger.hasClass('active') ) {
+        scrollToPageTop( function() {
+          $html.addClass('no-scrolling');
+        } );
+
 				$menuBurger.addClass('active');
 				$menubar.addClass('active');
+        $html.addClass('no-scrolling');
 			}
 			else {
 				$menuBurger.addClass('closing');
@@ -79,70 +117,19 @@ if ( ! String.prototype.format ) {
 				if ( $menuBurger.hasClass('closing') ) {
 					$menuBurger.removeClass('active closing');
 					$menubar.removeClass('active closing');
+          $html.removeClass('no-scrolling');
 				}
 			}, clickDelay );
 		}
 	}
 
-	function fitToViewportHeight() {
-		var $elems = $('[data-fit-to-viewport-height]'),
-				height = $(window).outerHeight();
-
-		$elems.each( function() {
-			var $this = $(this),
-					originalHeight = 0;
-
-			$this.css('height', '');
-			originalHeight = $this.outerHeight();
-
-			if ( isBreakpointDown('lg') ) return;
-
-			if ( originalHeight < height ) {
-				$this.css('height', height + 'px');
-			}
-		} );
-	}
-
-
-	function isBreakpointUp(size) {
-	  var width = breakpoints[size];
-
-	  if ( isNumeric(size) ) {
-	  	width = size;
-	  }
-	  else if ( ! breakpoints.hasOwnProperty(size) ) {
-	  	return false;
-	  }
-
-	  return $window.outerWidth() >= width;
-	}
-
-	function isBreakpointDown(size) {
-		if ( size === null ) {
-	  	return true;
-	  }
-
-	  var width = breakpoints[size];
-
-	  if ( isNumeric(size) ) {
-	  	width = size;
-	  }
-	  else if ( ! breakpoints.hasOwnProperty(size) ) {
-	  	return false;
-	  }
-
-	  return $window.outerWidth() < width;
-	}
-
-	function isNumeric(n) {
-	  return !isNaN(parseFloat(n)) && isFinite(n);
-	}
-
+  function scrollToPageTop( callback ) {
+    $('html, body').animate( { scrollTop: 0 }, 200, callback);
+  }
 
   init();
 
 });
-
 
 
 // Floating menu

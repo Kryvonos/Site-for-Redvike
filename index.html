@@ -13,8 +13,9 @@
 </head>
 <body>
 
-<header class="header header-dark container-wrapper" id="header">
-  <div class="header-logo logo logo-brand-lg" id="logo">
+<header class="header-wrapper" id="header">
+  <div class="header header-dark container-wrapper">
+    <div class="header-logo logo logo-brand-lg" id="logo">
       <a href="./">
         <svg class="logo-emblem" width="38" viewBox="0 0 60 52">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -33,17 +34,19 @@
       </a>
   </div>
 
-  <div class="header-menu-burger menu-burger" id="menuBurger">
-    <span class="menu-burger-stick"></span>
-    <span class="menu-burger-stick"></span>
-    <svg class="menu-burger-label" width="35" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
-    	<g style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
-    		<text class="st0 st1 st2 st3">MENU</text>
-    	</g>
-    </svg>
+    <div class="header-menu-burger menu-burger" id="menuBurger">
+      <span class="menu-burger-stick"></span>
+      <span class="menu-burger-stick"></span>
+      <svg class="menu-burger-label" width="35" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
+      	<g style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
+      		<text class="st0 st1 st2 st3">MENU</text>
+      	</g>
+      </svg>
+    </div>
   </div>
 
-  <nav class="header-menubar menubar" id="menubar">
+  <div class="header-menubar-wrapper">
+    <nav class="header-menubar menubar" id="menubar">
     <ul class="menubar-nav container">
       <a class="menubar-link active" data-menu-item href="./products.html">Products</a>
       <a class="menubar-link" data-menu-item href="./services.html">Services</a>
@@ -55,6 +58,7 @@
       </span>
     </ul>
   </nav>
+  </div>
 </header>
 
 <main>
@@ -239,6 +243,7 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+<script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
 
 <script>

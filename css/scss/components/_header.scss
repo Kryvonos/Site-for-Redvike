@@ -44,6 +44,15 @@
     padding: $header-padding-lg-y $header-padding-lg-x;
   }
 
+  &-menubar-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
   &-logo {
   }
 
