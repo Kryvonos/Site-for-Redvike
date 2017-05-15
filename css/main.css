@@ -4420,7 +4420,7 @@ a {
       font-size: 20px; } }
 
 .career-contacts {
-  margin-top: 6rem;
+  margin-top: 9rem;
   margin-left: -2rem;
   margin-bottom: -1.2rem; }
   .career-contacts-contacts {
@@ -4597,6 +4597,7 @@ a {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: -0.82px;
+    word-spacing: .2em;
     color: #EEE; }
     @media (min-width: 992px) {
       .menubar-link {

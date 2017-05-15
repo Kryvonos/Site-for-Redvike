@@ -11,8 +11,9 @@
 </head>
 <body>
 
-<header class="header header-dark container-wrapper" id="header">
-  <div class="header-logo logo" id="logo">
+<header class="header-wrapper" id="header">
+  <div class="header header-dark container-wrapper">
+    <div class="header-logo logo logo-brand-lg" id="logo">
       <a href="./">
         <svg class="logo-emblem" width="38" viewBox="0 0 60 52">
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -31,30 +32,32 @@
       </a>
   </div>
 
-  <div class="header-menu-burger menu-burger" id="menuBurger">
-    <span class="menu-burger-stick"></span>
-    <span class="menu-burger-stick"></span>
-    <svg class="menu-burger-label" width="35" version="1.1" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
-    	<g style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
-    		<text class="st0 st1 st2 st3">MENU</text>
-    	</g>
-    </svg>
+    <div class="header-menu-burger menu-burger" id="menuBurger">
+      <span class="menu-burger-stick"></span>
+      <span class="menu-burger-stick"></span>
+      <svg class="menu-burger-label" width="35" x="0px" y="0px" viewBox="0 -7.7 36 7.8">
+      	<g style="letter-spacing: 1; font-size: 10; font-family: 'Futura-Bold';">
+      		<text class="st0 st1 st2 st3">MENU</text>
+      	</g>
+      </svg>
+    </div>
   </div>
 
-  <nav class="header-menubar menubar" style="display: none;" id="menubar">
+  <div class="header-menubar-wrapper">
+    <nav class="header-menubar menubar" id="menubar">
     <ul class="menubar-nav container">
-      <a class="menubar-link active" href="./products.html">Products</a>
-      <a class="menubar-link" href="./services.html">Services</a>
-      <a class="menubar-link" href="./about-us.html">About us</a>
-      <a class="menubar-link" href="./career.html">Career</a>
+      <a class="menubar-link" data-menu-item href="./products.html">Products</a>
+      <a class="menubar-link" data-menu-item href="./services.html">Services</a>
+      <!--<a class="menubar-link" data-menu-item href="./about-us.html">About us</a>-->
+      <a class="menubar-link" data-menu-item href="./career.html">Career</a>
       <span class="menubar-gap"></span>
       <span class="menubar-simple-link">
           <a href="mailto:hello@redvike.com">hello@redvike.com</a>
       </span>
     </ul>
   </nav>
+  </div>
 </header>
-
 
 <main>
 
@@ -111,13 +114,13 @@
             </div>
 
             <div class="col-12 col-md-auto">
-              <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
+              <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
 
               <p class="footer-nav fs-sm text-uppercase">
-                <a class="nav-link" href="#">With you</a>
-                <a class="nav-link" href="#">For you</a>
-                <a class="nav-link" href="#">About us</a>
-                <a class="nav-link" href="#">Career</a>
+                <a class="nav-link" href="./services.html">With you</a>
+                <a class="nav-link" href="./products.html">For you</a>
+                <!-- <a class="nav-link" href="./#">About us</a> -->
+                <a class="nav-link" href="./career.html">Career</a>
               </p>
             </div>
           </div>
@@ -133,6 +136,7 @@
 <script src="bower_components/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+<script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
 </body>
 </html>

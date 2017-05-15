@@ -68,6 +68,7 @@
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: -0.82px;
+    word-spacing: .2em;
     color: color(menubar-text);
 
     @include media-breakpoint-up(lg) {
