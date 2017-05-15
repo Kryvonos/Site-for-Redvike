@@ -3804,7 +3804,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   background-size: cover;
   background-position: center; }
   .bg-gradient-brand {
-    background-image: linear-gradient(33deg, #F1183C 0%, #FF4081 100%); }
+    background-image: linear-gradient(-45deg, #F1183C 0%, #FF4081 100%); }
   .bg-dark {
     background: #212121; }
   .bg-section {
@@ -4276,6 +4276,27 @@ a {
       .floating-nav-item.active .floating-nav-text {
         opacity: 1; }
 
+.nav-marker {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  transform: translateX(100%) rotate(-90deg);
+  transform-origin: 0 100%;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 16px;
+  color: #212121; }
+  .nav-marker:before {
+    content: '';
+    display: inline-block;
+    border-radius: 100px;
+    margin-right: .4rem;
+    width: 3rem;
+    height: 2px;
+    vertical-align: middle;
+    background: #212121; }
+
 .products {
   position: relative; }
   .products-wrapper {
@@ -4649,9 +4670,6 @@ a {
 .menu-burger {
   width: 38px;
   cursor: pointer; }
-  @media (min-width: 992px) {
-    .menu-burger {
-      width: 46px; } }
   .menu-burger.active .menu-burger-stick:first-child {
     animation: burger-open-top 700ms ease-out forwards; }
   .menu-burger.active .menu-burger-stick:nth-child(2) {

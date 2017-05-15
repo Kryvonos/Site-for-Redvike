@@ -167,8 +167,8 @@ if ( ! String.prototype.format ) {
         duration: 0,
       });
 
-    scene.addTo( controller )
-  	  .addIndicators();
+    scene.addTo( controller );
+  	  // .addIndicators();
   }
 
   function initEventListeners() {
@@ -203,7 +203,6 @@ if ( ! String.prototype.format ) {
 });
 
 
-
 // Floating nav
 $( function() {
 
@@ -215,14 +214,18 @@ $( function() {
       $window = $(window),
       $floatingNav = null,
       $floatingMenu = $('#floatingMenu'),
+      $navMarker = null,
+      $navMarkerContainer = $('[data-append-floating-nav-marker]'),
       $elems = $('[data-floating-nav]');
 
 
   function init() {
     createFloatingNav();
-    initEventListeners();
+    createFloatingNavMaker();
     initScenes();
     updateScenesTriggerHook();
+
+    initEventListeners();
   }
 
   function createFloatingNav() {
@@ -237,12 +240,35 @@ $( function() {
     $(document.body).append( $floatingNav );
   }
 
+  function createFloatingNavMaker() {
+    var markerTxt = $elems.first().data('floatingNav');
+    $navMarker = $( $.parseHTML( floatigNavMarkerHtml( markerTxt ) ) );
+
+    $navMarkerContainer.append( $navMarker );
+  }
+
+  function onNavMarkerClick( event ) {
+    var top = $elems.offset().top;
+
+    $('html, body').animate( {scrollTop: top}, 500 );
+  }
+
   function floatingNavItemHtml( txt ) {
     return '<div class="floating-nav-item" data-floating-nav-item="{0}"><span class="floating-nav-text">{0}</span></div>'.format( txt );
   }
 
+  function floatigNavMarkerHtml( txt ) {
+    return '<span class="nav-marker">{0}</span>'.format( txt );
+  }
+
   function initEventListeners() {
+    $navMarker.on('click', onNavMarkerClick);
     $window.resize( updateScenesDuration );
+
+    scenes.forEach( function( scene ) {
+        scene.on('enter', onSceneEnter)
+             .on('leave', onSceneLeave);
+    } );
   }
 
   function initScenes() {
@@ -254,9 +280,7 @@ $( function() {
             duration: $this.outerHeight()
           });
 
-      scene.addTo( controller )
-        .on('enter', onSceneEnter)
-        .on('leave', onSceneLeave);
+      scene.addTo( controller );
         // .addIndicators();
 
       scenes.push( scene );

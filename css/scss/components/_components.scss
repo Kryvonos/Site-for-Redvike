@@ -570,6 +570,31 @@ a {
 }
 
 
+.nav-marker {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  transform: translateX(100%) rotate(-90deg);
+  transform-origin: 0 100%;
+  font-weight: bold;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: font-size(md);
+  color: color(dark);
+
+  &:before {
+    content: '';
+    display: inline-block;
+    border-radius: 100px;
+    margin-right: .4rem;
+    width: 3rem;
+    height: 2px;
+    vertical-align: middle;
+    background: color(dark);
+  }
+}
+
+
 .products {
   position: relative;
 

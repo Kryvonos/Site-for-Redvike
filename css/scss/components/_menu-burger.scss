@@ -5,10 +5,6 @@
   width: 38px;
   cursor: pointer;
 
-  @include media-breakpoint-up(lg) {
-    width: 46px;
-  }
-
   &.active {
       #{$menu-burger}-stick:first-child {
         animation: burger-open-top $menu-burger-animation-duration ease-out forwards;
