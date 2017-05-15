@@ -67,10 +67,13 @@
 
           <section class="first-section section">
             <h1 class="h1">
-              Creating Software <br>People <span class="color-brand">Love</span>
-              <!-- <span class="">
-                Love Enjoy Adore
-              </span> -->
+              Creating Software <br>People <!--<span class="color-brand">Love</span>-->
+
+              <span class="words-carousel color-brand">
+                <span class="words-carousel-item">Love</span>
+                <span class="words-carousel-item">Enjoy</span>
+                <span class="words-carousel-item">Adore</span>
+              </span>
             </h1>
           </section>
 
@@ -245,6 +248,7 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+<script src="./js/words-carousel.js"></script>
 <script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
 
@@ -261,6 +265,9 @@ var slickProps = {
 $feedbacks = $('#feedbacks');
 
 $feedbacks.slick( slickProps );
+
+
+$('.words-carousel').wordsCarousel();
 
 </script>
 </body>

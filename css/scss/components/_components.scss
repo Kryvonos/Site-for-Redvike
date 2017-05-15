@@ -831,3 +831,20 @@ a {
   }
 
 }
+
+
+.words-carousel {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden;
+
+  &-content {
+    display: block;
+    transition: transform 300ms ease-in-out;
+  }
+
+  &-item {
+    display: block;
+  }
+
+}

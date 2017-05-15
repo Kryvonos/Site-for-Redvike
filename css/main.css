@@ -4442,6 +4442,16 @@ a {
 .theme-light.floating-menu .list-link {
   color: #FFF; }
 
+.words-carousel {
+  display: inline-block;
+  vertical-align: bottom;
+  overflow: hidden; }
+  .words-carousel-content {
+    display: block;
+    transition: transform 300ms ease-in-out; }
+  .words-carousel-item {
+    display: block; }
+
 .btn {
   display: inline-block;
   border: 3px solid #FF4081;
