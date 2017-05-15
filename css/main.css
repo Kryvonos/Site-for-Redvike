@@ -4087,10 +4087,14 @@ html {
           .process-item-text p:first-child {
             text-indent: 11.1em; } }
 
+.feedbacks {
+  max-width: 650px; }
+
 .quote {
   position: relative;
   margin: 0;
-  padding-top: 2.2rem; }
+  padding-top: 2.2rem;
+  outline: none; }
   @media (min-width: 992px) {
     .quote {
       padding-top: 1.6rem; } }
@@ -4188,6 +4192,9 @@ a {
     .footer-contacts {
       margin-right: 7.5rem;
       margin-bottom: 2rem; } }
+  .footer-menu-label {
+    margin-top: .3rem;
+    margin-bottom: 2.6rem; }
   .footer-nav .nav-link {
     padding-left: 0;
     padding-right: 0; }

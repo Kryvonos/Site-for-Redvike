@@ -7,6 +7,8 @@
   <title>Redvike</title>
 
   <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css" />
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
   <link rel="stylesheet" href="./css/main.css" />
 </head>
 <body>
@@ -41,7 +43,7 @@
     </svg>
   </div>
 
-  <nav class="header-menubar menubar hidden-xs-up" id="menubar">
+  <nav class="header-menubar menubar" id="menubar">
     <ul class="menubar-nav container">
       <a class="menubar-link active" data-menu-item href="./products.html">Products</a>
       <a class="menubar-link" data-menu-item href="./services.html">Services</a>
@@ -136,13 +138,22 @@
                         <h2 class="section-heading h2">Testimotionals</h2>
                       </header>
 
-                      <div class="feedbacks">
+                      <div class="feedbacks" id="feedbacks">
                             <blockquote class="quote">
                               <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
                               <p>They provided us with constant support (even on weekends) and feedback on the development process. Due to constant communication, it felt like they are a part of our technical team. They are more flexible than other contractors we have worked with. They understand challenges that start-ups are facing and trying o adapt their development process based on the requirements.</p>
 
                               <footer>
                                 <p class="quote-author"><strong>Call Page</strong></p>
+                              </footer>
+                            </blockquote>
+
+                            <blockquote class="quote">
+                              <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                              <p>		From my point of view, Redvike has client-oriented culture. Team members are well motivated to do all the best to finish the project in time and deliver the best quality possible.</p>
+
+                              <footer>
+                                <p class="quote-author"><strong>LeadR</strong></p>
                               </footer>
                             </blockquote>
                       </div>
@@ -208,7 +219,7 @@
             </div>
 
             <div class="col-12 col-md-auto">
-              <p class="mb-4"><strong class="fs-md text-uppercase">Menu</strong></p>
+              <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
 
               <p class="footer-nav fs-sm text-uppercase">
                 <a class="nav-link" href="#">With you</a>
@@ -224,6 +235,7 @@
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
@@ -231,6 +243,17 @@
 
 <script>
 
+var slickProps = {
+  inifinite: true,
+  speed: 500,
+  fade: true,
+  autoplay: true,
+  autoplaySpeed: 2000,
+},
+
+$feedbacks = $('#feedbacks');
+
+$feedbacks.slick( slickProps );
 
 </script>
 </body>
