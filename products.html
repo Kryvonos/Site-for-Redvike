@@ -108,7 +108,7 @@
 
                 <div class="product-item-header">
                   <h3 class="product-item-heading heading">CRM</h3>
-                  <button type="button" class="product-item-btn btn btn-info">Order</button>
+                  <button data-select-product="crm" type="button" class="product-item-btn btn btn-info">Order</button>
                 </div>
 
                 <p class="product-item-text">Build strong relationships with your customers with an effective Customer Relationship Management (CRM) system. We’ll leverage the factors that matter for your customers and strategically infuse them within a CRM that will fuel your business’s growth.</p>
@@ -118,38 +118,38 @@
               <div>
                 <div class="product-item-description">
 
-                <div class="product-item-header">
-                  <h3 class="product-item-heading heading">CMS</h3>
-                  <button type="button" class="product-item-btn btn btn-info">Order</button>
-                </div>
+                  <div class="product-item-header">
+                    <h3 class="product-item-heading heading">CMS</h3>
+                    <button data-select-product="cms" type="button" class="product-item-btn btn btn-info">Order</button>
+                  </div>
 
-                <p class="product-item-text">Working closely with you, we can help you develop a custom Content Management System (CMS) that is designed to address your unique needs. With the perfect blend of user experience and efficiency, we’ll help you simplify the management of your website’s content.</p>
+                  <p class="product-item-text">Working closely with you, we can help you develop a custom Content Management System (CMS) that is designed to address your unique needs. With the perfect blend of user experience and efficiency, we’ll help you simplify the management of your website’s content.</p>
+                </div>
               </div>
-              </div>  
 
               <div>
                 <div class="product-item-description">
 
-                <div class="product-item-header">
-                  <h3 class="product-item-heading heading">Dashboard</h3>
-                  <button type="button" class="product-item-btn btn btn-info">Order</button>
-                </div>
+                  <div class="product-item-header">
+                    <h3 class="product-item-heading heading">Dashboard</h3>
+                    <button data-select-product="dashboard" type="button" class="product-item-btn btn btn-info">Order</button>
+                  </div>
 
-                <p class="product-item-text">Our custom developed dashboards for reporting and data visualisation consistently deliver accurate and timely business data in a simplified visual format. From conversion rates to production levels, we make it easy to view the metrics that matter to you.</p>
+                  <p class="product-item-text">Our custom developed dashboards for reporting and data visualisation consistently deliver accurate and timely business data in a simplified visual format. From conversion rates to production levels, we make it easy to view the metrics that matter to you.</p>
+                </div>
               </div>
-              </div>  
 
               <div>
                 <div class="product-item-description">
 
-                <div class="product-item-header">
-                  <h3 class="product-item-heading heading">Single Page Application</h3>
-                  <button type="button" class="product-item-btn btn btn-info">Order</button>
-                </div>
+                  <div class="product-item-header">
+                    <h3 class="product-item-heading heading">Single Page Application</h3>
+                    <button data-select-product="single page application" type="button" class="product-item-btn btn btn-info">Order</button>
+                  </div>
 
-                <p class="product-item-text">Known for their elegant user experience, improved performance and reduced loading times, we’ll help you develop exceptional single page applications that your users will love.</p>
+                  <p class="product-item-text">Known for their elegant user experience, improved performance and reduced loading times, we’ll help you develop exceptional single page applications that your users will love.</p>
+                </div>
               </div>
-              </div>  
           </div>
 
           <div class="product-item-img-col col-12 col-lg-6">
@@ -191,32 +191,38 @@
       </section>
   </div>
 
-  <div class="section-wrapper bg-gradient-brand" data-fit-to-viewport-height>
+  <div id="contacts" class="section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-floating-element-class="theme-light">
     <section class="section contacts">
       <h2 class="out-of-page">Contacts form</h2>
 
-      <form name="contactsUs">
-          <p class="contacts-group">Hey! Let’s get aquainted:)</p>
-          <p class="contacts-group">Hello! My <label for="clientName">name</label> is <input id="clientName" class="contacts-input" type="text" name="name" /></p>
-          <p class="contacts-group">I represent <input class="contacts-input" type="text" name="name" /></p>
+      <form method="post" action="mail.php" name="contactsUs" id="contactsForm">
+          <p data-scenario="product-selected" class="contacts-group">Awesome! We’ll be glad<br>to help you with <span data-restore-value="product-type"></span>.<br>Let’s get aquainted:)</p>
+          <p data-scenario="default" class="contacts-group contacts-group-shown">Hey! Let’s get aquainted:)</p>
+          <p data-scenario="default product-selected" class="contacts-group contacts-group-shown">Hello! My <label for="clientName">name</label> is <input id="clientName" data-contacts-value="client-name" class="contacts-input" type="text" name="name" /></p>
+          <p data-scenario="default product-selected" class="contacts-group">I represent <input class="contacts-input" type="text" name="name" /></p>
 
-          <p class="contacts-group">
-            Nice to meet you, Carlos.<br>
-            We can help you with <input class="contacts-input" type="text" name="name" />
+          <p data-scenario="product-selected" class="contacts-group">
+            Nice to meet you, <span data-restore-value="client-name"></span>.
+            When do you need your project to be done?<br>
+            <input class="contacts-input" type="text" name="name" />
+          </p>
+          <p data-scenario="default" class="contacts-group">
+            Nice to meet you, <span data-restore-value="client-name"></span>.<br>
+            We can help you with <input data-contacts-value="product-type" class="contacts-input" type="text" name="name" />
           </p>
 
-          <p class="contacts-group">
-            Awesome! We’ll be glad to help you with CRM.<br>When do you need it to be done?<br>
+          <p data-scenario="default" class="contacts-group">
+            Awesome! We’ll be glad to help you with <span data-restore-value="product-type"></span>.<br>When do you need it to be done?<br>
             <input class="contacts-input" type="text" name="name" />
           </p>
 
-          <p class="contacts-group">
+          <p data-scenario="default product-selected" class="contacts-group">
             No problem. Could you please leave your email?<br>
             <input class="contacts-input" type="text" name="email" />
           </p>
 
-          <p class="contacts-group">
-            Great. Thank you, Carlos!.<br>
+          <p data-scenario="default product-selected" class="contacts-group">
+            Great. Thank you, <span data-restore-value="client-name"></span>!.<br>
             We will get back to you ASAP :)
           </p>
       </form>
@@ -303,14 +309,65 @@
     // .addIndicators();
 
 
-$('.contacts-input').focusin( onContactsInputFocus );
-$('.contacts-input').blur( onContactsInputFocus );
 
-function onContactsInputFocus( event ) {
-  var $target = $(event.target);
+// Contacts form
+;$( function() {
+  var $body = $('body'),
+      $contactsInput = $('.contacts-input'),
+      $contactsGroup = $('.contacts-group'),
+      $focusedInput = null;
 
-  $target.closest('.contacts-group').toggleClass('contacts-group-focused');
-}
+  function init() {
+    $body.click( onBodyClick );
+    $contactsInput.focusin( onContactsInputFocus );
+    $contactsInput.keypress( onContactsInputKeypress );
+  }
+
+  function onContactsInputFocus( event ) {
+    var $target = $( event.target );
+
+    blurFocusedInput();
+    $focusedInput = $target;
+    triggerElementFocus( $target );
+  }
+
+  function onContactsInputKeypress( event ) {
+
+    if ( event.key === 'Enter' || event.keyCode === 27 ) {
+      blurFocusedInput();
+    }
+
+  }
+
+  function onBodyClick( event ) {
+    var $target = $( event.target ),
+        $contactsInput = $target.closest('.contacts-group').find('.contacts-input');
+
+    if ( $focusedInput && ! $contactsInput.is( $focusedInput ) ) {
+      blurFocusedInput();
+    }
+  }
+
+  function blurFocusedInput() {
+    if ( $focusedInput === null || $focusedInput === undefined ) return;
+
+    triggerElementFocus( $focusedInput );
+    $focusedInput.blur();
+    $focusedInput.trigger( 'contacts-input:blur', { target: $focusedInput.get(0) } );
+
+    $focusedInput = null;
+  }
+
+  function triggerElementFocus( $elem ) {
+    if ( $elem === null || $elem === undefined ) return;
+
+    $elem.closest('.contacts-group').toggleClass('contacts-group-focused');
+  }
+
+  init();
+
+} );
+
 
 
 
@@ -330,6 +387,9 @@ function onContactsInputFocus( event ) {
   $productItems.slick( slickOptions );
 
 } );
+
+
+
 </script>
 </body>
 </html>

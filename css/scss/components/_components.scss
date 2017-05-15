@@ -516,6 +516,10 @@ a {
   opacity: 0;
   transition: opacity $floating-nav-transition-duration ease-in-out, color $floating-nav-transition-duration ease-in-out;
 
+  @include media-breakpoint-down(md) {
+    display: none;
+  }
+
   &.shown {
     opacity: 1;
   }
@@ -692,19 +696,30 @@ a {
 }
 
 
+*[data-scenario] {
+  display: none;
+}
 
 .contacts {
   &-group {
     margin-top: 1em;
     margin-bottom: 1em;
-    font-size: 40px;
+    font-size: font-size(xl);
     font-weight: bold;
     line-height: 1.1;
     color: #FFF;
     transition: font-size 250ms ease-in-out;
 
+    @include media-breakpoint-up(lg) {
+      font-size: 40px;
+    }
+
     &-focused {
       font-size: 70px;
+    }
+
+    &-shown {
+      display: block;
     }
   }
 

@@ -1,6 +1,6 @@
 ;$(function() {
   var $window = $(window),
-  
+
       breakpoints = {
           xs: 0,
           sm: 576,
@@ -43,6 +43,10 @@
 
         isNumeric: function isNumeric(n) {
           return !isNaN(parseFloat(n)) && isFinite(n);
+        },
+
+        scrollTo: function scrollTo( $elem ) {
+          $('html, body').animate( {scrollTop: $elem.offset().top}, 600 );
         }
       };
 

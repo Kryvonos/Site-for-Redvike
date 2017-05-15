@@ -4240,6 +4240,9 @@ a {
   color: #212121;
   opacity: 0;
   transition: opacity 300ms ease-in-out, color 300ms ease-in-out; }
+  @media (max-width: 991px) {
+    .floating-nav {
+      display: none; } }
   .floating-nav.shown {
     opacity: 1; }
   .floating-nav-text {
@@ -4362,16 +4365,24 @@ a {
     position: relative;
     height: 577px; }
 
+*[data-scenario] {
+  display: none; }
+
 .contacts-group {
   margin-top: 1em;
   margin-bottom: 1em;
-  font-size: 40px;
+  font-size: 25px;
   font-weight: bold;
   line-height: 1.1;
   color: #FFF;
   transition: font-size 250ms ease-in-out; }
+  @media (min-width: 992px) {
+    .contacts-group {
+      font-size: 40px; } }
   .contacts-group-focused {
     font-size: 70px; }
+  .contacts-group-shown {
+    display: block; }
 .contacts-input {
   display: inline-block;
   border: 0;

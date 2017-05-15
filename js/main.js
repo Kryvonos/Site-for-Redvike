@@ -223,9 +223,21 @@ $( function() {
     createFloatingNav();
     createFloatingNavMaker();
     initScenes();
-    updateScenesTriggerHook();
 
+    function updateScenesFewTimes( stamp ) {
+      if ( stamp > 10000 ) return;
+
+      updateScenes();
+      window.requestAnimationFrame( updateScenesFewTimes );
+    }
+
+    updateScenesFewTimes();
     initEventListeners();
+  }
+
+  function updateScenes() {
+    updateScenesDuration();
+    updateScenesTriggerHook();
   }
 
   function createFloatingNav() {
@@ -306,6 +318,7 @@ $( function() {
         $floatingNavItem = $floatingNav.children().first();
       }
 
+
       top = $floatingNavItem.get(0).getBoundingClientRect().top,
       halfHeight = $floatingNavItem.outerHeight() / 2,
       triggerHook = (top + halfHeight) / windowHeight;
@@ -354,6 +367,134 @@ $( function() {
 
   function hideFloatingNav() {
     $floatingNav.removeClass('shown');
+  }
+
+  init();
+
+} );
+
+
+// Contacts form scenario
+;$( function() {
+  var scenario = null,
+
+      $window = $(window),
+      $body = $('body'),
+      $contacts = $('#contacts'),
+      $contactsForm = $('#contactsForm'),
+      $selectProduct = $('[data-select-product]');
+
+  function init() {
+    scenario = defineScenario( 'default' );
+
+    initEventListeners();
+  }
+
+  function initEventListeners() {
+    $selectProduct.click( onSelectProductClick );
+    $body.on('contacts-input:blur', onContactsInputBlur);
+  }
+
+  function defineScenario( name ) {
+    var $scenario = findScenario( name ),
+        shownClass = 'contacts-group-shown';
+
+    function showNextItem() {
+        var $contactsGroupHidden = $scenario.filter( ':not(.{0})'.format( shownClass ) ).first(),
+            $valuesToRestore = $contactsGroupHidden.find('[data-restore-value]');
+
+        restoreValues( $valuesToRestore );
+        $contactsGroupHidden.addClass( shownClass );
+
+        if ( ! hasMoreItemsToShow() ) {
+          submitForm();
+        }
+    }
+
+    function hasMoreItemsToShow() {
+      return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
+    }
+
+    function restoreValues( $elems ) {
+        $elems.each( function() {
+          var $this = $(this),
+              value = $this.data('restoreValue'),
+              $elem = $( '[data-contacts-value="{0}"]'.format( value ) );
+
+          $this.text( $elem.val() );
+        } );
+    }
+
+    function submitForm() {
+      var $name = $contactsForm.find('input[name=name]'),
+          $email = $contactsForm.find('input[name=email]'),
+          $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
+          $represent = $contactsForm.find('input[name=represent]'),
+          $deadline = $contactsForm.find('input[name=deadline]');
+
+      $.post( $contactsForm.attr('action'), {
+        name: $name.val(),
+        email: $email.val(),
+        selectedProduct: $selectedProduct.val(),
+        represent: $represent.val(),
+        deadline: $deadline.val(),
+      } )
+      .done( function( response ) {
+
+        if ( response == 1 ) {
+          alert( 'Thank you for your order.' );
+        }
+        else {
+          alert( 'An error has occurred. Please, try later.' );
+        }
+
+        console.log( response );
+      } );
+    }
+
+    return {
+      showNextItem: showNextItem
+    }
+  }
+
+  function findScenario( name ) {
+    var $elems = $('[data-scenario]');
+
+    return $elems.filter( function() {
+
+        return belongsToScenario( $(this), name );
+
+    } );
+  }
+
+  function onSelectProductClick( event ) {
+    scenario = defineScenario( 'product-selected' );
+    scenario.showNextItem();
+
+    Utility.scrollTo( $contacts );
+  }
+
+  function onContactsInputBlur( event ) {
+    scenario.showNextItem();
+  }
+
+  function clearContacts() {
+    $('.contacts-group-shown').removeClass( 'contacts-group-shown' );
+  }
+
+  function belongsToScenario( $elem, name ) {
+    var scenarios = null;
+
+    $elem = $elem.first();
+    scenarios = $elem.data('scenario').split(' ');
+
+    for (var i = 0; i < scenarios.length; ++i) {
+        if ( scenarios[i] === name ) {
+          return true;
+        }
+    }
+
+    return false;
   }
 
   init();
