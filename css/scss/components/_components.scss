@@ -407,7 +407,6 @@ a {
   &-content {
     margin-left: auto;
     margin-right: auto;
-    // min-height: 370px;
   }
 
   &-content-wrapper {
@@ -436,8 +435,10 @@ a {
   }
 
   &-menu-label {
-    margin-top: .3rem;
+    margin-top: .35rem;
     margin-bottom: 2.6rem;
+    font-family: 'Futura BT', sans-serif;
+    letter-spacing: 1.23px;
   }
 
   &-nav {

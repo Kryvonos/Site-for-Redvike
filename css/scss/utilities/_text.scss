@@ -16,6 +16,15 @@
        url('../fonts/Bebas/Bebas.ttf') format('truetype')
 }
 
+@font-face {
+  font-family: 'Futura BT';
+  font-weight: 700;
+  src: url('../fonts/Futura-BT/Futura-BT-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/Futura-BT/Futura-BT-Bold.otf') format('opentype'),
+	     url('../fonts/Futura-BT/Futura-BT-Bold.woff') format('woff'),
+       url('../fonts/Futura-BT/Futura-BT-Bold.ttf') format('truetype')
+}
+
 
 @each $font-size in map-keys($font-sizes) {
 	.fs-#{$font-size} {

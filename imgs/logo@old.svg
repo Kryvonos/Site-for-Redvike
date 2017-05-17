@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="38px" viewBox="0 0 130 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
+    <title>logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feGaussianBlur stdDeviation="0 0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="0 0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-157.000000, -4312.000000)">
+            <g id="logo" transform="translate(157.000000, 4312.000000)">
+                <g id="Page-1" fill="#F44336">
+                    <g id="Group-2">
+                        <polygon id="Fill-1" points="0 0 22.1328485 38 29.3333333 25.6223222 14.442454 0"></polygon>
+                        <polygon id="Fill-2" points="29.8571429 0 36.9292989 11.9726027 44 0"></polygon>
+                    </g>
+                </g>
+                <text id="REDVIKE" filter="url(#filter-2)" font-family="FuturaBT-Bold, Futura Md BT" font-size="18" font-weight="bold" letter-spacing="-0.422068983" fill="#282828">
+                    <tspan x="56" y="25">REDVIKE</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

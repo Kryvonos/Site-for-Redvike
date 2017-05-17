@@ -61,6 +61,7 @@
 
   &-logotype {
     display: none;
+    box-sizing: content-box;
 
     @include media-breakpoint-up(lg) {
       display: block;

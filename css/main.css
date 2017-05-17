@@ -3830,6 +3830,10 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   font-family: 'Bebas';
   font-weight: 500;
   src: url("../fonts/Bebas/Bebas.eot?#iefix") format("embedded-opentype"), url("../fonts/Bebas/Bebas.otf") format("opentype"), url("../fonts/Bebas/Bebas.woff") format("woff"), url("../fonts/Bebas/Bebas.ttf") format("truetype"); }
+@font-face {
+  font-family: 'Futura BT';
+  font-weight: 700;
+  src: url("../fonts/Futura-BT/Futura-BT-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Futura-BT/Futura-BT-Bold.otf") format("opentype"), url("../fonts/Futura-BT/Futura-BT-Bold.woff") format("woff"), url("../fonts/Futura-BT/Futura-BT-Bold.ttf") format("truetype"); }
 .fs-xs {
   font-size: 12px !important; }
 
@@ -4193,8 +4197,10 @@ a {
       margin-right: 7.5rem;
       margin-bottom: 2rem; } }
   .footer-menu-label {
-    margin-top: .3rem;
-    margin-bottom: 2.6rem; }
+    margin-top: .35rem;
+    margin-bottom: 2.6rem;
+    font-family: 'Futura BT', sans-serif;
+    letter-spacing: 1.23px; }
   .footer-nav .nav-link {
     padding-left: 0;
     padding-right: 0; }
@@ -4535,7 +4541,8 @@ a {
       filter: blur(0);
       opacity: 1; } }
   .logo-logotype {
-    display: none; }
+    display: none;
+    box-sizing: content-box; }
     @media (min-width: 992px) {
       .logo-logotype {
         display: block;
@@ -4692,6 +4699,7 @@ a {
 
 .menu-burger {
   width: 38px;
+  text-align: center;
   cursor: pointer; }
   .menu-burger.active .menu-burger-stick:first-child {
     animation: burger-open-top 700ms ease-out forwards; }
@@ -4714,8 +4722,15 @@ a {
     border-radius: 100px; }
   .menu-burger-label {
     display: block;
+    position: relative;
+    left: .12em;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    font-family: 'Futura BT';
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.36px; }
 
 @keyframes burger-open-top {
   50% {

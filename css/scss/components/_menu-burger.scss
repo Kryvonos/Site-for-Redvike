@@ -3,6 +3,7 @@
   $menu-burger-animation-duration: 700ms;
 
   width: 38px;
+  text-align: center;
   cursor: pointer;
 
   &.active {
@@ -45,8 +46,15 @@
 
   &-label {
     display: block;
+    position: relative;
+    left: .12em;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Futura BT';
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.36px;
     // transition: all $menu-burger-animation-duration ease-in-out;
   }
 
