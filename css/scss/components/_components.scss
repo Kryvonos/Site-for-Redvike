@@ -213,7 +213,7 @@
 
 
 .process {
-  $process-item-text-indent: 11.1em;
+  $process-item-text-indent: 2.6em;
 
   &-section {
 
@@ -246,7 +246,7 @@
       top: 0;
       left: 0;
       color: color(accent);
-      opacity: .15;
+      opacity: .1;
 
       @include media-breakpoint-up(lg) {
         left: .4em;
@@ -611,7 +611,7 @@ a {
   &-label {
     position: absolute;
     left: 50%;
-    bottom: -10%;
+    bottom: -5%;
     transform: translateX(-50%);
     font-family: 'Bebas';
     font-size: 360px;
@@ -821,7 +821,7 @@ a {
   font-size: 360px;
   text-transform: uppercase;
   color: #FFF;
-  opacity: .1;
+  opacity: .05;
 }
 
 

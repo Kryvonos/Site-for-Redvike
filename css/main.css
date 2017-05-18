@@ -4076,7 +4076,7 @@ html {
     top: 0;
     left: 0;
     color: #FF4081;
-    opacity: .15; }
+    opacity: .1; }
     @media (min-width: 992px) {
       .process-item-heading {
         left: .4em; } }
@@ -4085,11 +4085,11 @@ html {
     text-align: justify; }
     @media (min-width: 992px) {
       .process-item-text {
-        text-indent: 11.1em; }
+        text-indent: 2.6em; }
         .process-item-text p {
           text-indent: 0; }
           .process-item-text p:first-child {
-            text-indent: 11.1em; } }
+            text-indent: 2.6em; } }
 
 .feedbacks {
   max-width: 650px; }
@@ -4314,7 +4314,7 @@ a {
   .products-label {
     position: absolute;
     left: 50%;
-    bottom: -10%;
+    bottom: -5%;
     transform: translateX(-50%);
     font-family: 'Bebas';
     font-size: 360px;
@@ -4449,7 +4449,7 @@ a {
   font-size: 360px;
   text-transform: uppercase;
   color: #FFF;
-  opacity: .1; }
+  opacity: .05; }
 
 .theme-light.floating-nav {
   color: #FFF; }

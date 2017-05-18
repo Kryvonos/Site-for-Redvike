@@ -47,6 +47,18 @@
 
         scrollTo: function scrollTo( $elem ) {
           $('html, body').animate( {scrollTop: $elem.offset().top}, 600 );
+        },
+
+        stringValidation: function stringValidation() {
+
+        },
+
+        nameValidation: function nameValidation() {
+
+        },
+
+        emailValidation: function emailValidation() {
+
         }
       };
 

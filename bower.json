@@ -18,6 +18,7 @@
   "dependencies": {
     "scrollmagic": "^2.0.5",
     "gsap": "^1.19.1",
-    "slick-carousel": "^1.6.0"
+    "slick-carousel": "^1.6.0",
+    "css-element-queries": "^0.4.0"
   }
 }

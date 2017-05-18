@@ -14,7 +14,8 @@ if ( ! String.prototype.format ) {
 
 ;$(function( $ ) {
 	var $window = $(window),
-      $html = $('html');
+      $html = $('html'),
+      $fitToViewportHeight = $('[data-fit-to-viewport-height]');
 
 	function init() {
   		if ( ! Modernizr.flexbox ) {
@@ -22,25 +23,26 @@ if ( ! String.prototype.format ) {
   		}
 
 			initEventListeners();
-			fitToViewportHeight();
+			defineFitToViewportHeight();
 	};
 
 	function initEventListeners() {
-		$(window).resize( onWindowResize );
+		$window.resize( onWindowResize );
 	}
 
 	function onWindowResize( event ) {
-		fitToViewportHeight();
+		defineFitToViewportHeight();
 	}
 
 
-	function fitToViewportHeight() {
-		var $elems = $('[data-fit-to-viewport-height]'),
-				height = $(window).outerHeight();
+	function defineFitToViewportHeight( $elem ) {
+		var height = $window.outerHeight(),
+        $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
 
-		$elems.each( function() {
+        // console.log( 'yes' );
+		$fitToViewportHeight.each( function() {
 			var $this = $(this),
-					originalHeight = 0;
+          originalHeight = 0;
 
 			$this.css('height', '');
 			originalHeight = $this.outerHeight();
@@ -224,15 +226,41 @@ $( function() {
     createFloatingNavMaker();
     initScenes();
 
-    function updateScenesFewTimes( stamp ) {
-      if ( stamp > 10000 ) return;
-
-      updateScenes();
-      window.requestAnimationFrame( updateScenesFewTimes );
-    }
-
-    updateScenesFewTimes();
+    // function updateScenesFewTimes( stamp ) {
+    //   if ( stamp > 10000 ) return;
+    //
+    //   updateScenes();
+    //   window.requestAnimationFrame( updateScenesFewTimes );
+    // }
+    //
+    // updateScenesFewTimes();
     initEventListeners();
+  }
+
+  function initScenes() {
+    $elems.each( function() {
+      var $this = $(this),
+          scene = new ScrollMagic.Scene( {
+            triggerElement: $this,
+            triggerHook: .15,
+            duration: $this.outerHeight()
+          });
+
+      scene.addTo( controller );
+        // .addIndicators();
+
+      scenes.push( scene );
+    } );
+  }
+
+  function initEventListeners() {
+    $navMarker.on('click', onNavMarkerClick);
+    // new ResizeSensor($elems, updateScenesDuration);
+
+    scenes.forEach( function( scene ) {
+        scene.on('enter', onSceneEnter)
+             .on('leave', onSceneLeave);
+    } );
   }
 
   function updateScenes() {
@@ -273,38 +301,28 @@ $( function() {
     return '<span class="nav-marker">{0}</span>'.format( txt );
   }
 
-  function initEventListeners() {
-    $navMarker.on('click', onNavMarkerClick);
-    $window.resize( updateScenesDuration );
+  function updateScenesDuration() {
+      scenes.forEach( updateSceneDuration );
+  }
+
+  function updateSceneDuration( scene ) {
+    var $triggerElement = $( scene.triggerElement() ),
+        height = $triggerElement.outerHeight();
+
+    scene.duration( height );
+  }
+
+  function getSceneByTriggerElement( triggerElement ) {
+    var res = null;
 
     scenes.forEach( function( scene ) {
-        scene.on('enter', onSceneEnter)
-             .on('leave', onSceneLeave);
+        if ( scene.triggerElement() === triggerElement ) {
+          res = scene;
+          return
+        }
     } );
-  }
 
-  function initScenes() {
-    $elems.each( function() {
-      var $this = $(this),
-          scene = new ScrollMagic.Scene( {
-            triggerElement: $this,
-            triggerHook: .15,
-            duration: $this.outerHeight()
-          });
-
-      scene.addTo( controller );
-        // .addIndicators();
-
-      scenes.push( scene );
-    } );
-  }
-
-  function updateScenesDuration() {
-      scenes.forEach( function( scene ) {
-          var height = $( scene.triggerElement() ).outerHeight();
-
-          scene.duration( height );
-      } );
+    return res;
   }
 
   function updateScenesTriggerHook() {
@@ -361,6 +379,12 @@ $( function() {
     clearTimeout( timerId );
   }
 
+  function onContentChange( event ) {
+    console.log( 'contentchange nav' );
+    updateSceneDuration( getSceneByTriggerElement( event.target ) );
+  }
+
+
   function showFloatingNav() {
     $floatingNav.addClass('shown');
   }
@@ -396,65 +420,86 @@ $( function() {
   }
 
   function defineScenario( name ) {
-    var $scenario = findScenario( name ),
-        shownClass = 'contacts-group-shown';
+      var $scenario = findScenario( name ),
+          shownClass = 'contacts-group-shown';
 
-    function showNextItem() {
-        var $contactsGroupHidden = $scenario.filter( ':not(.{0})'.format( shownClass ) ).first(),
-            $valuesToRestore = $contactsGroupHidden.find('[data-restore-value]');
+      function showNextItem(  ) {
+          var $lastShown = $scenario.filter( '.{0}:last'.format( shownClass ) ),
+              $scenarioItem = getNextScenarioItem( $lastShown );
 
-        restoreValues( $valuesToRestore );
-        $contactsGroupHidden.addClass( shownClass );
+          if ( $scenarioItem.hasClass( shownClass) ) {
+            return;
+          }
 
-        if ( ! hasMoreItemsToShow() ) {
-          submitForm();
-        }
-    }
+          restoreValues( $scenarioItem );
+          $scenarioItem.addClass( shownClass );
+          // if ( ! hasMoreItemsToShow() ) {
+          //   submitForm();
+          // }
+      }
 
-    function hasMoreItemsToShow() {
-      return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
-    }
+      function getNextScenarioItem( $elem ) {
+        var index = Number.POSITIVE_INFINITY,
+            counter = 0;
 
-    function restoreValues( $elems ) {
-        $elems.each( function() {
-          var $this = $(this),
-              value = $this.data('restoreValue'),
-              $elem = $( '[data-contacts-value="{0}"]'.format( value ) );
+        $scenario.each( function() {
+          var $this = $(this);
+          counter++;
 
-          $this.text( $elem.val() );
+          if ( $this.is( $elem ) ) {
+              index = counter;
+              return;
+          }
+
         } );
-    }
 
-    function submitForm() {
-      var $name = $contactsForm.find('input[name=name]'),
-          $email = $contactsForm.find('input[name=email]'),
-          $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
-          $represent = $contactsForm.find('input[name=represent]'),
-          $deadline = $contactsForm.find('input[name=deadline]');
+        return $scenario.eq( index );
+      }
 
-      $.post( $contactsForm.attr('action'), {
-        name: $name.val(),
-        email: $email.val(),
-        selectedProduct: $selectedProduct.val(),
-        represent: $represent.val(),
-        deadline: $deadline.val(),
-      } )
-      .done( function( response ) {
+      function hasMoreItemsToShow() {
+        return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
+      }
 
-        if ( response == 1 ) {
-          alert( 'Thank you for your order.' );
-        }
-        else {
-          alert( 'An error has occurred. Please, try later.' );
-        }
+      function restoreValues( $elems ) {
+          $elems.each( function() {
+            var $this = $(this),
+                value = $this.data('restoreValue'),
+                $elem = $( '[data-contacts-value="{0}"]'.format( value ) );
 
-        console.log( response );
-      } );
-    }
+            $this.text( $elem.val() );
+          } );
+      }
 
-    return {
-      showNextItem: showNextItem
-    }
+      function submitForm() {
+        var $name = $contactsForm.find('input[name=name]'),
+            $email = $contactsForm.find('input[name=email]'),
+            $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
+            $represent = $contactsForm.find('input[name=represent]'),
+            $deadline = $contactsForm.find('input[name=deadline]');
+
+        $.post( $contactsForm.attr('action'), {
+          name: $name.val(),
+          email: $email.val(),
+          selectedProduct: $selectedProduct.val(),
+          represent: $represent.val(),
+          deadline: $deadline.val(),
+        } )
+        .done( function( response ) {
+
+          if ( response == 1 ) {
+            alert( 'Thank you for your order.' );
+          }
+          else {
+            alert( 'An error has occurred. Please, try later.' );
+          }
+
+          console.log( response );
+        } );
+      }
+
+      return {
+        showNextItem: showNextItem
+      }
   }
 
   function findScenario( name ) {
@@ -496,6 +541,7 @@ $( function() {
 
     return false;
   }
+
 
   init();
 
