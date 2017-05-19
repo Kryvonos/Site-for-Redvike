@@ -226,15 +226,20 @@ $( function() {
     createFloatingNavMaker();
     initScenes();
 
-    // function updateScenesFewTimes( stamp ) {
-    //   if ( stamp > 10000 ) return;
-    //
-    //   updateScenes();
-    //   window.requestAnimationFrame( updateScenesFewTimes );
-    // }
-    //
-    // updateScenesFewTimes();
+    function updateScenesFewTimes( stamp ) {
+      if ( stamp > 10000 ) return;
+
+      updateScenes();
+      window.requestAnimationFrame( updateScenesFewTimes );
+    }
+
+    updateScenesFewTimes();
     initEventListeners();
+  }
+
+  function updateScenes() {
+    updateScenesDuration();
+    updateScenesTriggerHook();
   }
 
   function initScenes() {
@@ -406,7 +411,9 @@ $( function() {
       $contacts = $('#contacts'),
       $contactsForm = $('#contactsForm'),
       $selectProduct = $('[data-select-product]'),
-      formHasBeenSubmitted = false;
+
+      formHasBeenSubmitted = false,
+      manuallyRestoredValue = {};
 
   function init() {
     scenario = defineScenario( 'default' );
@@ -419,10 +426,36 @@ $( function() {
     $body.on('contacts-input:blur', onContactsInputBlur);
   }
 
+  function onSelectProductClick( event ) {
+    var $target = $( event.target ),
+        productType = $target.data('selectProduct');
+
+    scenario = defineScenario( 'product-selected' );
+
+    clearContacts();
+    scenario.restoreValue( 'product-type', productType );
+    scenario.showNextItem();
+    scenario.showNextItem();
+
+    Utility.scrollTo( $contacts );
+  }
+
+  function onContactsInputBlur( event ) {
+    var $target = $( event.target ),
+        $scenarioItem = $target.closest('[data-scenario]');
+
+    scenario.showNextItem( $scenarioItem );
+
+    if ( ! scenario.hasMoreItemsToShow() && scenario.isValidItems() && ! formHasBeenSubmitted ) {
+      submitForm();
+    }
+  }
+
+
   function defineScenario( name ) {
       var $scenario = findScenario( name ),
-          shownClass = 'contacts-group-shown',
-          manuallyRestoredValue = {};
+          shownClass = 'contacts-group-shown';
+
 
       function showNextItem( $elem ) {
           var $scenarioItem = null;
@@ -445,11 +478,30 @@ $( function() {
           if ( $scenarioItem.hasClass( shownClass) ) return;
 
           $scenarioItem.addClass( shownClass );
-
-          if ( ! formHasBeenSubmitted && ! hasMoreItemsToShow() ) {
-            submitForm();
-          }
       }
+
+      function getNextScenarioItem( $elem ) {
+        var index = Number.POSITIVE_INFINITY,
+        counter = 0;
+
+        $scenario.each( function() {
+          var $this = $(this);
+          counter++;
+
+          if ( $this.is( $elem ) ) {
+            index = counter;
+            return;
+          }
+
+        } );
+
+        return $scenario.eq( index );
+      }
+
+      function hasMoreItemsToShow() {
+        return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
+      }
+
 
       function validateShownItems() {
           var $elems = $scenario.filter( '.' + shownClass ),
@@ -475,6 +527,27 @@ $( function() {
                 $inputError.parent().addClass('contacts-input-shown-error');
                 $inputError.text( validationRes );
               }
+          } );
+
+          return isValid;
+      }
+
+      function isValidItems() {
+          var $elems = $scenario.filter( '.' + shownClass ),
+              isValid = true;
+
+          $elems.each( function() {
+              var $this = $(this),
+                  $input = $this.find('[data-validation]'),
+                  validationFuncName = $input.data('validation'),
+                  validationFunc = null,
+                  validationRes = null;
+
+              if ( ! validationFuncName ) return;
+
+              validationFunc = Utility[validationFuncName];
+              validationRes = validationFunc( $input.val() );
+              isValid = ( validationRes === 'ok' );
 
               return isValid;
           } );
@@ -482,79 +555,12 @@ $( function() {
           return isValid;
       }
 
-      function getNextScenarioItem( $elem ) {
-        var index = Number.POSITIVE_INFINITY,
-            counter = 0;
-
-        $scenario.each( function() {
-          var $this = $(this);
-          counter++;
-
-          if ( $this.is( $elem ) ) {
-              index = counter;
-              return;
-          }
-
-        } );
-
-        return $scenario.eq( index );
-      }
-
-      function hasMoreItemsToShow() {
-        return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
-      }
-
-      function restoreValues() {
-          var $elems = $('[data-restore-value]');
-
-          $elems.each( function() {
-              var $this = $(this),
-                  valueToRestore = $this.data('restoreValue'),
-                  $elem = $( '[data-contacts-value="{0}"]'.format( valueToRestore ) ),
-                  val = manuallyRestoredValue[valueToRestore] || $elem.val();
-
-              $this.text( val );
-          } );
-      }
-
-      function restoreValue( value, data ) {
-        var $elems = $( '[data-restore-value="{0}"]'.format( value ) );
-
-        manuallyRestoredValue[value] = data;
-        $elems.text( data );
-      }
-
-      function submitForm() {
-        var $name = $contactsForm.find('input[name=name]'),
-            $email = $contactsForm.find('input[name=email]'),
-            $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
-            $represent = $contactsForm.find('input[name=represent]'),
-            $deadline = $contactsForm.find('input[name=deadline]');
-
-        $.post( $contactsForm.attr('action'), {
-          name: $name.val(),
-          email: $email.val(),
-          selectedProduct: $selectedProduct.val(),
-          represent: $represent.val(),
-          deadline: $deadline.val(),
-        } )
-        .done( function( response ) {
-
-          if ( response == 1 ) {
-            formHasBeenSubmitted = true;
-            alert( 'Thank you for your order.' );
-          }
-          else {
-            alert( 'An error has occurred. Please, try later.' );
-          }
-
-          console.log( response );
-        } );
-      }
 
       return {
         showNextItem: showNextItem,
-        restoreValue: restoreValue
+        restoreValue: restoreValue,
+        hasMoreItemsToShow: hasMoreItemsToShow,
+        isValidItems: isValidItems,
       }
   }
 
@@ -563,34 +569,29 @@ $( function() {
 
     return $elems.filter( function() {
 
-        return belongsToScenario( $(this), name );
+      return belongsToScenario( $(this), name );
 
     } );
   }
 
-  function onSelectProductClick( event ) {
-    var $target = $( event.target ),
-        productType = $target.data('selectProduct');
-        
-    scenario = defineScenario( 'product-selected' );
+  function restoreValues() {
+      var $elems = $('[data-restore-value]');
 
-    clearContacts();
-    scenario.restoreValue( 'product-type', productType );
-    scenario.showNextItem();
-    scenario.showNextItem();
+      $elems.each( function() {
+          var $this = $(this),
+              valueToRestore = $this.data('restoreValue'),
+              $elem = $( '[data-contacts-value="{0}"]'.format( valueToRestore ) ),
+              val = manuallyRestoredValue[valueToRestore] || $elem.val();
 
-    Utility.scrollTo( $contacts );
+          $this.text( val );
+      } );
   }
 
-  function onContactsInputBlur( event ) {
-    var $target = $( event.target ),
-        $scenarioItem = $target.closest('[data-scenario]');
+  function restoreValue( value, data ) {
+    var $elems = $( '[data-restore-value="{0}"]'.format( value ) );
 
-    scenario.showNextItem( $scenarioItem );
-  }
-
-  function clearContacts() {
-    $('.contacts-group-shown').removeClass( 'contacts-group-shown' );
+    manuallyRestoredValue[value] = data;
+    $elems.text( data );
   }
 
   function belongsToScenario( $elem, name ) {
@@ -608,6 +609,41 @@ $( function() {
     return false;
   }
 
+
+  function clearContacts() {
+    $('.contacts-group-shown').removeClass( 'contacts-group-shown' );
+  }
+
+
+  function submitForm() {
+      var $name = $contactsForm.find('input[name=name]'),
+          $email = $contactsForm.find('input[name=email]'),
+          $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
+          $represent = $contactsForm.find('input[name=represent]'),
+          $deadline = $contactsForm.find('input[name=deadline]'),
+          $fail = $('#formSubmitFail'),
+          $ok = $('#formSubmitOk');
+
+      $.post( $contactsForm.attr('action'), {
+        name: $name.val(),
+        email: $email.val(),
+        selectedProduct: $selectedProduct.val(),
+        represent: $represent.val(),
+        deadline: $deadline.val(),
+      } )
+      .done( function( response ) {
+
+        if ( response == 1 ) {
+          formHasBeenSubmitted = true;
+          $ok.removeClass('hidden-xs-up');
+        }
+        else {
+          $fail.removeClass('hidden-xs-up');
+        }
+
+        console.log( response );
+      } );
+  }
 
   init();
 

@@ -663,6 +663,10 @@ a {
       }
     }
 
+    .slick-slide {
+      outline: none;
+    }
+
     &-btn {
       margin-bottom: $product-item-heading-margin;
       margin-left: $product-item-heading-maring-left;;

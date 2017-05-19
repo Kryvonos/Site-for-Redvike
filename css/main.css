@@ -4349,6 +4349,8 @@ a {
     @media (min-width: 992px) {
       .product-item-heading {
         font-size: 50px; } }
+  .product-item .slick-slide {
+    outline: none; }
   .product-item-btn {
     margin-bottom: 2rem;
     margin-left: 3rem; }

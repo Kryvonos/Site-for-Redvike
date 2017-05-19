@@ -37,8 +37,8 @@ $subject = "=?UTF-8?B?".base64_encode($subjectText)."?=";
 $headers   = array();
 $headers[] = "MIME-Version: 1.0";
 $headers[] = "Content-type: text/html; charset=UTF-8";
-$headers[] = "From: Kyivnotes <$from>";
-$headers[] = "Reply-To: Kyivnotes <$from>";
+$headers[] = "From: Redvike <$from>";
+$headers[] = "Reply-To: Redvike <$from>";
 $headers[] = "X-Mailer: PHP/".phpversion();
 
 
