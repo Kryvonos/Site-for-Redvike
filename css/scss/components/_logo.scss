@@ -22,7 +22,7 @@
   display: inline-block;
   position: relative;
 
-  &-brand {
+  &-theme-brand {
     @include logo-style($trapezia-fill: #F1183C, $triangle-fill: #F44336);
 
     &-lg {
@@ -32,10 +32,17 @@
     }
   }
 
-  &.logo-dark {
+  &-theme-dark {
       .logo-emblem-shape,
-      .logo-logotype {
+      .logo-logotype-shape {
         fill: color(dark);
+      }
+  }
+
+  &-theme-light {
+      .logo-emblem-shape,
+      .logo-logotype-shape {
+        fill: #FFF;
       }
   }
 

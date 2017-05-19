@@ -4600,58 +4600,6 @@ a {
       background: #FF4081;
       color: #FFF; }
 
-.logo {
-  display: inline-block;
-  position: relative; }
-  .logo-brand .logo-emblem-shape:first-child {
-    fill: #F1183C !important; }
-  .logo-brand .logo-emblem-shape:nth-child(2) {
-    fill: #F44336 !important; }
-  .logo-brand .logo-logotype-shape {
-    fill: #F44336 !important; }
-  @media (min-width: 992px) {
-    .logo-brand-lg .logo-emblem-shape:first-child {
-      fill: #F1183C !important; }
-    .logo-brand-lg .logo-emblem-shape:nth-child(2) {
-      fill: #F44336 !important; }
-    .logo-brand-lg .logo-logotype-shape {
-      fill: #F44336 !important; } }
-  .logo.logo-dark .logo-emblem-shape,
-  .logo.logo-dark .logo-logotype {
-    fill: #212121; }
-  .logo-emblem {
-    display: block;
-    width: 38px;
-    height: auto; }
-    @media (min-width: 992px) {
-      .logo-emblem {
-        width: 60px; } }
-  @media (min-width: 992px) {
-    .logo:hover .logo-logotype {
-      transform: translateX(60px);
-      filter: blur(0);
-      opacity: 1; } }
-  .logo-logotype {
-    display: none;
-    box-sizing: content-box; }
-    @media (min-width: 992px) {
-      .logo-logotype {
-        display: block;
-        transform: translateX(30px);
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        margin-top: auto;
-        margin-bottom: auto;
-        border-left: 20px solid transparent;
-        opacity: 0;
-        filter: blur(2.5px);
-        transition: all 250ms ease-in-out; } }
-    .logo-logotype-hidden {
-      z-index: -1;
-      overflow: hidden; }
-
 .menubar {
   left: -99999999px;
   display: flex;
@@ -4757,36 +4705,91 @@ a {
     @media (min-width: 992px) {
       .header-offset, .start-section-wrapper {
         padding-top: 112px; } }
-  .header-dark .header-logo .logo-emblem-shape, .header-dark .header-logo .logo-logotype {
+  .header-theme-dark .header-logo .logo-emblem-shape, .header-theme-dark .header-logo .logo-logotype-shape {
     fill: #212121; }
-  .header-dark .header-menu-burger .menu-burger-stick {
+  .header-theme-dark .header-menu-burger .menu-burger-stick {
     background: #212121; }
-  .header-dark .header-menu-burger .menu-burger-label {
+  .header-theme-dark .header-menu-burger .menu-burger-label {
     color: #212121;
     fill: #212121; }
   @media (min-width: 992px) {
-    .header-dark-lg .header-logo .logo-emblem-shape, .header-dark-lg .header-logo .logo-logotype {
+    .header-theme-dark-lg .header-logo .logo-emblem-shape, .header-theme-dark-lg .header-logo .logo-logotype-shape {
       fill: #212121; }
-    .header-dark-lg .header-menu-burger .menu-burger-stick {
+    .header-theme-dark-lg .header-menu-burger .menu-burger-stick {
       background: #212121; }
-    .header-dark-lg .header-menu-burger .menu-burger-label {
+    .header-theme-dark-lg .header-menu-burger .menu-burger-label {
       color: #212121;
       fill: #212121; } }
-  .header-light .header-logo .logo-emblem-shape, .header-light .header-logo .logo-logotype {
+  .header-theme-light .header-logo .logo-emblem-shape, .header-theme-light .header-logo .logo-logotype-shape {
     fill: #FFF; }
-  .header-light .header-menu-burger .menu-burger-stick {
+  .header-theme-light .header-menu-burger .menu-burger-stick {
     background: #FFF; }
-  .header-light .header-menu-burger .menu-burger-label {
+  .header-theme-light .header-menu-burger .menu-burger-label {
     color: #FFF;
     fill: #FFF; }
   @media (min-width: 992px) {
-    .header-light-lg .header-logo .logo-emblem-shape, .header-light-lg .header-logo .logo-logotype {
+    .header-theme-light-lg .header-logo .logo-emblem-shape, .header-theme-light-lg .header-logo .logo-logotype-shape {
       fill: #FFF; }
-    .header-light-lg .header-menu-burger .menu-burger-stick {
+    .header-theme-light-lg .header-menu-burger .menu-burger-stick {
       background: #FFF; }
-    .header-light-lg .header-menu-burger .menu-burger-label {
+    .header-theme-light-lg .header-menu-burger .menu-burger-label {
       color: #FFF;
       fill: #FFF; } }
+
+.logo {
+  display: inline-block;
+  position: relative; }
+  .logo-theme-brand .logo-emblem-shape:first-child {
+    fill: #F1183C !important; }
+  .logo-theme-brand .logo-emblem-shape:nth-child(2) {
+    fill: #F44336 !important; }
+  .logo-theme-brand .logo-logotype-shape {
+    fill: #F44336 !important; }
+  @media (min-width: 992px) {
+    .logo-theme-brand-lg .logo-emblem-shape:first-child {
+      fill: #F1183C !important; }
+    .logo-theme-brand-lg .logo-emblem-shape:nth-child(2) {
+      fill: #F44336 !important; }
+    .logo-theme-brand-lg .logo-logotype-shape {
+      fill: #F44336 !important; } }
+  .logo-theme-dark .logo-emblem-shape,
+  .logo-theme-dark .logo-logotype-shape {
+    fill: #212121; }
+  .logo-theme-light .logo-emblem-shape,
+  .logo-theme-light .logo-logotype-shape {
+    fill: #FFF; }
+  .logo-emblem {
+    display: block;
+    width: 38px;
+    height: auto; }
+    @media (min-width: 992px) {
+      .logo-emblem {
+        width: 60px; } }
+  @media (min-width: 992px) {
+    .logo:hover .logo-logotype {
+      transform: translateX(60px);
+      filter: blur(0);
+      opacity: 1; } }
+  .logo-logotype {
+    display: none;
+    box-sizing: content-box; }
+    @media (min-width: 992px) {
+      .logo-logotype {
+        display: block;
+        transform: translateX(30px);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        border-left: 20px solid transparent;
+        opacity: 0;
+        filter: blur(2.5px);
+        transition: all 250ms ease-in-out; } }
+    .logo-logotype-hidden {
+      z-index: -1;
+      overflow: hidden; }
 
 .menu-burger {
   width: 38px;

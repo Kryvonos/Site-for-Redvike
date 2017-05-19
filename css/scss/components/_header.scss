@@ -2,7 +2,7 @@
   .header-logo {
       .logo {
         &-emblem-shape,
-        &-logotype {
+        &-logotype-shape {
           fill: $color;
         }
       }
@@ -80,7 +80,7 @@
     }
   }
 
-  &-dark {
+  &-theme-dark {
     @include header-style( color(dark) );
 
     &-lg {
@@ -90,7 +90,7 @@
     }
   }
 
-  &-light {
+  &-theme-light {
     @include header-style(#FFF);
 
     &-lg {
