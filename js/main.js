@@ -28,31 +28,56 @@ if ( ! String.prototype.format ) {
 
 	function initEventListeners() {
 		$window.resize( onWindowResize );
+    $('a[href*="#"]').click( onAnchorLinkClick );
 	}
 
 	function onWindowResize( event ) {
 		defineFitToViewportHeight();
 	}
 
+  function onAnchorLinkClick( event ) {
+      var $anchor = $( event.target ).closest('a');
+
+      if ( $anchor.attr('href') === '#' || $anchor.attr('href') === '#0' ) return;
+
+      if (
+        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+        &&
+        location.hostname == this.hostname
+      ) {
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+
+            // Does a scroll target exist?
+            if ( target.length ) {
+                // Only prevent default if animation is actually gonna happen
+                event.preventDefault();
+
+                $('html, body').animate({
+                  scrollTop: target.offset().top
+                }, 1000);
+            }
+        }
+  }
+
 
 	function defineFitToViewportHeight( $elem ) {
-		var height = $window.outerHeight(),
-        $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
+  		var height = $window.outerHeight(),
+          $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
 
-        // console.log( 'yes' );
-		$fitToViewportHeight.each( function() {
-			var $this = $(this),
-          originalHeight = 0;
+  		$fitToViewportHeight.each( function() {
+    			var $this = $(this),
+              originalHeight = 0;
 
-			$this.css('height', '');
-			originalHeight = $this.outerHeight();
+    			$this.css('height', '');
+    			originalHeight = $this.outerHeight();
 
-			if ( Utility.isBreakpointDown('lg') ) return;
+    			if ( Utility.isBreakpointDown('lg') ) return;
 
-			if ( originalHeight < height ) {
-				$this.css('height', height + 'px');
-			}
-		} );
+    			if ( originalHeight < height ) {
+    				$this.css('height', height + 'px');
+    			}
+  		} );
 	}
 
 
