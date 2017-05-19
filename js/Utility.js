@@ -49,16 +49,37 @@
           $('html, body').animate( {scrollTop: $elem.offset().top}, 600 );
         },
 
-        stringValidation: function stringValidation() {
+        stringValidation: function stringValidation( txt ) {
+            var isValid = txt.length > 1;
 
+            if ( isValid ) {
+              return 'ok';
+            }
+            else {
+              return 'This field can\'t be empty';
+            }
         },
 
-        nameValidation: function nameValidation() {
+        nameValidation: function nameValidation( name ) {
+            var isValid = name.length > 1 && ! name.match( /\d+/g );
 
+            if ( isValid ) {
+              return 'ok';
+            }
+            else {
+              return 'Incorrect name type';
+            }
         },
 
-        emailValidation: function emailValidation() {
+        emailValidation: function emailValidation( email ) {
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+            if ( re.test( email ) ) {
+              return 'ok'
+            }
+            else {
+              return 'Incorrect email type';
+            }
         }
       };
 

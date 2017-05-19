@@ -1,6 +1,6 @@
 .out-of-page {
-  position: absolute;
-  left: -9999999px;
+  position: absolute !important;
+  left: -9999999px !important;
 }
 // .container {
 //   padding-left: 30px;
@@ -733,6 +733,22 @@ a {
     outline: none;
     color: #FFF;
 
+    &-wrapper {
+      position: relative;
+    }
+
+    &-shown-error &-error{
+        display: block;
+    }
+
+    &-error {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      transform: translateY( 30% );
+      font-size: 16px;
+    }
   }
 }
 
@@ -867,9 +883,46 @@ a {
 }
 
 
+.team-contacts {
+  $team-contacts-margin-right: 2rem;
+  $team-contacts-margin-bottom: 1rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-right: -$team-contacts-margin-right;
+  margin-bottom: -$team-contacts-margin-bottom;
+
+  @include media-breakpoint-up(md) {
+    margin-top: 5rem;
+    margin-bottom: 4rem;
+  }
+
+  &-parallax {
+    font-size: 500px;
+  }
+
+  &-heading {
+    flex: auto;
+    margin-right: $team-contacts-margin-right;
+    margin-bottom: $team-contacts-margin-bottom;
+  }
+
+  &-btn {
+    margin-right: $team-contacts-margin-right;
+    margin-bottom: $team-contacts-margin-bottom;
+  }
+}
+
 .team-section {
   $team-section-text-margin-y: 1em;
   $team-section-col-padding-x: 30px;
+
+  .parallax-label {
+    margin: 0;
+    bottom: auto;
+    top: 0;
+  }
 
   &-row {
     margin-left: -$team-section-col-padding-x;

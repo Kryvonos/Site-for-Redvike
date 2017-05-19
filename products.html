@@ -200,9 +200,10 @@
           <p data-scenario="default" class="contacts-group contacts-group-shown">Hey! Let’s get aquainted:)</p>
           <p data-scenario="default product-selected" class="contacts-group contacts-group-shown">
             Hello! My <label for="clientName">name</label> is
+
             <span class="contacts-input-wrapper">
               <input id="clientName" data-validation="nameValidation" data-contacts-value="client-name" class="contacts-input" type="text" name="name" />
-              <!-- <span class="contacts-input-error">Input error</span> -->
+              <span class="contacts-input-error">Incorrect name type</span>
             </span>
           </p>
 
@@ -210,6 +211,7 @@
             I represent
             <span class="contacts-input-wrapper">
               <input class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
 
@@ -218,6 +220,7 @@
             When do you need your project to be done?<br>
             <span class="contacts-input-wrapper">
               <input class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
 
@@ -226,6 +229,7 @@
             We can help you width
             <span class="contacts-input-wrapper">
               <input data-contacts-value="product-type" class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
 
@@ -233,6 +237,7 @@
             Awesome! We’ll be glad to help you with <span data-restore-value="product-type"></span>.<br>When do you need it to be done?<br>
             <span class="contacts-input-wrapper">
               <input class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
 
@@ -240,6 +245,7 @@
             No problem. Could you please leave your email?<br>
             <span class="contacts-input-wrapper">
               <input class="contacts-input" type="text" name="email" data-validation="emailValidation" />
+              <span class="contacts-input-error">Incorrect email type</span>
             </span>
           </p>
 
@@ -351,7 +357,8 @@
   function onContactsInputFocus( event ) {
     var $target = $( event.target );
 
-    // $target.closest('[data-fit-to-viewport-height]').trigger('contentchange');
+    if ( $target.is( $focusedInput ) ) return;
+
     blurFocusedInput();
     $focusedInput = $target;
     triggerElementFocus( $target );

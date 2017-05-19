@@ -3920,8 +3920,8 @@ html {
   -webkit-font-smoothing: antialiased; }
 
 .out-of-page {
-  position: absolute;
-  left: -9999999px; }
+  position: absolute !important;
+  left: -9999999px !important; }
 
 .container-wrapper {
   margin-left: auto;
@@ -4397,6 +4397,17 @@ a {
   background: transparent;
   outline: none;
   color: #FFF; }
+  .contacts-input-wrapper {
+    position: relative; }
+  .contacts-input-shown-error .contacts-input-error {
+    display: block; }
+  .contacts-input-error {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(30%);
+    font-size: 16px; }
 
 .tech-section-row {
   margin-bottom: -1rem; }
@@ -4470,6 +4481,30 @@ a {
   .words-carousel-item {
     display: block; }
 
+.team-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-right: -2rem;
+  margin-bottom: -1rem; }
+  @media (min-width: 768px) {
+    .team-contacts {
+      margin-top: 5rem;
+      margin-bottom: 4rem; } }
+  .team-contacts-parallax {
+    font-size: 500px; }
+  .team-contacts-heading {
+    flex: auto;
+    margin-right: 2rem;
+    margin-bottom: 1rem; }
+  .team-contacts-btn {
+    margin-right: 2rem;
+    margin-bottom: 1rem; }
+
+.team-section .parallax-label {
+  margin: 0;
+  bottom: auto;
+  top: 0; }
 .team-section-row {
   margin-left: -30px;
   margin-right: -30px; }

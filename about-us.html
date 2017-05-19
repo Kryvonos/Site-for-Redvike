@@ -71,8 +71,8 @@
     </div>
   </div>
 
-  <section class="team-section section">
-      <h2 class="team-section-heading parallax-label">Team</h2>
+  <section class="team-section section" data-floating-nav="team" id="team">
+      <h2 class="team-section-heading parallax-label color-brand out-of-page" id="teamLabel">Team</h2>
 
       <div class="team-section-row row align-items-center">
           <div class="team-section-col col-12 col-md-5">
@@ -132,6 +132,16 @@
           </div>
       </div>
   </section>
+
+  <div class="section" data-floating-nav="career">
+    <div class="team-contacts">
+        <span class="team-contacts-heading h2">Meet Redvike</span>
+
+        <a class="team-contacts-btn btn btn-primary" href="./career.html">Join the team</a>
+    </div>
+
+    <span class="team-contacts-parallax parallax-label color-brand">Team</span>
+  </div>
 
 </main>
 
@@ -198,5 +208,32 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 <script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
+
+<script>
+
+// var controller = new ScrollMagic.Controller(),
+//     scene = new ScrollMagic.Scene( {
+//       triggerElement: '#team',
+//       triggerHook: 'onEnter',
+//       duration: 1940
+//     } );
+//
+// scene
+//   .setTween('#teamLabel', {y: '1000', ease: Linear.easeNone})
+//   .addTo( controller );
+  // .addIndicators();
+
+var controller = new ScrollMagic.Controller(),
+    scene = new ScrollMagic.Scene( {
+      triggerElement: '#team',
+      triggerHook: 'onEnter',
+      duration: 1940
+    } );
+
+scene
+  .setTween('#teamLabel', {y: '1000', ease: Linear.easeNone})
+  .addTo( controller );
+
+</script>
 </body>
 </html>

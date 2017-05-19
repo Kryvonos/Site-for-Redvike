@@ -380,7 +380,6 @@ $( function() {
   }
 
   function onContentChange( event ) {
-    console.log( 'contentchange nav' );
     updateSceneDuration( getSceneByTriggerElement( event.target ) );
   }
 
@@ -406,7 +405,8 @@ $( function() {
       $body = $('body'),
       $contacts = $('#contacts'),
       $contactsForm = $('#contactsForm'),
-      $selectProduct = $('[data-select-product]');
+      $selectProduct = $('[data-select-product]'),
+      formHasBeenSubmitted = false;
 
   function init() {
     scenario = defineScenario( 'default' );
@@ -421,21 +421,65 @@ $( function() {
 
   function defineScenario( name ) {
       var $scenario = findScenario( name ),
-          shownClass = 'contacts-group-shown';
+          shownClass = 'contacts-group-shown',
+          manuallyRestoredValue = {};
 
-      function showNextItem(  ) {
-          var $lastShown = $scenario.filter( '.{0}:last'.format( shownClass ) ),
-              $scenarioItem = getNextScenarioItem( $lastShown );
+      function showNextItem( $elem ) {
+          var $scenarioItem = null;
 
-          if ( $scenarioItem.hasClass( shownClass) ) {
-            return;
+          if ( ! $elem ) {
+            $elem = $scenario.filter( '.{0}:last'.format( shownClass ) );
           }
 
-          restoreValues( $scenarioItem );
+          if ( $elem.length ) {
+            $scenarioItem = getNextScenarioItem( $elem );
+          } else {
+            $scenarioItem = $scenario.first();
+          }
+
+          // 1. Restore values
+          restoreValues();
+
+          // 2. Validating all the input fields
+          if ( ! validateShownItems() ) return;
+          if ( $scenarioItem.hasClass( shownClass) ) return;
+
           $scenarioItem.addClass( shownClass );
-          // if ( ! hasMoreItemsToShow() ) {
-          //   submitForm();
-          // }
+
+          if ( ! formHasBeenSubmitted && ! hasMoreItemsToShow() ) {
+            submitForm();
+          }
+      }
+
+      function validateShownItems() {
+          var $elems = $scenario.filter( '.' + shownClass ),
+              isValid = true;
+
+          $elems.find('.contacts-input-shown-error').removeClass('contacts-input-shown-error');
+          $elems.each( function() {
+              var $this = $(this),
+                  $input = $this.find('[data-validation]'),
+                  validationFuncName = $input.data('validation'),
+                  validationFunc = null,
+                  validationRes = null;
+
+              if ( ! validationFuncName ) return;
+
+              validationFunc = Utility[validationFuncName];
+              validationRes = validationFunc( $input.val() );
+              isValid = ( validationRes === 'ok' );
+
+              if ( ! isValid ) {
+                var $inputError = $input.siblings('.contacts-input-error');
+
+                $inputError.parent().addClass('contacts-input-shown-error');
+                $inputError.text( validationRes );
+              }
+
+              return isValid;
+          } );
+
+          return isValid;
       }
 
       function getNextScenarioItem( $elem ) {
@@ -460,14 +504,24 @@ $( function() {
         return $scenario.filter( ':not(.{0})'.format( shownClass ) ).length != 0;
       }
 
-      function restoreValues( $elems ) {
-          $elems.each( function() {
-            var $this = $(this),
-                value = $this.data('restoreValue'),
-                $elem = $( '[data-contacts-value="{0}"]'.format( value ) );
+      function restoreValues() {
+          var $elems = $('[data-restore-value]');
 
-            $this.text( $elem.val() );
+          $elems.each( function() {
+              var $this = $(this),
+                  valueToRestore = $this.data('restoreValue'),
+                  $elem = $( '[data-contacts-value="{0}"]'.format( valueToRestore ) ),
+                  val = manuallyRestoredValue[valueToRestore] || $elem.val();
+
+              $this.text( val );
           } );
+      }
+
+      function restoreValue( value, data ) {
+        var $elems = $( '[data-restore-value="{0}"]'.format( value ) );
+
+        manuallyRestoredValue[value] = data;
+        $elems.text( data );
       }
 
       function submitForm() {
@@ -487,6 +541,7 @@ $( function() {
         .done( function( response ) {
 
           if ( response == 1 ) {
+            formHasBeenSubmitted = true;
             alert( 'Thank you for your order.' );
           }
           else {
@@ -498,7 +553,8 @@ $( function() {
       }
 
       return {
-        showNextItem: showNextItem
+        showNextItem: showNextItem,
+        restoreValue: restoreValue
       }
   }
 
@@ -513,14 +569,24 @@ $( function() {
   }
 
   function onSelectProductClick( event ) {
+    var $target = $( event.target ),
+        productType = $target.data('selectProduct');
+        
     scenario = defineScenario( 'product-selected' );
+
+    clearContacts();
+    scenario.restoreValue( 'product-type', productType );
+    scenario.showNextItem();
     scenario.showNextItem();
 
     Utility.scrollTo( $contacts );
   }
 
   function onContactsInputBlur( event ) {
-    scenario.showNextItem();
+    var $target = $( event.target ),
+        $scenarioItem = $target.closest('[data-scenario]');
+
+    scenario.showNextItem( $scenarioItem );
   }
 
   function clearContacts() {
