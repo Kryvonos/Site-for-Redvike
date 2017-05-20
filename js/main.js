@@ -678,7 +678,8 @@ $( function() {
 
 
 ;$( function() {
-  var animationFlows = null;
+  var animationFlows = null,
+      timelines = null;
 
   function init() {
     animationFlows = createAnimationFlows();
@@ -740,6 +741,11 @@ $( function() {
       }
   }
 
+  // function next( flowName ) {
+  //   var timeline = timelines[flowName],
+  //       // index =
+  // }
+
   function initEventListeners() {}
 
   function createAnimationFlowTimeline( flowName ) {
@@ -748,6 +754,8 @@ $( function() {
     var flow = animationFlows[ flowName ],
         $wrapper = flow[0].parent(),
         timeline = new TimelineMax({paused: true});
+
+    // timelines[flowName] = timeline;
 
     var $startElement = null,
         $endElement = null;
@@ -767,13 +775,12 @@ $( function() {
         wrapperWidth = $wrapper.outerWidth();
         wrapperHeight = $wrapper.outerHeight();
 
-
         $startItem.removeClass('animation-flow-item').addClass('animation-flow-content');
         $endItem.removeClass('animation-flow-content').addClass('animation-flow-item');
 
         timeline.to($startItem, .7, {y: -100, opacity: 0, onComplete: updateStartElement}, startItemLabel)
           .set($endItem, {y: 0}, startItemLabel)
-          .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateEndElement}, startItemLabel + '+=.2')
+          .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateEndElement}, startItemLabel + '+=.3')
           .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight}, startItemLabel)
           .add('label' + i)
           .addCallback(onLabelComplete)
@@ -783,36 +790,47 @@ $( function() {
     $wrapper.children().removeClass('animation-flow-content').addClass('animation-flow-item');
     $wrapper.children().first().removeClass('animation-flow-item').addClass('animation-flow-content');
 
-    timeline.seek('label0');
-    timeline.reverse('label0');
+    // timeline.tweenTo('label0');
+    // timeline.seek('label1');
+
+    // setTimeout( function(){
+    //   // timeline.reverse('label1');
+    //   timeline.tweenFromTo('label1', 'label0');
+    // }, 1000 );
 
     function updateStartElement() {
-      console.log('start');
       $startElement = $(this.target);
     }
 
     function updateEndElement() {
-      console.log('end');
       $endElement = $(this.target);
     }
 
     function onLabelComplete() {
-      console.log('onLabelComplete');
+      if ( ! $startElement || ! $startElement ) return;
+
+      $wrapper.children().removeClass('animation-flow-active');
       $startElement.removeClass('animation-flow-content').addClass('animation-flow-item');
       $endElement.removeClass('animation-flow-item').addClass('animation-flow-content');
       $wrapper.css({width: '', height: ''});
+
+      $endElement.addClass('animation-flow-active');
+
+      setTimeout( function() {
+        $wrapper.css({width: '', height: ''});
+      }, 10 );
     }
   }
 
   init();
 
 } );
-
+// 
 // function AnimationFlow( flowName ) {
 //   var $wrapper = null;
 //
 //   function init() {
-//     createWrapper();
+//     $wrapper = createWrapper();
 //     fillWrapper();
 //   }
 //
