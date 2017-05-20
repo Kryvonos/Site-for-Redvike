@@ -4561,6 +4561,16 @@ a {
   .figure-text {
     display: block; }
 
+.animation-flow-wrapper {
+  position: relative; }
+.animation-flow-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0; }
+
 .btn {
   display: inline-block;
   border: 3px solid #FF4081;
