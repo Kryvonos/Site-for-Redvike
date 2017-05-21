@@ -756,30 +756,34 @@ function AnimationFlow( flowName ) {
           wrapperHeight = $wrapper.outerHeight();
           setContent( $startItem );
 
-          console.log( 'wrapperWidth: {0}; wrapperHeight: {1}'.format( wrapperWidth, wrapperHeight) );
-
           timeline
-            .to($startItem, .7, {y: -100, opacity: 0, onComplete: updateCurrentStartItem}, startItemLabel)
+            .to($startItem, .7, {y: -100, opacity: 0, onComplete: updateCurrentStartItem, onReverseComplete: updateCurrentStartItem, onReverseCompleteParams: [true]}, startItemLabel)
             .set($endItem, {y: 0}, startItemLabel)
-            .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateCurrentEndItem}, startItemLabel + '+=.3')
+            .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateCurrentEndItem, onReverseComplete: updateCurrentEndItem, onReverseCompleteParams: [true]}, startItemLabel + '+=.3')
             .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight}, startItemLabel)
+            .eventCallback('onReverseComplete', onLabelComplete)
+            .addCallback( onLabelComplete )
             .add('label-' + (i + 1))
-            .addCallback( onLabelComplete );
       }
 
       currentTimelineLabel = 0;
       setContent( initialElement() );
 
-      function updateCurrentStartItem() {
-          $currentStartItem = $(this.target);
+      function updateCurrentStartItem( isReversed ) {
+          if ( isReversed )
+            $currentEndItem = $(this.target);
+          else
+            $currentStartItem = $(this.target);
       }
 
-      function updateCurrentEndItem() {
-          $currentEndItem = $(this.target);
+      function updateCurrentEndItem( isReversed ) {
+          if ( isReversed )
+            $currentStartItem = $(this.target);
+          else
+            $currentEndItem = $(this.target);
       }
 
       function onLabelComplete() {
-          console.log('onLabelComplete');
           if ( ! $currentStartItem || ! $currentEndItem ) return;
 
           setContent( $currentEndItem );
