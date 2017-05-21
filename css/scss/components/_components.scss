@@ -1013,9 +1013,12 @@ a {
 
 .animation-flow {
 
+  &-d-inline-block {
+    display: inline-block;
+  }
+
   &-wrapper {
     position: relative;
-    // overflow: hidden;
   }
 
   &-item {

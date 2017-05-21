@@ -677,156 +677,6 @@ $( function() {
 } );
 
 
-;$( function() {
-  return;
-  var animationFlows = null,
-      timelines = null;
-
-  function init() {
-    animationFlows = createAnimationFlows();
-
-    initAnimationFlow();
-    initEventListeners();
-
-    setTimeout(function() {
-      // createAnimationFlowTimeline( 'section-subheading' );
-      createAnimationFlowTimeline( 'section-text' );
-    }, 500);
-  }
-
-  function createAnimationFlows() {
-      var obj = {},
-          $elems = $('[data-animation-flow]');
-
-      $elems.each( createOneFlow );
-
-      function createOneFlow() {
-        var $this = $(this),
-            flow = $this.data('animation-flow');
-
-        if ( ! obj.hasOwnProperty( flow ) ) {
-          obj[flow] = [];
-        }
-
-        obj[flow].push( $this );
-      }
-
-      return obj;
-  }
-
-  function initAnimationFlow() {
-
-      for (var key in animationFlows) {
-        createAndFillAnimationFlowWrapper( animationFlows[key] );
-      }
-
-      function createAndFillAnimationFlowWrapper( animationFlow ) {
-          if ( ! animationFlow.length ) return;
-
-          var $firstItem = animationFlow[0],
-              $wrapper = null,
-              items = null;
-
-          // creating wrapper
-          $firstItem.wrap('<div class="animation-flow-wrapper"></div>');
-          $firstItem.addClass('animation-flow-content');
-
-          $wrapper = $firstItem.parent();
-          items = animationFlow.slice( 1 );
-          // Filling up the wrapper
-          $wrapper.append( items );
-
-          for (var i = 0; i < items.length; ++i) {
-            items[i].addClass('animation-flow-item');
-          }
-      }
-  }
-
-  // function next( flowName ) {
-  //   var timeline = timelines[flowName],
-  //       // index =
-  // }
-
-  function initEventListeners() {}
-
-  function createAnimationFlowTimeline( flowName ) {
-    if ( ! animationFlows[ flowName ] || ! animationFlows[ flowName ].length ) return;
-
-    var flow = animationFlows[ flowName ],
-        $wrapper = flow[0].parent(),
-        timeline = new TimelineMax({paused: true});
-
-    // timelines[flowName] = timeline;
-
-    var $startElement = null,
-        $endElement = null;
-
-    for (var i = 0; i < flow.length - 1; ++i) {
-        var $startItem = flow[i],
-            $endItem = flow[i + 1],
-            wrapperWidth = 0,
-            wrapperHeight = 0,
-            startItemLabel = 'startItem' + i;
-
-        $wrapper.children().removeClass('animation-flow-content').addClass('animation-flow-item');
-
-        $startItem.removeClass('animation-flow-content').addClass('animation-flow-item');
-        $endItem.removeClass('animation-flow-item').addClass('animation-flow-content');
-
-        wrapperWidth = $wrapper.outerWidth();
-        wrapperHeight = $wrapper.outerHeight();
-
-        $startItem.removeClass('animation-flow-item').addClass('animation-flow-content');
-        $endItem.removeClass('animation-flow-content').addClass('animation-flow-item');
-
-        timeline.to($startItem, .7, {y: -100, opacity: 0, onComplete: updateStartElement}, startItemLabel)
-          .set($endItem, {y: 0}, startItemLabel)
-          .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateEndElement}, startItemLabel + '+=.3')
-          .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight}, startItemLabel)
-          .add('label' + i)
-          .addCallback(onLabelComplete)
-          ;
-    }
-
-    $wrapper.children().removeClass('animation-flow-content').addClass('animation-flow-item');
-    $wrapper.children().first().removeClass('animation-flow-item').addClass('animation-flow-content');
-
-    // timeline.tweenTo('label0');
-    // timeline.seek('label1');
-
-    // setTimeout( function(){
-    //   // timeline.reverse('label1');
-    //   timeline.tweenFromTo('label1', 'label0');
-    // }, 1000 );
-
-    function updateStartElement() {
-      $startElement = $(this.target);
-    }
-
-    function updateEndElement() {
-      $endElement = $(this.target);
-    }
-
-    function onLabelComplete() {
-      if ( ! $startElement || ! $startElement ) return;
-
-      $wrapper.children().removeClass('animation-flow-active');
-      $startElement.removeClass('animation-flow-content').addClass('animation-flow-item');
-      $endElement.removeClass('animation-flow-item').addClass('animation-flow-content');
-      $wrapper.css({width: '', height: ''});
-
-      $endElement.addClass('animation-flow-active');
-
-      setTimeout( function() {
-        $wrapper.css({width: '', height: ''});
-      }, 10 );
-    }
-  }
-
-  init();
-
-} );
-
 function AnimationFlow( flowName ) {
   var timeline = null,
       $wrapper = null,
@@ -835,6 +685,7 @@ function AnimationFlow( flowName ) {
       wrapperClass = 'animation-flow-wrapper',
       contentClass = 'animation-flow-content',
       itemClass = 'animation-flow-item',
+      inlineBlockClass = 'animation-flow-d-inline-block',
 
       currentTimelineLabel = '';
 
@@ -843,7 +694,6 @@ function AnimationFlow( flowName ) {
     createWrapper();
     fillWrapper();
     createTimeline();
-    // next();
   }
 
   function initAnimationFlowElems() {
@@ -852,8 +702,14 @@ function AnimationFlow( flowName ) {
 
   function createWrapper() {
       if ( ! $elems.length ) return;
+      var displayClass = '',
+          display = initialElement().css('display');
 
-      initialElement().wrap( '<div class="{0}"></div>'.format( wrapperClass ) );
+      if ( display === 'inline' || display === 'inline-block' ) {
+        displayClass = inlineBlockClass;
+      }
+
+      initialElement().wrap( '<div class="{0} {1}"></div>'.format( wrapperClass, displayClass ) );
       $wrapper = initialElement().parent();
   }
 
@@ -895,11 +751,12 @@ function AnimationFlow( flowName ) {
               wrapperHeight = 0,
               startItemLabel = 'startItem' + i;
 
-          // console.log( $endItem );
           setContent( $endItem );
           wrapperWidth = $wrapper.outerWidth();
           wrapperHeight = $wrapper.outerHeight();
           setContent( $startItem );
+
+          console.log( 'wrapperWidth: {0}; wrapperHeight: {1}'.format( wrapperWidth, wrapperHeight) );
 
           timeline
             .to($startItem, .7, {y: -100, opacity: 0, onComplete: updateCurrentStartItem}, startItemLabel)
@@ -922,6 +779,7 @@ function AnimationFlow( flowName ) {
       }
 
       function onLabelComplete() {
+          console.log('onLabelComplete');
           if ( ! $currentStartItem || ! $currentEndItem ) return;
 
           setContent( $currentEndItem );
@@ -944,7 +802,6 @@ function AnimationFlow( flowName ) {
   function prev() {
     var prevLabel = getPreviousLabel( currentTimelineLabel );
 
-    console.log( prevLabel );
     if ( prevLabel === null || prevLabel === undefined ) return;
 
     timeline.tweenFromTo(currentTimelineLabel, prevLabel);
@@ -1030,6 +887,7 @@ function AnimationFlow( flowName ) {
   this.prev = prev;
 }
 
+// var flow = new AnimationFlow( 'section-heading-word' );
 var flow = new AnimationFlow( 'section-text' );
 
 $('#serviceSection').click( function() {

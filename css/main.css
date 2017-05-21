@@ -3879,6 +3879,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   margin-top: 0;
   margin-bottom: 0;
   font-family: Bebas;
+  font-family: Arial;
   font-weight: 300;
   letter-spacing: 0.02px;
   word-spacing: .15em;
@@ -4561,6 +4562,8 @@ a {
   .figure-text {
     display: block; }
 
+.animation-flow-d-inline-block {
+  display: inline-block; }
 .animation-flow-wrapper {
   position: relative; }
 .animation-flow-item {
