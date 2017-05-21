@@ -7,14 +7,18 @@
           md: 768,
           lg: 992,
           xl: 1200
-      },
+      };
 
-      Utility = {
+  Object.freeze( breakpoints );
+
+  var Utility = {
+
+        breakpoints: breakpoints,
 
         isBreakpointUp: function isBreakpointUp(size) {
           var width = breakpoints[size];
 
-          if ( isNumeric(size) ) {
+          if ( Utility.isNumeric(size) ) {
             width = size;
           }
           else if ( ! breakpoints.hasOwnProperty(size) ) {

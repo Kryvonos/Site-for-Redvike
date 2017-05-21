@@ -57,7 +57,7 @@
 </header>
 
 <div id="fullpage">
-      <div id="startSection" class="pezda active first section-wrapper header-offset" data-append-floating-nav-marker data-fit-to-viewport-height style="height: 580px;">
+      <div id="startSection" class="active first section-wrapper header-offset" data-fp-section data-append-floating-nav-marker data-fit-to-viewport-height style="height: 580px;">
           <div class="bg-photo-1"></div>
 
           <section class="first-section section">
@@ -66,8 +66,8 @@
 
               <span class="words-carousel color-brand">
                 <span class="words-carousel-item">Love</span>
-                <span class="words-carousel-item">Enjoy</span>
-                <span class="words-carousel-item">Adore</span>
+                <!-- <span class="words-carousel-item">Enjoy</span> -->
+                <!-- <span class="words-carousel-item">Adore</span> -->
               </span>
             </h1>
           </section>
@@ -75,16 +75,34 @@
           <!-- <span class="nav-marker">services</span> -->
       </div>
 
-      <!-- <div data-floating-nav="services" data-floating-menu data-show-floating-menu> -->
-        <div class="pezda section-wrapper" data-show-floating-menu data-fit-to-viewport-height>
-          <section class="section" id="serviceSection">
+      <div class="section-wrapper" data-fp-section data-show-floating-menu data-fit-to-viewport-height>
+        <section class="section" id="serviceSection">
+            <div class="row">
+                <div class="section-content col-12 col-lg">
+                    <h2 class="section-heading h2" id="heading">Build It <span class="color-brand" data-animation-flow="section-heading-word">With</span> You</h2>
+
+                    <div class="column-reverse" data-animation-flow="section-description">
+                      <p class="h3" data-animation-flow="section-subheading">A Dedicated Development Team – Without The Overheads</p>
+                      <p class="section-text" data-animation-flow="section-text">Give your technical team the support they need without the overheads that come with hiring in-house developers. We’re here to help you supercharge your growth becoming an out-of-house part of your technical team. By leveraging the latest frameworks and technologies, we’ll ensure that you have everything you need to succeed.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-auto section-btn-wrapper">
+                  <a class="btn btn-primary" href="#">Learn more</a>
+                </div>
+            </div>
+        </section>
+      </div>
+
+      <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
+          <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
-                      <h2 class="section-heading h2" id="heading">Build It <span class="color-brand" data-animation-flow="section-heading-word">With</span> You</h2>
+                      <h2 class="section-heading h2">Build It <span class="color-brand" data-animation-flow="section-heading-word">For</span> You</h2>
 
-                      <div class="" data-animation-flow="section-description">
-                        <p class="section-text" data-animation-flow="section-text">Give your technical team the support they need without the overheads that come with hiring in-house developers. We’re here to help you supercharge your growth becoming an out-of-house part of your technical team. By leveraging the latest frameworks and technologies, we’ll ensure that you have everything you need to succeed.</p>
-                        <p class="h3" data-animation-flow="section-subheading">A Dedicated Development Team – Without The Overheads</p>
+                      <div class="column-reverse" data-animation-flow="section-description">
+                        <p class="h3" data-animation-flow="section-subheading">Customized Product Development To <br class="hidden-lg-down">Make Your Vision A Reality</p>
+                        <p class="section-text" data-animation-flow="section-text">Have an idea for a software product but you aren’t sure how to make it a reality? Rest assured, we’ve got you covered. Our expert team will help you build engaging, secure and high-performance web applications using the latest technologies and frameworks to promote your success.</p>
                       </div>
                   </div>
 
@@ -93,48 +111,9 @@
                   </div>
               </div>
           </section>
-        </div>
+      </div>
 
-        <div class="section-wrapper" style="display: none;" data-fit-to-viewport-height>
-            <section class="section">
-                <div class="row">
-                    <div class="section-content col-12 col-lg">
-                        <h2 class="section-heading h2">Build It <span class="color-brand" data-animation-flow="section-heading-word">For</span> You</h2>
-
-                        <div data-animation-flow="section-description">
-                          <p class="section-text" data-animation-flow="section-text">Have an idea for a software product but you aren’t sure how to make it a reality? Rest assured, we’ve got you covered. Our expert team will help you build engaging, secure and high-performance web applications using the latest technologies and frameworks to promote your success.</p>
-                          <p class="h3" data-animation-flow="section-subheading">Customized Product Development To <br class="hidden-lg-down">Make Your Vision A Reality</p>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-lg-auto section-btn-wrapper">
-                      <a class="btn btn-primary" href="#">Learn more</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="section-wrapper" style="display: none;" data-fit-to-viewport-height>
-            <section class="section">
-                <div class="row">
-                    <div class="section-content col-12 col-lg">
-                        <header class="section-header">
-                          <h2 class="section-heading h2">Build It <span class="color-brand">For</span> You</h2>
-                          <p class="h3" data-animation-flow="section-subheading">3.Customized Product Development To <br class="hidden-lg-down">Make Your Vision A Reality</p>
-                        </header>
-
-                        <p class="section-text" data-animation-flow="section-text">3. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore maxime deserunt est facilis nobis eum sed impedit et ratione! Adipisci alias nulla necessitatibus excepturi commodi, blanditiis omnis mollitia aliquid inventore delectus saepe asperiores, fuga odio ab cupiditate ipsum ratione eum? Officia minima ut dolores enim, quas, cum corporis vero nostrum est libero facere quae ex quis, voluptate explicabo facilis doloremque, provident repellendus ducimus voluptatem. Dolor odit, voluptates numquam qui. Cupiditate iusto, incidunt eaque quaerat suscipit optio totam consequatur dignissimos, id quis libero assumenda dolor odit aliquid nesciunt ad illo. Harum facilis rem nam earum praesentium repudiandae tenetur, cum facere nemo!</p>
-                    </div>
-
-                    <div class="col-12 col-lg-auto section-btn-wrapper">
-                      <a class="btn btn-primary" href="#">Learn more</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-      <!-- </div> -->
-
-      <div class="pezda section-wrapper section-bg" data-floating-nav="team" data-fit-to-viewport-height>
+      <div class="section-wrapper section-bg" data-fp-section data-floating-nav="team" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -153,7 +132,7 @@
           </section>
       </div>
 
-      <div class="pezda section-wrapper" data-floating-nav="feedback" data-fit-to-viewport-height>
+      <div class="section-wrapper" data-fp-section data-floating-nav="feedback" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -189,7 +168,7 @@
           </section>
       </div>
 
-      <div class="pezda section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-floating-element-class="theme-light" data-fit-to-viewport-height>
+      <div class="section-wrapper bg-gradient-brand" data-fp-section data-floating-nav="contacts" data-floating-element-class="theme-light" data-fit-to-viewport-height>
           <section class="section hire-us-section">
               <h2 class="hire-us-heading heading">Hire Us</h2>
 
@@ -197,7 +176,7 @@
           </section>
       </div>
 
-      <footer class="pezda fp-auto-height footer">
+      <footer class="fp-auto-height footer" data-fp-section>
           <div class="container-wrapper footer-content-wrapper">
               <div class="footer-content container">
                   <div class="row">
@@ -283,38 +262,132 @@ var slickProps = {
 $feedbacks.slick( slickProps );
 //
 //
-$('.words-carousel').wordsCarousel();
+// $('.words-carousel').wordsCarousel();
 
 
-// $('#fullpage').fullpage( {
-//   scrollingSpeed: 600,
-//   scrollBar: true,
-//   verticalCentered: false,
-//   sectionSelector: '.pezda',
-//   onLeave: onLeave
-// } );
+$( function() {
+  var $window = $(window),
+      $body = $('body'),
+      $fullpage = $('#fullpage'),
+      $section = null,
+      $originalPrevSibling = null,
 
-var scrollCanceled = false;
+      hiddenClass = 'hidden-xs-up',
+      fullpageSectionsSelector = '[data-fp-section]',
+      fullpageIgnoreSelector = '[data-fp-ignore]',
 
-function onLeave(index, nextIndex, direction) {
-  // console.log( direction );
-  //
-  // if ( index == 2 && ! scrollCanceled ) {
-  //   var toIndex = direction === 'down' ? index + 1 : index - 1;
-  //   console.log( toIndex );
-  //
-  //   setTimeout( function() {
-  //     scrollCanceled = true;
-  //     $.fn.fullpage.silentMoveTo( toIndex );
-  //     scrollCanceled = false;
-  //   }, 600);
-  //
-  //   return false;
-  // }
-}
+      fullpageOptions = {
+          scrollingSpeed: 600,
+          responsiveWidth: Utility.breakpoints.sm,
+          scrollBar: true,
+          verticalCentered: false,
+          sectionSelector: fullpageSectionsSelector,
+          onLeave: onLeave,
+          // afterLoad: afterLoad,
+      };
 
-$('.fp-auto-height').css('height', '');
+  function init() {
+      $section = $( fullpageIgnoreSelector ).first();
 
+      initFullpage();
+      updateSectionsVisibility();
+
+      initEventListeners();
+  }
+
+  function initFullpage() {
+      $fullpage.fullpage( fullpageOptions );
+
+      $('.fp-auto-height').css('height', '');
+  }
+
+  function rebuildFullpage() {
+      var activeSectionIndex = $('.fp-section.active').index(),
+          $fullpageSections = $( fullpageSectionsSelector );
+
+      $.fn.fullpage.destroy('all');
+
+      //setting the active section as before
+      $fullpageSections.eq( activeSectionIndex ).addClass('active');
+
+      initFullpage();
+  }
+
+  function initEventListeners() {
+      $window.resize( updateSectionsVisibility );
+  }
+
+
+  function updateSectionsVisibility( event ) {
+      var isBreakpointUp = Utility.isBreakpointUp('sm');
+
+      if ( $originalPrevSibling === null && isBreakpointUp ) {
+        $originalPrevSibling = $section.prev();
+
+        $section.addClass( hiddenClass );
+        $body.append( $section );
+
+        rebuildFullpage();
+      }
+      else if ( $originalPrevSibling !== null && ! isBreakpointUp ) {
+        $section.removeClass( hiddenClass );
+        $prevSibling.after( $section );
+
+        $originalPrevSibling = null;
+
+        rebuildFullpage();
+      }
+  }
+
+
+  var preventSectionScrolling = true,
+      lastDirection = null,
+      timerId = null;
+
+  function onLeave(index, nextIndex, direction) {
+
+    if ( index === 2 && lastDirection != direction ) {
+      preventSectionScrolling = true;
+    }
+
+    if ( index === 2 && preventSectionScrolling ) {
+        if ( timerId != null ) return false;
+
+        var toIndex = (direction === 'down' ? index + 1 : index - 1);
+
+        timerId = setTimeout( function() {
+
+          preventSectionScrolling = false;
+          timerId = null;
+
+        }, fullpageOptions.scrollingSpeed);
+
+        if ( direction === 'down' ) {
+          window.sectionDescriptionFlow.next();
+          window.sectionHeadingWordFlow.next();
+        }
+        else {
+          window.sectionDescriptionFlow.prev();
+          window.sectionHeadingWordFlow.prev();
+        }
+
+        lastDirection = direction;
+
+        return false;
+    }
+
+    if ( index > 2 && ! preventSectionScrolling ) {
+      preventSectionScrolling = true;
+    }
+
+    if ( index < 2 & ! preventSectionScrolling ) {
+      preventSectionScrolling = true;
+    }
+  }
+
+  init();
+
+} );
 </script>
 </body>
 </html>

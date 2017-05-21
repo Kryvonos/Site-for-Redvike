@@ -3822,6 +3822,10 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     background-image: url("../imgs/photos/first-section-2.png");
     background-position: center 30%; }
 
+.column-reverse {
+  display: flex;
+  flex-direction: column-reverse; }
+
 @font-face {
   font-family: 'Bebas Neue';
   font-weight: 500;
@@ -3952,11 +3956,13 @@ html {
     background: #EBEBEB; }
   .section-content {
     display: flex;
-    flex-direction: column-reverse;
-    min-height: 340px; }
+    flex-direction: column-reverse; }
+    @media (min-width: 576px) {
+      .section-content {
+        min-height: 340px; } }
   .section-header {
     display: flex;
-    flex-direction: column; }
+    flex-direction: column-reverse; }
     .section-header p {
       margin-top: .35em;
       line-height: 1.35; }

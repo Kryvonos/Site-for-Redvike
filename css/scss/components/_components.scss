@@ -47,13 +47,17 @@
   &-content {
     display: flex;
     flex-direction: column-reverse;
-    min-height: 340px;
+
+
+    @include media-breakpoint-up(sm) {
+      min-height: 340px;
+    }
   }
 
 
   &-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     p {
       margin-top: .35em;
