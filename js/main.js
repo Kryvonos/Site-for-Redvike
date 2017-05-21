@@ -23,7 +23,7 @@ if ( ! String.prototype.format ) {
   		}
 
 			initEventListeners();
-			// defineFitToViewportHeight();
+			defineFitToViewportHeight();
 	};
 
 	function initEventListeners() {
@@ -743,6 +743,7 @@ function AnimationFlow( flowName ) {
           onLabelCompleteDone = false;
 
       timeline = new TimelineMax({paused: true});
+      // TimelineLite.ease = Power2.easeInOut;
 
       for (var i = 0; i < $elems.length - 1; ++i) {
           var $startItem = $elems.eq(i),
@@ -757,10 +758,12 @@ function AnimationFlow( flowName ) {
           setContent( $startItem );
 
           timeline
-            .to($startItem, .7, {y: -100, opacity: 0, onComplete: updateCurrentStartItem, onReverseComplete: updateCurrentStartItem, onReverseCompleteParams: [true]}, startItemLabel)
+            .to($startItem, .7, {y: -100, onComplete: updateCurrentStartItem, onReverseComplete: updateCurrentStartItem, onReverseCompleteParams: [true], ease: Power2.easeInOut}, startItemLabel)
+            .fromTo($startItem, .5, {opacity: 1}, {opacity: 0, delay: .2, ease: Power2.easeInOut}, startItemLabel)
             .set($endItem, {y: 0}, startItemLabel)
-            .fromTo($endItem, .7, {y: 100, opacity: 0}, {y: 0, opacity: 1, onComplete: updateCurrentEndItem, onReverseComplete: updateCurrentEndItem, onReverseCompleteParams: [true]}, startItemLabel + '+=.3')
-            .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight}, startItemLabel)
+            .fromTo($endItem, .7, {y: 100}, {y: 0, onComplete: updateCurrentEndItem, onReverseComplete: updateCurrentEndItem, onReverseCompleteParams: [true], ease: Power2.easeInOut}, startItemLabel)
+            .fromTo($endItem, .5, {opacity: 0}, {opacity: 1, delay: .2, ease: Power2.easeInOut}, startItemLabel)
+            .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight, ease: Power2.easeInOut}, startItemLabel)
             .eventCallback('onReverseComplete', onLabelComplete)
             .addCallback( onLabelComplete )
             .add('label-' + (i + 1))
@@ -891,13 +894,19 @@ function AnimationFlow( flowName ) {
   this.prev = prev;
 }
 
-// var flow = new AnimationFlow( 'section-heading-word' );
-var flow = new AnimationFlow( 'section-text' );
+;$( function() {
 
-$('#serviceSection').click( function() {
-  flow.next();
-} );
+  var sectionDescriptionFlow = new AnimationFlow( 'section-description' ),
+      sectionHeadingWordFlow = new AnimationFlow( 'section-heading-word' );
 
-$('#startSection').click( function() {
-  flow.prev();
+  $('#serviceSection').click( function() {
+    sectionDescriptionFlow.next();
+    sectionHeadingWordFlow.next();
+  } );
+
+  $('#startSection').click( function() {
+    sectionDescriptionFlow.prev();
+    sectionHeadingWordFlow.prev();
+  } );
+
 } );

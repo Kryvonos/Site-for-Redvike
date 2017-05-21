@@ -46,13 +46,14 @@
 
   &-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    min-height: 340px;
   }
+
 
   &-header {
     display: flex;
     flex-direction: column;
-    order: 99999;
 
     p {
       margin-top: .35em;
@@ -61,7 +62,6 @@
   }
 
   &-heading {
-    order: 999999;
     margin-top: 1.15em;
   }
 
@@ -1015,6 +1015,10 @@ a {
 
   &-d-inline-block {
     display: inline-block;
+
+    .animation-flow-content {
+      display: inline-block;
+    }
   }
 
   &-wrapper {
