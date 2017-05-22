@@ -15,6 +15,7 @@ if ( ! String.prototype.format ) {
 ;$(function( $ ) {
 	var $window = $(window),
       $html = $('html'),
+      $entranceLoader = $('#entranceLoader'),
       $fitToViewportHeight = $('[data-fit-to-viewport-height]');
 
 	function init() {
@@ -22,6 +23,8 @@ if ( ! String.prototype.format ) {
   			window.location = "./browser-update.html";
   		}
 
+      goTop();
+      removeEntranceLoader();
 			initEventListeners();
 			defineFitToViewportHeight();
 	};
@@ -60,6 +63,17 @@ if ( ! String.prototype.format ) {
         }
   }
 
+
+  function removeEntranceLoader() {
+    $entranceLoader.fadeOut( 300, function() {
+        $(this).remove();
+        $html.removeClass('no-scrolling');
+    } );
+  }
+
+  function goTop() {
+		window.scrollTo(0,0);
+	}
 
 	function defineFitToViewportHeight( $elem ) {
   		var height = $window.outerHeight(),
