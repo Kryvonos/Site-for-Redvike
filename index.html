@@ -141,7 +141,7 @@
                         <h2 class="section-heading h2">Testimotionals</h2>
                       </header>
 
-                      <div class="feedbacks" id="feedbacks">
+                      <div class="feedbacks slick-custom" id="feedbacks">
                             <blockquote class="quote">
                               <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
                               <p>They provided us with constant support (even on weekends) and feedback on the development process. Due to constant communication, it felt like they are a part of our technical team. They are more flexible than other contractors we have worked with. They understand challenges that start-ups are facing and trying o adapt their development process based on the requirements.</p>
@@ -251,6 +251,7 @@
 <script>
 
 var slickProps = {
+    dots: true,
     inifinite: true,
     speed: 500,
     fade: true,
@@ -261,12 +262,10 @@ var slickProps = {
   $feedbacks = $('#feedbacks');
 
 $feedbacks.slick( slickProps );
-//
-//
-// $('.words-carousel').wordsCarousel();
 
 
 $( function() {
+  return;
   var $window = $(window),
       $body = $('body'),
       $fullpage = $('#fullpage'),
@@ -284,7 +283,6 @@ $( function() {
           verticalCentered: false,
           sectionSelector: fullpageSectionsSelector,
           onLeave: onLeave,
-          // afterLoad: afterLoad,
       };
 
   function init() {

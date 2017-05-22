@@ -73,3 +73,31 @@
 	display: flex;
 	flex-direction: column-reverse;
 }
+
+
+.slick {
+	$slick-dot-margin-x: 1.5rem;
+
+	&-custom {
+
+		&.slick-dotted {
+			margin-top: 30px;
+			margin-bottom: 0;
+		}
+
+		.slick-dots {
+			top: 0;
+			bottom: auto;
+			transform: translateY(-160%);
+			margin-left: -$slick-dot-margin-x;
+			margin-right: -$slick-dot-margin-x;
+			text-align: left;
+
+			li {
+				margin-left: $slick-dot-margin-x;
+	      margin-right: $slick-dot-margin-x;
+			}
+		}
+	}
+
+}

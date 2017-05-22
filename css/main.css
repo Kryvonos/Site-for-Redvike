@@ -3826,6 +3826,20 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   display: flex;
   flex-direction: column-reverse; }
 
+.slick-custom.slick-dotted {
+  margin-top: 30px;
+  margin-bottom: 0; }
+.slick-custom .slick-dots {
+  top: 0;
+  bottom: auto;
+  transform: translateY(-160%);
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  text-align: left; }
+  .slick-custom .slick-dots li {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem; }
+
 @font-face {
   font-family: 'Bebas Neue';
   font-weight: 500;
@@ -4334,28 +4348,16 @@ a {
     color: #FFF;
     opacity: .1; }
   .products .slick-dots {
-    top: 0;
-    left: 24px;
-    bottom: auto;
-    transform: translateY(-160%);
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-    text-align: left; }
+    left: 24px; }
     @media (min-width: 576px) {
       .products .slick-dots {
         left: 8px; } }
-    .products .slick-dots li {
-      margin-left: 1.5rem;
-      margin-right: 1.5rem; }
-      .products .slick-dots li.slick-active button:before {
-        color: #FFF;
-        opacity: 1; }
-      .products .slick-dots li button:before {
-        opacity: .5;
-        color: #D0D0D0; }
-  .products .slick-dotted.slick-slider {
-    margin-top: 30px;
-    margin-bottom: 0; }
+    .products .slick-dots li.slick-active button:before {
+      color: #FFF;
+      opacity: 1; }
+    .products .slick-dots li button:before {
+      opacity: .5;
+      color: #D0D0D0; }
 
 .product-item {
   position: relative;

@@ -605,7 +605,6 @@ a {
 
 
 .products {
-  $products-slick-dot-margin-x: 1.5rem;
   position: relative;
 
   &-wrapper {
@@ -636,21 +635,13 @@ a {
   }
 
   .slick-dots {
-    top: 0;
     left: 24px;
-    bottom: auto;
-    transform: translateY(-160%);
-    margin-left: -$products-slick-dot-margin-x;
-    margin-right: -$products-slick-dot-margin-x;
-    text-align: left;
 
     @include media-breakpoint-up(sm) {
       left: 8px;
     }
 
     li {
-      margin-left: $products-slick-dot-margin-x;
-      margin-right: $products-slick-dot-margin-x;
 
       &.slick-active button:before {
         color: #FFF;
@@ -664,17 +655,12 @@ a {
     }
   }
 
-  .slick-dotted.slick-slider {
-      margin-top: 30px;
-      margin-bottom: 0;
-  }
-
 }
 
 .product {
   $product-item-heading-margin: 2rem;
   $product-item-heading-maring-left: 3rem;
-  
+
   $product-item-img-col-width-xs: 715px;
   $product-item-img-col-height-xs: 400px;
   $product-item-img-col-width-lg: 1031px;
