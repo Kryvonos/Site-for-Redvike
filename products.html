@@ -99,20 +99,20 @@
   <div id="products" class="section-wrapper products-wrapper" data-floating-nav="products" data-floating-element-class="theme-light" data-fit-to-viewport-height>
     <div class="section products container" id="products">
 
-        <section class="product-item row">
+        <section class="products-inner row align-items-center">
           <h2 class="out-of-page">Products</h2>
 
           <div class="flex-last col-12 col-lg-6" id="productItems">
               <div>
                 <div class="product-item-description">
 
-                <div class="product-item-header">
-                  <h3 class="product-item-heading heading">CRM</h3>
-                  <button data-select-product="crm" type="button" class="product-item-btn btn btn-info">Order</button>
-                </div>
+                  <div class="product-item-header">
+                    <h3 class="product-item-heading heading">CRM</h3>
+                    <button data-select-product="crm" type="button" class="product-item-btn btn btn-info">Order</button>
+                  </div>
 
-                <p class="product-item-text">Build strong relationships with your customers with an effective Customer Relationship Management (CRM) system. We’ll leverage the factors that matter for your customers and strategically infuse them within a CRM that will fuel your business’s growth.</p>
-              </div>
+                  <p class="product-item-text">Build strong relationships with your customers with an effective Customer Relationship Management (CRM) system. We’ll leverage the factors that matter for your customers and strategically infuse them within a CRM that will fuel your business’s growth.</p>
+                </div>
               </div>
 
               <div>
@@ -143,7 +143,7 @@
                 <div class="product-item-description">
 
                   <div class="product-item-header">
-                    <h3 class="product-item-heading heading">Single Page Application</h3>
+                    <h3 class="product-item-heading heading">SPA</h3>
                     <button data-select-product="single page application" type="button" class="product-item-btn btn btn-info">Order</button>
                   </div>
 
@@ -154,7 +154,7 @@
 
           <div class="product-item-img-col col-12 col-lg-6">
               <figure class="product-item-img">
-                <!-- <img src="./imgs/photos/macbook-crm.png" width="300" /> -->
+                <img class="out-of-page" src="./imgs/photos/macbook-crm.png" width="300" />
               </figure>
           </div>
         </section>
@@ -411,16 +411,17 @@
   var $productItems = $('#productItems'),
 
       slickOptions = {
+          dots: true,
+          arrows: false,
           infinite: true,
           fade: true,
-          autoplay: true,
+          // autoplay: true,
           autoplaySpeed: 5000,
           speed: 500,
       };
 
 
   $productItems.slick( slickOptions );
-
 } );
 
 

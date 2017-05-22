@@ -605,11 +605,22 @@ a {
 
 
 .products {
+  $products-slick-dot-margin-x: 1.5rem;
   position: relative;
 
   &-wrapper {
     overflow: hidden;
     background: color(dark);
+  }
+
+  &-inner {
+    position: relative;
+    z-index: 2;
+
+    @include media-breakpoint-up(lg) {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &-label {
@@ -624,11 +635,50 @@ a {
     opacity: .1;
   }
 
+  .slick-dots {
+    top: 0;
+    left: 24px;
+    bottom: auto;
+    transform: translateY(-160%);
+    margin-left: -$products-slick-dot-margin-x;
+    margin-right: -$products-slick-dot-margin-x;
+    text-align: left;
+
+    @include media-breakpoint-up(sm) {
+      left: 8px;
+    }
+
+    li {
+      margin-left: $products-slick-dot-margin-x;
+      margin-right: $products-slick-dot-margin-x;
+
+      &.slick-active button:before {
+        color: #FFF;
+        opacity: 1;
+      }
+
+      button:before {
+        opacity: .5;
+        color: #D0D0D0;
+      }
+    }
+  }
+
+  .slick-dotted.slick-slider {
+      margin-top: 30px;
+      margin-bottom: 0;
+  }
+
 }
 
 .product {
   $product-item-heading-margin: 2rem;
   $product-item-heading-maring-left: 3rem;
+  
+  $product-item-img-col-width-xs: 715px;
+  $product-item-img-col-height-xs: 400px;
+  $product-item-img-col-width-lg: 1031px;
+  $product-item-img-col-height-lg: 577px;
 
   &-item {
     position: relative;
@@ -642,7 +692,6 @@ a {
     &-description {
       display: flex;
       flex-direction: column-reverse;
-      // width: 50%;
     }
 
     &-header {
@@ -686,19 +735,33 @@ a {
       position: absolute;
       z-index: -1;
       top: 0;
-      right: -56px;
+      left: auto;
+      right: 0;
       margin: 0;
-      width: 1031px;
-      height: 577px;
+      width: $product-item-img-col-width-xs;
+      height: $product-item-img-col-height-xs;
       background-image: url('../imgs/photos/macbook-crm.png');
       background-repeat: no-repeat;
       background-size: contain;
+
+      @include media-breakpoint-up(md) {
+        right: auto;
+      }
+
+      @include media-breakpoint-up(lg) {
+        right: -56px;
+        width: $product-item-img-col-width-lg;
+        height: $product-item-img-col-height-lg;
+      }
     }
 
     &-img-col {
       position: relative;
-      // width: 50%;
-      height: 577px;
+      height: $product-item-img-col-height-xs;
+
+      @include media-breakpoint-up(lg) {
+        height: $product-item-img-col-height-lg;
+      }
     }
 
   }

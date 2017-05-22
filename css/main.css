@@ -4316,6 +4316,13 @@ a {
   .products-wrapper {
     overflow: hidden;
     background: #212121; }
+  .products-inner {
+    position: relative;
+    z-index: 2; }
+    @media (min-width: 992px) {
+      .products-inner {
+        display: flex;
+        align-items: center; } }
   .products-label {
     position: absolute;
     left: 50%;
@@ -4326,6 +4333,29 @@ a {
     text-transform: uppercase;
     color: #FFF;
     opacity: .1; }
+  .products .slick-dots {
+    top: 0;
+    left: 24px;
+    bottom: auto;
+    transform: translateY(-160%);
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    text-align: left; }
+    @media (min-width: 576px) {
+      .products .slick-dots {
+        left: 8px; } }
+    .products .slick-dots li {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem; }
+      .products .slick-dots li.slick-active button:before {
+        color: #FFF;
+        opacity: 1; }
+      .products .slick-dots li button:before {
+        opacity: .5;
+        color: #D0D0D0; }
+  .products .slick-dotted.slick-slider {
+    margin-top: 30px;
+    margin-bottom: 0; }
 
 .product-item {
   position: relative;
@@ -4367,16 +4397,28 @@ a {
     position: absolute;
     z-index: -1;
     top: 0;
-    right: -56px;
+    left: auto;
+    right: 0;
     margin: 0;
-    width: 1031px;
-    height: 577px;
+    width: 715px;
+    height: 400px;
     background-image: url("../imgs/photos/macbook-crm.png");
     background-repeat: no-repeat;
     background-size: contain; }
+    @media (min-width: 768px) {
+      .product-item-img {
+        right: auto; } }
+    @media (min-width: 992px) {
+      .product-item-img {
+        right: -56px;
+        width: 1031px;
+        height: 577px; } }
   .product-item-img-col {
     position: relative;
-    height: 577px; }
+    height: 400px; }
+    @media (min-width: 992px) {
+      .product-item-img-col {
+        height: 577px; } }
 
 *[data-scenario] {
   display: none; }
