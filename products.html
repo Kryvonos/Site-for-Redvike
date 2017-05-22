@@ -59,7 +59,7 @@
 
 <main>
 
-  <div class="start-section-wrapper bg-accent" data-append-floating-nav-marker data-fit-to-viewport-height>
+  <div class="start-section-wrapper bg-accent" data-show-floating-menu data-append-floating-nav-marker data-fit-to-viewport-height>
     <div class="start-section start-section-theme-accent">
       <h1 class="start-section-heading h1">Build It For You</h1>
 
@@ -268,8 +268,8 @@
   </div>
 </main>
 
-<div class="floating-menu" id="floatingMenu">
-  <a class="floating-menu-emblem logo logo-dark " href="./">
+<div class="floating-menu theme-dark" id="floatingMenu">
+  <a class="floating-menu-emblem logo" href="./">
     <svg width="60" viewBox="0 0 60 52">
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <polygon class="logo-emblem-shape" fill="#F1183C" points="0 0 30.181157 52 40 35.0621252 19.6942555 0"></polygon>
@@ -278,14 +278,9 @@
     </svg>
   </a>
 
-  <nav class="floating-menu-nav fs-sm">
-    <a href="#" class="list-link">home</a>
-    <a href="#" class="list-link">service</a>
-    <a href="#" class="list-link">product</a>
-    <a href="#" class="list-link">about us</a>
-    <a href="#" class="list-link">career</a>
-  </nav>
+  <nav class="floating-menu-nav fs-sm"></nav>
 </div>
+
 
 <footer class="fp-auto-height footer" data-fp-section>
     <div class="container-wrapper footer-content-wrapper">
@@ -319,7 +314,6 @@
         </div>
     </div>
 </footer>
-
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
@@ -366,9 +360,23 @@ $feedbacks.slick( slickProps );
   ;
     // .addIndicators();
 
-  processScene.addTo( controller )
-    .setTween('.process-item-heading', {y: '30%', ease: Linear.easeNone})
-  ;
+  // processScene.addTo( controller )
+  //   .setTween('.process-item-heading', {y: '30%', ease: Linear.easeNone})
+  // ;
+
+  $processItems = $('.process-item');
+
+  $processItems.each(function() {
+      var $this = $(this),
+          scene = new ScrollMagic.Scene( {
+            triggerElement: $this,
+            triggerHook: 'onEnter',
+            duration: '100%'
+          } );
+
+      scene.addTo( controller )
+           .setTween( $this.find('.process-item-heading'), {y: '30%', ease: Linear.easeNone} );
+  });
 
 
 // Contacts form
@@ -379,17 +387,25 @@ $feedbacks.slick( slickProps );
       $focusedInput = null;
 
   function init() {
-    $body.click( onBodyClick );
-    $contactsInput.focusin( onContactsInputFocus );
+    $body.click( onBodyFocusOrClick );
+    $body.get(0).addEventListener('focus', onBodyFocusOrClick, true);
+    // $contactsInput.focusin( onContactsInputFocus );
+
+    $contactsInput.each( function() {
+        this.addEventListener('focus',  onContactsInputFocus, true);
+    } );
     $contactsInput.keypress( onContactsInputKeypress );
   }
 
   function onContactsInputFocus( event ) {
     var $target = $( event.target );
 
+    console.log( $target );
+    console.log( $focusedInput );
     if ( $target.is( $focusedInput ) ) return;
 
-    blurFocusedInput();
+    // blurFocusedInput();
+    console.log( 'set focused input' );
     $focusedInput = $target;
     triggerElementFocus( $target );
   }
@@ -397,16 +413,22 @@ $feedbacks.slick( slickProps );
   function onContactsInputKeypress( event ) {
 
     if ( event.key === 'Enter' || event.keyCode === 27 ) {
-      blurFocusedInput();
+      console.log('onContactsInputKeypress');
+      // blurFocusedInput();
     }
 
   }
 
-  function onBodyClick( event ) {
+  function onBodyFocusOrClick( event ) {
     var $target = $( event.target ),
         $contactsInput = $target.closest('.contacts-group').find('.contacts-input');
 
+    console.log( 'body' );
     if ( $focusedInput && ! $contactsInput.is( $focusedInput ) ) {
+      console.log('blur');
+      console.log( event );
+      console.log( $target );
+      // debugger;
       blurFocusedInput();
     }
   }
@@ -414,10 +436,13 @@ $feedbacks.slick( slickProps );
   function blurFocusedInput() {
     if ( $focusedInput === null || $focusedInput === undefined ) return;
 
-    triggerElementFocus( $focusedInput );
+
+    removeElementFocus( $focusedInput );
     $focusedInput.blur();
     $focusedInput.trigger( 'contacts-input:blur', { target: $focusedInput.get(0) } );
 
+    console.log( 'contacts-input:blur' );
+    console.log( $focusedInput );
     $focusedInput = null;
   }
 
@@ -425,6 +450,12 @@ $feedbacks.slick( slickProps );
     if ( $elem === null || $elem === undefined ) return;
 
     $elem.closest('.contacts-group').toggleClass('contacts-group-focused');
+  }
+
+  function removeElementFocus( $elem ) {
+    if ( $elem === null || $elem === undefined ) return;
+
+    $elem.closest('.contacts-group').removeClass('contacts-group-focused');
   }
 
   init();

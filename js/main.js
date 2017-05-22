@@ -161,17 +161,23 @@ if ( ! String.prototype.format ) {
 
 // Floating menu
 ;$(function() {
-  return;
+  // return;
 	var $header = $('#header'),
       $menuItems = $('[data-menu-item]'),
 	    $floatingMenu = $('#floatingMenu'),
       $floatingMenuNav = $floatingMenu.find('.floating-menu-nav'),
+      $triggerElement = $('[data-show-floating-menu]'),
 
 	    controller = new ScrollMagic.Controller(),
 	    scene = null,
 	    needHideFloatingMenu = false;
 
   function init() {
+    if ( ! $triggerElement.length ) {
+      console.warn( 'Need to use data-show-floating-menu attribute to show floating menu' );
+      return;
+    }
+
     createFloatingMenuNav();
     initScene();
     initEventListeners();
@@ -226,7 +232,7 @@ if ( ! String.prototype.format ) {
 	  }
 	}
 
-  // init();
+  init();
 
 });
 
@@ -247,6 +253,10 @@ $( function() {
 
 
   function init() {
+    if ( ! $elems.length ) {
+      return;
+    }
+
     createFloatingNav();
     createFloatingNavMaker();
     initScenes();
@@ -476,6 +486,8 @@ $( function() {
     var $target = $( event.target ),
         $scenarioItem = $target.closest('[data-scenario]');
 
+    // console.log( 'onContactsInputBlur' );
+    // console.log( event.target );
     scenario.showNextItem( $scenarioItem );
 
     if ( ! scenario.hasMoreItemsToShow() && scenario.isValidItems() && ! formHasBeenSubmitted ) {
@@ -510,6 +522,8 @@ $( function() {
           if ( $scenarioItem.hasClass( shownClass) ) return;
 
           $scenarioItem.addClass( shownClass );
+          // console.log('need to focus next item');
+          // $scenarioItem.find('.contacts-input').focus();
       }
 
       function getNextScenarioItem( $elem ) {
