@@ -379,14 +379,18 @@ $( function() {
   function onSceneEnter( event ) {
     var $triggerElement = $( event.target.triggerElement() ),
         section = $triggerElement.data('floatingNav'),
-        $floatingNavItem = getFloatingNavItem( section );
-        
+        $floatingNavItem = getFloatingNavItem( section ),
+
+        prevTriggerElementClass = triggerElementClass;
+
     triggerElementClass = $triggerElement.data('floating-element-class');
     showFloatingNav();
 
     timerId = setTimeout( function() {
       timerId = null;
 
+      $floatingMenu.removeClass( prevTriggerElementClass );
+      $floatingNav.removeClass( prevTriggerElementClass );
       $floatingMenu.addClass( triggerElementClass );
       $floatingNav.addClass( triggerElementClass );
       $floatingNavItem.addClass('active');
@@ -400,13 +404,22 @@ $( function() {
   }
 
   function onSceneLeave( event ) {
+    var $nextItem = getNextItem();
+
     $floatingNav.find('.active').removeClass('active');
-    $floatingNav.removeClass( triggerElementClass );
-    $floatingMenu.removeClass( triggerElementClass );
+
+    // We remove triggerElementClass only if there is no more nav items
+    if ( ! $nextItem.length ) {
+      $floatingNav.removeClass( triggerElementClass );
+      $floatingMenu.removeClass( triggerElementClass );
+    }
 
     hideFloatingNav();
-
     clearTimeout( timerId );
+  }
+
+  function getNextItem() {
+    return $floatingNav.find('.active').next('.floating-nav-item');
   }
 
   function onContentChange( event ) {
