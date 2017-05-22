@@ -340,15 +340,16 @@
     }
   }
 
-  &-mail {
-    display: block;
+  &-link {
+    display: inline-block;
     margin-bottom: 1.84em;
+    border-bottom: .1em solid transparent;
     font-size: 50px;
     text-decoration: none;
     color: #FFF;
 
     &:hover {
-      text-decoration: underline;
+      border-color: #FFF;
     }
 
     @include media-breakpoint-up(lg) {
