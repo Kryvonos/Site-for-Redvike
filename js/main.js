@@ -888,10 +888,26 @@ function AnimationFlow( flowName ) {
     return res;
   }
 
+
+  function hasNext() {
+    var next = getNextLabel( currentTimelineLabel );
+
+    return next !== null && next !== undefined;
+  }
+
+  function hasPrev() {
+    var prev = getPreviousLabel( currentTimelineLabel );
+
+    return prev !== null && prev !== undefined;
+  }
+
+
   init();
 
   this.next = next;
   this.prev = prev;
+  this.hasNext = hasNext;
+  this.hasPrev = hasPrev;
 }
 
 ;$( function() {

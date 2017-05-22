@@ -340,50 +340,40 @@ $( function() {
   }
 
 
-  var preventSectionScrolling = true,
-      lastDirection = null,
+  var preventSectionScrolling = false,
       timerId = null;
 
   function onLeave(index, nextIndex, direction) {
+      if ( (index === 2 && direction === 'down' && window.sectionDescriptionFlow.hasNext()) ||
+           (index === 2 && direction === 'up' && window.sectionDescriptionFlow.hasPrev()) ) {
 
-    if ( index === 2 && lastDirection != direction ) {
-      preventSectionScrolling = true;
-    }
+        preventSectionScrolling = true;
+      }
 
-    if ( index === 2 && preventSectionScrolling ) {
-        if ( timerId != null ) return false;
+      if ( index === 2 && preventSectionScrolling ) {
+          if ( timerId != null ) return false;
 
-        var toIndex = (direction === 'down' ? index + 1 : index - 1);
+          var toIndex = (direction === 'down' ? index + 1 : index - 1);
+          timerId = setTimeout( preventScollingTimeout, fullpageOptions.scrollingSpeed);
 
-        timerId = setTimeout( function() {
+          if ( direction === 'down' ) {
+            window.sectionDescriptionFlow.next();
+            window.sectionHeadingWordFlow.next();
+          }
+          else {
+            window.sectionDescriptionFlow.prev();
+            window.sectionHeadingWordFlow.prev();
+          }
 
-          preventSectionScrolling = false;
-          timerId = null;
+          function preventScollingTimeout() {
+            preventSectionScrolling = false;
+            timerId = null;
+          }
 
-        }, fullpageOptions.scrollingSpeed);
-
-        if ( direction === 'down' ) {
-          window.sectionDescriptionFlow.next();
-          window.sectionHeadingWordFlow.next();
-        }
-        else {
-          window.sectionDescriptionFlow.prev();
-          window.sectionHeadingWordFlow.prev();
-        }
-
-        lastDirection = direction;
-
-        return false;
-    }
-
-    if ( index > 2 && ! preventSectionScrolling ) {
-      preventSectionScrolling = true;
-    }
-
-    if ( index < 2 & ! preventSectionScrolling ) {
-      preventSectionScrolling = true;
-    }
+          return false;
+      }
   }
+
 
   init();
 
