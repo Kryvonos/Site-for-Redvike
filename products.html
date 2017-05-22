@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  <div class="section-wrapper" data-floating-nav="process" data-fit-to-viewport-height>
+  <div id="process" class="section-wrapper" data-floating-nav="process" data-fit-to-viewport-height>
     <section class="section process-section">
       <h2 class="out-of-page">Process description</h2>
 
@@ -163,7 +163,7 @@
     </div>
   </div>
 
-  <div class="section-wrapper" data-floating-nav="feedback" data-floating-nav="about us" data-fit-to-viewport-height>
+  <div class="section-wrapper" data-fp-section data-floating-nav="feedback" data-fit-to-viewport-height>
       <section class="section">
           <div class="row">
               <div class="section-content col-12 col-lg">
@@ -171,7 +171,7 @@
                     <h2 class="section-heading h2">Testimotionals</h2>
                   </header>
 
-                  <div class="feedbacks">
+                  <div class="feedbacks slick-custom" id="feedbacks">
                         <blockquote class="quote">
                           <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
                           <p>They provided us with constant support (even on weekends) and feedback on the development process. Due to constant communication, it felt like they are a part of our technical team. They are more flexible than other contractors we have worked with. They understand challenges that start-ups are facing and trying o adapt their development process based on the requirements.</p>
@@ -180,11 +180,20 @@
                             <p class="quote-author"><strong>Call Page</strong></p>
                           </footer>
                         </blockquote>
+
+                        <blockquote class="quote">
+                          <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                          <p>		From my point of view, Redvike has client-oriented culture. Team members are well motivated to do all the best to finish the project in time and deliver the best quality possible.</p>
+
+                          <footer>
+                            <p class="quote-author"><strong>LeadR</strong></p>
+                          </footer>
+                        </blockquote>
                   </div>
               </div>
 
               <div class="col-12 col-lg-auto section-btn-wrapper">
-                <a class="btn btn-primary" href="#">Work with us</a>
+                <a class="btn btn-primary" href="./services.html">Work with us</a>
               </div>
           </div>
       </section>
@@ -328,18 +337,40 @@
 <script src="./js/main.js"></script>
 
 <script>
+var slickProps = {
+    dots: true,
+    inifinite: true,
+    speed: 500,
+    fade: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  },
+
+  $feedbacks = $('#feedbacks');
+
+$feedbacks.slick( slickProps );
+
+
   var controller = new ScrollMagic.Controller(),
       scene = new ScrollMagic.Scene( {
         triggerElement: '#products',
         triggerHook: 'onEnter',
         duration: '200%'
+      } ),
+      processScene = new ScrollMagic.Scene( {
+        triggerElement: '#process .process-item:first-of-type',
+        triggerHook: 'onEnter',
+        duration: '200%'
       } );
 
-  scene
+  scene.addTo( controller )
     .setTween('#productsLabel', {y: '50%', ease: Linear.easeNone})
-    .addTo( controller );
+  ;
     // .addIndicators();
 
+  processScene.addTo( controller )
+    .setTween('.process-item-heading', {y: '30%', ease: Linear.easeNone})
+  ;
 
 
 // Contacts form
