@@ -25,6 +25,18 @@
       animation: burger-close-top $menu-burger-animation-duration ease-out forwards;
     }
 
+    &.light {
+        #{$menu-burger}-stick:first-child {
+          animation: burger-close-top $menu-burger-animation-duration ease-out forwards,
+                     burger-close-top-bg-light $menu-burger-animation-duration ease-out forwards;
+        }
+
+        #{$menu-burger}-stick:nth-child(2) {
+          animation: burger-close-bottom $menu-burger-animation-duration ease-out forwards,
+                     burger-close-top-bg-light $menu-burger-animation-duration ease-out forwards;
+        }
+    }
+
     #{$menu-burger}-stick:nth-child(2) {
       animation: burger-close-bottom $menu-burger-animation-duration ease-out forwards;
     }
@@ -60,6 +72,12 @@
 
 }
 
+// @keyframes change-font-size {
+//   to {
+//     font-size: 20px;
+//   }
+// }
+
 
 @keyframes burger-open-top {
   50% {
@@ -92,6 +110,16 @@
   100% {
     transform: translateY(0) rotate(0);
     background: color(dark);
+  }
+}
+
+@keyframes burger-close-top-bg-light {
+  40% {
+    background: #FFF;
+  }
+
+  100% {
+    background: #FFF;
   }
 }
 

@@ -907,6 +907,8 @@ a {
   }
 
   &-parallax {
+    z-index: -1;
+    bottom: -55%;
     font-size: 500px;
   }
 

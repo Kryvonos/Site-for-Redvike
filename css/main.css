@@ -4499,6 +4499,8 @@ a {
       margin-top: 5rem;
       margin-bottom: 4rem; } }
   .team-contacts-parallax {
+    z-index: -1;
+    bottom: -55%;
     font-size: 500px; }
   .team-contacts-heading {
     flex: auto;
@@ -4822,6 +4824,10 @@ a {
     animation: burger-open-label 700ms ease-out forwards; }
   .menu-burger.closing .menu-burger-stick:first-child {
     animation: burger-close-top 700ms ease-out forwards; }
+  .menu-burger.closing.light .menu-burger-stick:first-child {
+    animation: burger-close-top 700ms ease-out forwards, burger-close-top-bg-light 700ms ease-out forwards; }
+  .menu-burger.closing.light .menu-burger-stick:nth-child(2) {
+    animation: burger-close-bottom 700ms ease-out forwards, burger-close-top-bg-light 700ms ease-out forwards; }
   .menu-burger.closing .menu-burger-stick:nth-child(2) {
     animation: burger-close-bottom 700ms ease-out forwards; }
   .menu-burger.closing .menu-burger-label {
@@ -4865,6 +4871,11 @@ a {
   100% {
     transform: translateY(0) rotate(0);
     background: #212121; } }
+@keyframes burger-close-top-bg-light {
+  40% {
+    background: #FFF; }
+  100% {
+    background: #FFF; } }
 @keyframes burger-open-bottom {
   50% {
     background: #FFF; }

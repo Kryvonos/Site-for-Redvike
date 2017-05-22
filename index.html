@@ -46,6 +46,7 @@
       <ul class="menubar-nav container">
         <a class="menubar-link" data-menu-item href="./products.html">Products</a>
         <a class="menubar-link" data-menu-item href="./services.html">Services</a>
+        <a class="menubar-link" data-menu-item href="./about-us.html">About Us</a>
         <a class="menubar-link" data-menu-item href="./career.html">Career</a>
         <span class="menubar-gap"></span>
         <span class="menubar-simple-link">
@@ -75,7 +76,7 @@
           <!-- <span class="nav-marker">services</span> -->
       </div>
 
-      <div class="section-wrapper" data-fp-section data-show-floating-menu data-fit-to-viewport-height>
+      <div class="section-wrapper" data-floating-nav="services" data-fp-section data-show-floating-menu data-fit-to-viewport-height>
         <section class="section" id="serviceSection">
             <div class="row">
                 <div class="section-content col-12 col-lg">
@@ -313,6 +314,7 @@ $( function() {
       initFullpage();
   }
 
+
   function initEventListeners() {
       $window.resize( updateSectionsVisibility );
   }
@@ -331,7 +333,7 @@ $( function() {
       }
       else if ( $originalPrevSibling !== null && ! isBreakpointUp ) {
         $section.removeClass( hiddenClass );
-        $prevSibling.after( $section );
+        $originalPrevSibling.after( $section );
 
         $originalPrevSibling = null;
 

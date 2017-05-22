@@ -233,7 +233,7 @@ if ( ! String.prototype.format ) {
 
 // Floating nav
 $( function() {
-  return;
+  // return;
   var controller = new ScrollMagic.Controller(),
       scenes = [],
       timerId = null,
@@ -430,7 +430,7 @@ $( function() {
 
 // Contacts form scenario
 ;$( function() {
-  return;
+  // return;
   var scenario = null,
 
       $window = $(window),
@@ -687,7 +687,9 @@ function AnimationFlow( flowName ) {
       itemClass = 'animation-flow-item',
       inlineBlockClass = 'animation-flow-d-inline-block',
 
-      currentTimelineLabel = '';
+      currentTimelineLabel = '',
+
+      labels = {};
 
   function init() {
     initAnimationFlowElems();
@@ -908,6 +910,7 @@ function AnimationFlow( flowName ) {
   this.prev = prev;
   this.hasNext = hasNext;
   this.hasPrev = hasPrev;
+  // this.rebuild = reduild();
 }
 
 ;$( function() {
