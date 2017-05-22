@@ -233,7 +233,6 @@ if ( ! String.prototype.format ) {
 
 // Floating nav
 $( function() {
-  // return;
   var controller = new ScrollMagic.Controller(),
       scenes = [],
       timerId = null,
@@ -381,7 +380,7 @@ $( function() {
     var $triggerElement = $( event.target.triggerElement() ),
         section = $triggerElement.data('floatingNav'),
         $floatingNavItem = getFloatingNavItem( section );
-
+        
     triggerElementClass = $triggerElement.data('floating-element-class');
     showFloatingNav();
 
