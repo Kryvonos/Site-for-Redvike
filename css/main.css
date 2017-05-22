@@ -3833,10 +3833,16 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   top: 0;
   bottom: auto;
   transform: translateY(-160%);
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
+  margin-left: -0.75rem;
+  margin-right: -0.75rem;
   text-align: left; }
   .slick-custom .slick-dots li {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem; }
+.slick-dots-wide .slick-dots {
+  margin-left: -1.5rem;
+  margin-right: -1.5rem; }
+  .slick-dots-wide .slick-dots li {
     margin-left: 1.5rem;
     margin-right: 1.5rem; }
 

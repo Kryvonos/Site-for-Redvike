@@ -76,7 +76,8 @@
 
 
 .slick {
-	$slick-dot-margin-x: 1.5rem;
+	$slick-dot-margin-x: .75rem;
+	$slick-dot-margin-x-wide: 1.5rem;
 
 	&-custom {
 
@@ -96,6 +97,18 @@
 			li {
 				margin-left: $slick-dot-margin-x;
 	      margin-right: $slick-dot-margin-x;
+			}
+		}
+	}
+
+	&-dots-wide {
+		.slick-dots {
+			margin-left: -$slick-dot-margin-x-wide;
+			margin-right: -$slick-dot-margin-x-wide;
+
+			li {
+				margin-left: $slick-dot-margin-x-wide;
+				margin-right: $slick-dot-margin-x-wide;
 			}
 		}
 	}

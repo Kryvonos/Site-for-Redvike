@@ -914,7 +914,7 @@ function AnimationFlow( flowName ) {
 }
 
 ;$( function() {
-
+  return;
   var sectionDescriptionFlow = new AnimationFlow( 'section-description' ),
       sectionHeadingWordFlow = new AnimationFlow( 'section-heading-word' );
 
