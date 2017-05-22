@@ -4475,9 +4475,11 @@ a {
 .tech-section-heading {
   margin-bottom: 1.2em; }
 .tech-section-item {
-  margin-bottom: 1rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem; }
+  margin-bottom: 1rem; }
+  @media (min-width: 992px) {
+    .tech-section-item {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem; } }
 .tech-section-list-heading {
   margin-top: .5em;
   margin-bottom: 1em; }
@@ -4512,7 +4514,7 @@ a {
 .parallax-label {
   position: absolute;
   left: 50%;
-  bottom: -10%;
+  bottom: 0%;
   transform: translateX(-50%);
   font-family: 'Bebas';
   font-size: 360px;

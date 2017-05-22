@@ -830,8 +830,11 @@ a {
 
   &-item {
     margin-bottom: $tech-section-item-margin-bottom;
-    padding-left: $tech-section-item-padding-x;
-    padding-right: $tech-section-item-padding-x;
+
+    @include media-breakpoint-up(lg) {
+      padding-left: $tech-section-item-padding-x;
+      padding-right: $tech-section-item-padding-x;
+    }
   }
 
   &-list-heading {
@@ -889,7 +892,7 @@ a {
 .parallax-label {
   position: absolute;
   left: 50%;
-  bottom: -10%;
+  bottom: 0%;
   transform: translateX(-50%);
   font-family: 'Bebas';
   font-size: 360px;

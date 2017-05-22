@@ -57,7 +57,7 @@
 
 <main>
 
-  <div class="start-section-wrapper bg-accent" data-fit-to-viewport-height>
+  <div class="start-section-wrapper bg-accent" data-fit-to-viewport-height data-append-floating-nav-marker>
     <div class="start-section start-section-theme-accent">
       <h1 class="start-section-heading h1">Build It With You</h1>
 
@@ -68,11 +68,12 @@
   </div>
 
   <div id="services" class="section-wrapper bg-dark" data-floating-nav="our tech" data-floating-element-class="theme-light" data-fit-to-viewport-height>
+
     <section class="tech-section section">
       <div class="tech-section-row row">
         <h2 class="tech-section-heading h2 color-light col-12 col-lg-5">Our Tech</h2>
 
-        <section class="tech-section-item col-auto">
+        <section class="tech-section-item col col-auto">
             <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Tools</h3>
 
             <ul class="tech-section-list">
@@ -88,7 +89,7 @@
             </ul>
         </section>
 
-        <section class="tech-section-item text-lg col-auto">
+        <section class="tech-section-item col col-auto">
             <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Frontend</h3>
 
             <ul class="tech-section-list">
@@ -103,7 +104,7 @@
             </ul>
         </section>
 
-        <section class="tech-section-item col-auto">
+        <section class="tech-section-item col col-auto">
           <h3 class="tech-section-list-heading color-light text-uppercase text-lg">Backend</h3>
 
           <ul class="tech-section-list">
@@ -116,13 +117,15 @@
         </section>
       </div>
     </section>
+    
+    <span id="servicesLabel" class="parallax-label">Services</span>
   </div>
 
-  <div class="section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-floating-element-class="theme-light" data-fit-to-viewport-height>
+  <div class="section-wrapper bg-gradient-brand" data-fp-section data-floating-nav="contacts" data-floating-element-class="theme-light" data-fit-to-viewport-height>
       <section class="section hire-us-section">
           <h2 class="hire-us-heading heading">Hire Us</h2>
 
-          <a class="hire-us-mail heading" href="mailto:hello@redvike.com">hello@<br class="hidden-sm-up">redvike.com</a>
+          <p class="m-0"><a class="hire-us-link heading" href="mailto:hello@redvike.com">hello@<br class="hidden-sm-up">redvike.com</a></p>
       </section>
   </div>
 </main>
@@ -137,50 +140,41 @@
     </svg>
   </a>
 
-  <nav class="floating-menu-nav fs-sm">
-    <a href="#" class="list-link">home</a>
-    <a href="#" class="list-link">service</a>
-    <a href="#" class="list-link">product</a>
-    <a href="#" class="list-link">about us</a>
-    <a href="#" class="list-link">career</a>
-  </nav>
+  <nav class="floating-menu-nav fs-sm"></nav>
 </div>
 
+<footer class="fp-auto-height footer" data-fp-section>
+    <div class="container-wrapper footer-content-wrapper">
+        <div class="footer-content container">
+            <div class="row">
+              <div class="footer-contacts col-12 col-md-auto">
+                <img class="mb-3" src="./imgs/logo.svg" width="138" height="" alt="Redvike logo" />
 
-<footer class="footer">
-  <div class="container-wrapper footer-content-wrapper">
-      <div class="footer-content container">
-          <div class="row">
-            <div class="footer-contacts col-12 col-md-auto">
-              <img class="mb-3" src="./imgs/logo.svg" width="138" height="" alt="Redvike logo" />
+                <p class="footer-nav fs-md">
+                  <span class="nav-link">
+                    <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
+                  </span>
+                  <span class="nav-link">
+                    <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
+                  </span>
+                  <span class="nav-link">Świętej Teresy 2, 31-162</span>
+                  <span class="nav-link">Kraków, Poland</span>
+                </p>
+              </div>
 
-              <p class="footer-nav fs-md">
-                <span class="nav-link">
-                  <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
-                </span>
-                <span class="nav-link">
-                  <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
-                </span>
-                <span class="nav-link">Świętej Teresy 2, 31-162</span>
-                <span class="nav-link">Kraków, Poland</span>
-              </p>
+              <div class="col-12 col-md-auto">
+                <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
+
+                <p class="footer-nav fs-sm text-uppercase">
+                  <a class="nav-link" href="./services.html">Services</a>
+                  <a class="nav-link" href="./products.html">Products</a>
+                  <a class="nav-link" href="./career.html">Career</a>
+                </p>
+              </div>
             </div>
-
-            <div class="col-12 col-md-auto">
-              <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
-
-              <p class="footer-nav fs-sm text-uppercase">
-                <a class="nav-link" href="./services.html">With you</a>
-                <a class="nav-link" href="./products.html">For you</a>
-                <!-- <a class="nav-link" href="./#">About us</a> -->
-                <a class="nav-link" href="./career.html">Career</a>
-              </p>
-            </div>
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
 </footer>
-
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
@@ -192,6 +186,19 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 <script src="./js/Utility.js"></script>
 <script src="./js/main.js"></script>
+
+<script>
+var controller = new ScrollMagic.Controller(),
+    servicesScene = new ScrollMagic.Scene( {
+      triggerElement: '#services',
+      triggerHook: 'onEnter',
+      duration: '200%'
+    } );
+
+servicesScene.addTo( controller )
+  .setTween('#servicesLabel', {y: '50%', ease: Linear.easeNone})
+;
+</script>
 
 </body>
 </html>
