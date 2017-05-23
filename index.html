@@ -158,7 +158,7 @@
 
                             <blockquote class="quote">
                               <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
-                              <p>		From my point of view, Redvike has client-oriented culture. Team members are well motivated to do all the best to finish the project in time and deliver the best quality possible.</p>
+                              <p>From my point of view, Redvike has client-oriented culture. Team members are well motivated to do all the best to finish the project in time and deliver the best quality possible.</p>
 
                               <footer>
                                 <p class="quote-author"><strong>LeadR</strong></p>
@@ -317,9 +317,7 @@ $( function() {
 
   function initEventListeners() {
       $window.resize( function() {
-        updateSectionsVisibility();
-        // sectionDescriptionFlow.rebuild();
-        // sectionHeadingWordFlow.rebuild();
+        // updateSectionsVisibility();
       });
   }
 
@@ -364,11 +362,11 @@ $( function() {
 
           if ( direction === 'down' ) {
             sectionDescriptionFlow.next();
-            sectionHeadingWordFlow.next();
+            // sectionHeadingWordFlow.next();
           }
           else {
             sectionDescriptionFlow.prev();
-            sectionHeadingWordFlow.prev();
+            // sectionHeadingWordFlow.prev();
           }
 
           function preventScollingTimeout() {

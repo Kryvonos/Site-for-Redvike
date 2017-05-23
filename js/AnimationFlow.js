@@ -1,28 +1,21 @@
 function AnimationFlow( flowName ) {
-  var timeline = null,
-      $window = $(window),
+  var $window = $(window),
       $wrapper = null,
       $elems = null,
+
+      timeline = null,
 
       wrapperClass = 'animation-flow-wrapper',
       contentClass = 'animation-flow-content',
       itemClass = 'animation-flow-item',
-      inlineBlockClass = 'animation-flow-d-inline-block',
-
-      currentTimelineLabel = '',
-
-      labels = {};
+      inlineBlockClass = 'animation-flow-d-inline-block';
 
   function init() {
+    timeline = new TimelineMax({paused: true})
+
     initAnimationFlowElems();
     createWrapper();
     fillWrapper();
-    createTimeline();
-    initEventListeners();
-  }
-
-  function initEventListeners() {
-    $window.resize( rebuild );
   }
 
   function initAnimationFlowElems() {
@@ -56,8 +49,13 @@ function AnimationFlow( flowName ) {
       $wrapper.append( $items );
   }
 
+
   function initialElement() {
       return $elems.first();
+  }
+
+  function contentElement() {
+    return $elems.filter( '.' + contentClass );
   }
 
   function setContent( $item ) {
@@ -70,188 +68,103 @@ function AnimationFlow( flowName ) {
     $elems.removeClass( contentClass ).removeClass( itemClass );
   }
 
-  function rebuild() {
-    var $content = $elems.filter( '.' + contentClass ),
-        index = $content.index();
 
-    setContent( initialElement() );
-    $wrapper.css({'height': '', "width": ''});
-    createTimeline();
-    setContent( $content );
-    timeline.seek( 'label-' + index );
+  function animate($startItem, $endItem, playReverse) {
+    if ( ! $elems.length ) return;
+
+    var wrapperWidth = null,
+        wrapperHeight = null,
+        duration = .9,
+        delay = .2;
+
+    setContent( $endItem );
+    wrapperWidth = $wrapper.outerWidth();
+    wrapperHeight = $wrapper.outerHeight();
+    setContent( $startItem );
+
+    timeline.clear().progress(0)
+      .fromTo($startItem, duration, {y: 0}, {y: -50, ease: Power2.easeInOut}, 'startItem')
+      .set($startItem, {y: 0})
+      .fromTo($startItem, duration - delay, {opacity: 1}, {opacity: 0, ease: Power2.easeInOut}, 'startItem+=' + delay)
+      .fromTo($endItem, duration, {y: 50}, {y: 0, ease: Power2.easeInOut}, 'startItem')
+      .fromTo($endItem, duration - delay, {opacity: 0}, {opacity: 1, ease: Power2.easeInOut}, 'startItem+=' + delay)
+      .to($wrapper, duration, {width: wrapperWidth, height: wrapperHeight, ease: Power2.easeInOut}, 'startItem')
+      .eventCallback('onReverseComplete', onLabelComplete, ['REVERSE'])
+      .eventCallback('onComplete', onLabelComplete, ['FORWARD'])
+    ;
+
+    console.log( playReverse );
+    if ( playReverse === true ) {
+      timeline.reverse(0);
+    } else {
+      timeline.play();
+    }
+
+    function onLabelComplete( arg ) {
+        console.log( 'complete', arg );
+
+        if ( playReverse ) {
+          console.log('complete reverse');
+          setContent( $startItem );
+        } else {
+          setContent( $endItem );
+          // console.log( 'complete' );
+        }
+
+        window.requestAnimationFrame( function() {
+          $wrapper.css({width: '', height: ''});
+        } );
+    }
   }
 
-  function createTimeline() {
-      if ( ! $elems.length ) return;
 
-      var $currentStartItem = null,
-          $currentEndItem = null,
-          onLabelCompleteDone = false;
-
-      timeline = new TimelineMax({paused: true});
-
-      for (var i = 0; i < $elems.length - 1; ++i) {
-          var $startItem = $elems.eq(i),
-              $endItem = $elems.eq(i + 1),
-              wrapperWidth = 0,
-              wrapperHeight = 0,
-              startItemLabel = 'startItem' + i;
-
-          setContent( $endItem );
-          wrapperWidth = $wrapper.outerWidth();
-          wrapperHeight = $wrapper.outerHeight();
-          setContent( $startItem );
-
-          timeline
-            .to($startItem, .7, {y: -50, onComplete: updateCurrentStartItem, onReverseComplete: updateCurrentStartItem, onReverseCompleteParams: [true], ease: Power2.easeInOut}, startItemLabel)
-            .fromTo($startItem, .5, {opacity: 1}, {opacity: 0, delay: .2, ease: Power2.easeInOut}, startItemLabel)
-            .set($endItem, {y: 0}, startItemLabel)
-            .fromTo($endItem, .7, {y: 50}, {y: 0, onComplete: updateCurrentEndItem, onReverseComplete: updateCurrentEndItem, onReverseCompleteParams: [true], ease: Power2.easeInOut}, startItemLabel)
-            .fromTo($endItem, .5, {opacity: 0}, {opacity: 1, delay: .2, ease: Power2.easeInOut}, startItemLabel)
-            .to($wrapper, .9, {width: wrapperWidth, height: wrapperHeight, ease: Power2.easeInOut}, startItemLabel)
-            .eventCallback('onReverseComplete', onLabelComplete)
-            .addCallback( onLabelComplete )
-            .add('label-' + (i + 1))
-      }
-
-      currentTimelineLabel = 0;
-      setContent( initialElement() );
-
-      function updateCurrentStartItem( isReversed ) {
-          if ( isReversed )
-            $currentEndItem = $(this.target);
-          else
-            $currentStartItem = $(this.target);
-      }
-
-      function updateCurrentEndItem( isReversed ) {
-          if ( isReversed )
-            $currentStartItem = $(this.target);
-          else
-            $currentEndItem = $(this.target);
-      }
-
-      function onLabelComplete() {
-          if ( ! $currentStartItem || ! $currentEndItem ) return;
-
-          setContent( $currentEndItem );
-
-          window.requestAnimationFrame( function() {
-            $wrapper.css({width: '', height: ''});
-          } );
-      }
+  function reset() {
+    $elems.css('opacity', '');
+    setContent( initialElement() );
   }
 
   function next() {
-    var nextLabel = getNextLabel( currentTimelineLabel );
+    if ( ! hasNext() ) return;
 
-    if ( ! nextLabel ) return;
+    var $content = contentElement();
 
-    timeline.tweenFromTo(currentTimelineLabel, nextLabel);
-    currentTimelineLabel = nextLabel;
+    if ( timeline.isActive() ) {
+      timeline.pause();
+
+      TweenMax.to(timeline, .2, {progress: 1});
+      return;
+    }
+
+    animate( $content, $content.next() );
   }
 
   function prev() {
-    var prevLabel = getPreviousLabel( currentTimelineLabel );
+    if ( ! hasPrev() ) return;
 
-    if ( prevLabel === null || prevLabel === undefined ) return;
+    var $content = contentElement();
 
-    timeline.tweenFromTo(currentTimelineLabel, prevLabel);
-    currentTimelineLabel = prevLabel;
-  }
-
-  function getNextLabel( label ) {
-    if ( label === 0 ) return 'label-1';
-
-    var nextLabel = null,
-      labels = timeline.getLabelsArray(),
-      labelName = getLabelName( label ),
-      labelIndex = getLabelIndex( label );
-
-    if ( labelIndex === -1 ) return;
-
-    labels.forEach( function( currLabelObj ) {
-        var currLabel = currLabelObj.name,
-            currLabelName = getLabelName( currLabel ),
-            currLabelIndex = getLabelIndex( currLabel );
-
-        if ( currLabelIndex === -1 ) return;
-        if ( currLabelName !== labelName ) return;
-        if ( currLabelIndex !== labelIndex + 1) return;
-
-        nextLabel = currLabelObj.name;
-    } );
-
-    return nextLabel;
-  }
-
-  function getPreviousLabel( label ) {
-    if ( label === 0 ) return null;
-    if ( label === 'label-1' ) return 0;
-
-    var prevLabel = null,
-      labels = timeline.getLabelsArray(),
-      labelName = getLabelName( label ),
-      labelIndex = getLabelIndex( label );
-
-    if ( labelIndex === -1 ) return;
-
-    labels.forEach( function( currLabelObj ) {
-        var currLabel = currLabelObj.name,
-            currLabelName = getLabelName( currLabel ),
-            currLabelIndex = getLabelIndex( currLabel );
-
-        if ( currLabelIndex === -1 ) return;
-        if ( currLabelName !== labelName ) return;
-        if ( currLabelIndex !== labelIndex - 1) return;
-
-        prevLabel = currLabel;
-    } );
-
-    return prevLabel;
-  }
-
-  function getLabelName( label ) {
-    var labelSplit = label.split('-'),
-        res = labelSplit[0];
-
-    if ( labelSplit.length !== 1 ) {
-      res = labelSplit.slice(0, -1).join('-');
-    }
-
-    return res;
-  }
-
-  function getLabelIndex( label ) {
-    var labelSplit = label.split('-'),
-        res = -1;
-
-    if ( labelSplit.length !== 1 ) {
-      res = Number.parseInt( labelSplit[ labelSplit.length - 1 ] );
-    }
-
-    return res;
+    animate( $content.prev(), $content, true );
   }
 
 
   function hasNext() {
-    var next = getNextLabel( currentTimelineLabel );
+    var $next = contentElement().next();
 
-    return next !== null && next !== undefined;
+    return $next.length != 0;
   }
 
   function hasPrev() {
-    var prev = getPreviousLabel( currentTimelineLabel );
+    var $prev = contentElement().prev();
 
-    return prev !== null && prev !== undefined;
+    return $prev.length != 0;
   }
 
 
   init();
 
+  this.reset = reset;
   this.next = next;
   this.prev = prev;
   this.hasNext = hasNext;
   this.hasPrev = hasPrev;
-  this.rebuild = rebuild;
 }
