@@ -100,7 +100,7 @@
         </section>
       </div>
 
-      <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
+      <!-- <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -117,7 +117,7 @@
                   </div>
               </div>
           </section>
-      </div>
+      </div> -->
 
       <div class="section-wrapper bg-dark" data-fp-section data-floating-nav="team" data-floating-element-class="theme-light" data-fit-to-viewport-height>
           <section class="section">
@@ -260,28 +260,17 @@ $feedbacks.slick( slickProps );
 
 
 $( function() {
-  return;
+  // return;
   var $window = $(window),
       $body = $('body'),
       $fullpage = $('#fullpage'),
       $section = null,
       $originalPrevSibling = null,
 
-      hiddenClass = 'hidden-xs-up',
-      fullpageSectionsSelector = '[data-fp-section]',
-      fullpageIgnoreSelector = '[data-fp-ignore]',
-
-      fullpageOptions = {
-          scrollingSpeed: 600,
-          responsiveWidth: Utility.breakpoints.sm,
-          scrollBar: true,
-          verticalCentered: false,
-          sectionSelector: fullpageSectionsSelector,
-          onLeave: onLeave,
-      };
+      hiddenClass = 'hidden-xs-up';
 
   function init() {
-      $section = $( fullpageIgnoreSelector ).first();
+      $section = $( Main.fullpageIgnoreSelector ).first();
 
       initFullpage();
       updateSectionsVisibility();
@@ -290,14 +279,14 @@ $( function() {
   }
 
   function initFullpage() {
-      $fullpage.fullpage( fullpageOptions );
+      $fullpage.fullpage( Main.fullpageOptions );
 
       $('.fp-auto-height').css('height', '');
   }
 
   function rebuildFullpage() {
       var activeSectionIndex = $('.fp-section.active').index(),
-          $fullpageSections = $( fullpageSectionsSelector );
+          $fullpageSections = $( Main.fullpageSectionsSelector );
 
       $.fn.fullpage.destroy('all');
 
@@ -349,7 +338,7 @@ $( function() {
           if ( timerId != null ) return false;
 
           var toIndex = (direction === 'down' ? index + 1 : index - 1);
-          timerId = setTimeout( preventScollingTimeout, fullpageOptions.scrollingSpeed);
+          timerId = setTimeout( preventScollingTimeout, Main.fullpageOptions.scrollingSpeed);
 
           if ( direction === 'down' ) {
             window.sectionDescriptionFlow.next();

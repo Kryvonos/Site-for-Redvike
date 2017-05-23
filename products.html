@@ -63,9 +63,9 @@
     </div>
 </header>
 
-<main>
+<div id="fullpage">
 
-  <div class="start-section-wrapper bg-accent" data-show-floating-menu data-append-floating-nav-marker data-fit-to-viewport-height>
+  <div class="start-section-wrapper bg-accent fp-normal-scroll" data-fp-section data-show-floating-menu data-append-floating-nav-marker data-fit-to-viewport-height>
     <div class="start-section start-section-theme-accent">
       <h1 class="start-section-heading h1">Build It For You</h1>
 
@@ -75,7 +75,7 @@
     </div>
   </div>
 
-  <div id="process" class="section-wrapper" data-floating-nav="process" data-fit-to-viewport-height>
+  <div id="process" class="fp-normal-scroll section-wrapper" data-fp-section data-floating-nav="process" data-fit-to-viewport-height>
     <section class="section process-section">
       <h2 class="out-of-page">Process description</h2>
 
@@ -102,7 +102,7 @@
     </section>
   </div>
 
-  <div id="products" class="section-wrapper products-wrapper" data-floating-nav="products" data-floating-element-class="theme-light" data-fit-to-viewport-height>
+  <div id="products" class="section-wrapper products-wrapper" data-fp-section data-floating-nav="products" data-floating-element-class="theme-light" data-fit-to-viewport-height>
     <div class="section products container" id="products">
 
         <section class="products-inner row align-items-center">
@@ -205,7 +205,7 @@
       </section>
   </div>
 
-  <div id="contacts" class="section-wrapper bg-gradient-brand" data-floating-nav="contacts" data-floating-element-class="theme-light">
+  <div id="contacts" class="section-wrapper bg-gradient-brand" data-fp-section data-floating-nav="contacts" data-floating-element-class="theme-light">
     <section class="section contacts">
       <h2 class="out-of-page">Contacts form</h2>
 
@@ -272,7 +272,42 @@
       </form>
     </section>
   </div>
-</main>
+
+
+  <footer class="fp-auto-height footer" data-fp-section>
+      <div class="container-wrapper footer-content-wrapper">
+          <div class="footer-content container">
+              <div class="row">
+                <div class="footer-contacts col-12 col-md-auto">
+                  <img class="mb-3" src="./imgs/logo.svg" width="138" height="" alt="Redvike logo" />
+
+                  <p class="footer-nav fs-md">
+                    <span class="nav-link">
+                      <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
+                    </span>
+                    <span class="nav-link">
+                      <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
+                    </span>
+                    <span class="nav-link">Świętej Teresy 2, 31-162</span>
+                    <span class="nav-link">Kraków, Poland</span>
+                  </p>
+                </div>
+
+                <div class="col-12 col-md-auto">
+                  <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
+
+                  <p class="footer-nav fs-sm text-uppercase">
+                    <a class="nav-link" href="./services.html">Services</a>
+                    <a class="nav-link" href="./products.html">Products</a>
+                    <a class="nav-link" href="./career.html">Career</a>
+                  </p>
+                </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+</div>
 
 <div class="floating-menu theme-dark" id="floatingMenu">
   <a class="floating-menu-emblem logo" href="./">
@@ -287,45 +322,14 @@
   <nav class="floating-menu-nav fs-sm"></nav>
 </div>
 
-
-<footer class="fp-auto-height footer" data-fp-section>
-    <div class="container-wrapper footer-content-wrapper">
-        <div class="footer-content container">
-            <div class="row">
-              <div class="footer-contacts col-12 col-md-auto">
-                <img class="mb-3" src="./imgs/logo.svg" width="138" height="" alt="Redvike logo" />
-
-                <p class="footer-nav fs-md">
-                  <span class="nav-link">
-                    <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
-                  </span>
-                  <span class="nav-link">
-                    <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
-                  </span>
-                  <span class="nav-link">Świętej Teresy 2, 31-162</span>
-                  <span class="nav-link">Kraków, Poland</span>
-                </p>
-              </div>
-
-              <div class="col-12 col-md-auto">
-                <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
-
-                <p class="footer-nav fs-sm text-uppercase">
-                  <a class="nav-link" href="./services.html">Services</a>
-                  <a class="nav-link" href="./products.html">Products</a>
-                  <a class="nav-link" href="./career.html">Career</a>
-                </p>
-              </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
 <script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
 <script src="./bower_components/gsap/src/uncompressed/TweenMax.js"></script>
 <script src="./bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
+<!-- <script src="./bower_components/fullpage.js/vendors/scrolloverflow.min.js"></script> -->
+<!-- <script src="./bower_components/fullpage.js/dist/jquery.fullpage.min.js"></script> -->
+<script src="./js/fullpage.js/dist/jquery.fullpage.min.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/jquery.ScrollMagic.js"></script>
@@ -335,18 +339,22 @@
 <script src="./js/main.js"></script>
 
 <script>
-var slickProps = {
-    dots: true,
-    inifinite: true,
-    speed: 500,
-    fade: true,
-    autoplay: true,
-    autoplaySpeed: 2000,
-  },
 
-  $feedbacks = $('#feedbacks');
+$( function() {
 
-$feedbacks.slick( slickProps );
+  var slickProps = {
+      dots: true,
+      inifinite: true,
+      speed: 500,
+      fade: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+    },
+
+    $feedbacks = $('#feedbacks');
+
+  $feedbacks.slick( slickProps );
+} );
 
 
   var controller = new ScrollMagic.Controller(),
@@ -485,6 +493,9 @@ $feedbacks.slick( slickProps );
           speed: 500,
       };
 
+  $productItems.on('init', function() {
+      setTimeout( Main.defineFitToViewportHeight.bind( Main), 10);
+  });
 
   $productItems.slick( slickOptions );
 } );

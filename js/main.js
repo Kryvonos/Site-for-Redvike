@@ -13,90 +13,123 @@ if ( ! String.prototype.format ) {
 }
 
 ;$(function( $ ) {
-	var $window = $(window),
-      $html = $('html'),
-      $entranceLoader = $('#entranceLoader'),
-      $fitToViewportHeight = $('[data-fit-to-viewport-height]');
+  	var $window = $(window),
+        $html = $('html'),
+        $entranceLoader = $('#entranceLoader'),
+        $fullpage = $('#fullpage'),
+        $fitToViewportHeight = $('[data-fit-to-viewport-height]'),
 
-	function init() {
-  		if ( ! Modernizr.flexbox ) {
-  			window.location = "./browser-update.html";
-  		}
+        fullpageSectionsSelector =  '[data-fp-section]',
+        fullpageIgnoreSelector =  '[data-fp-ignore]',
 
-      goTop();
-      removeEntranceLoader();
-			initEventListeners();
-			defineFitToViewportHeight();
-	};
+        fullpageOptions = {
+            scrollingSpeed: 600,
+            // scrollOverflow: true,
+            // fixedElements: '#header',
+            bigSectionsDestination: 'bottom',
+            hybrid: true,
+            // autoScrolling: true,
+            // normalScrollElements: '#process',
+            responsiveWidth: Utility.breakpoints.sm,
+            // scrollBar: true,
+            verticalCentered: false,
+            fitToSection: false,
+            sectionSelector: fullpageSectionsSelector,
+        };
 
-	function initEventListeners() {
-		$window.resize( onWindowResize );
-    $('a[href*="#"]').click( onAnchorLinkClick );
-	}
+  	function init() {
+    		if ( ! Modernizr.flexbox ) {
+    			window.location = "./browser-update.html";
+    		}
 
-	function onWindowResize( event ) {
-		defineFitToViewportHeight();
-	}
+        goTop();
+        removeEntranceLoader();
+        initFullpage();
+  			initEventListeners();
+  			defineFitToViewportHeight();
+  	};
 
-  function onAnchorLinkClick( event ) {
-      var $anchor = $( event.target ).closest('a');
+  	function initEventListeners() {
+  		$window.resize( onWindowResize );
+      $('a[href*="#"]').click( onAnchorLinkClick );
+  	}
 
-      if ( $anchor.attr('href') === '#' || $anchor.attr('href') === '#0' ) return;
+  	function onWindowResize( event ) {
+  		defineFitToViewportHeight();
+  	}
 
-      if (
-        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
-        &&
-        location.hostname == this.hostname
-      ) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+    function onAnchorLinkClick( event ) {
+        var $anchor = $( event.target ).closest('a');
 
-            // Does a scroll target exist?
-            if ( target.length ) {
-                // Only prevent default if animation is actually gonna happen
-                event.preventDefault();
+        if ( $anchor.attr('href') === '#' || $anchor.attr('href') === '#0' ) return;
 
-                $('html, body').animate({
-                  scrollTop: target.offset().top
-                }, 1000);
-            }
-        }
-  }
+        if (
+          location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+          &&
+          location.hostname == this.hostname
+        ) {
+              var target = $(this.hash);
+              target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
 
+              // Does a scroll target exist?
+              if ( target.length ) {
+                  // Only prevent default if animation is actually gonna happen
+                  event.preventDefault();
 
-  function removeEntranceLoader() {
-    $entranceLoader.fadeOut( 300, function() {
-        $(this).remove();
-        $html.removeClass('no-scrolling');
-    } );
-  }
-
-  function goTop() {
-		window.scrollTo(0,0);
-	}
-
-	function defineFitToViewportHeight( $elem ) {
-  		var height = $window.outerHeight(),
-          $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
-
-  		$fitToViewportHeight.each( function() {
-    			var $this = $(this),
-              originalHeight = 0;
-
-    			$this.css('height', '');
-    			originalHeight = $this.outerHeight();
-
-    			if ( Utility.isBreakpointDown('lg') ) return;
-
-    			if ( originalHeight < height ) {
-    				$this.css('height', height + 'px');
-    			}
-  		} );
-	}
+                  $('html, body').animate({
+                    scrollTop: target.offset().top
+                  }, 1000);
+              }
+          }
+    }
 
 
-  init();
+    function initFullpage() {
+        $fullpage.fullpage( fullpageOptions );
 
+        $('.fp-auto-height').css('height', '');
+    }
+
+    function removeEntranceLoader() {
+      $entranceLoader.fadeOut( 300, function() {
+          $(this).remove();
+          $html.removeClass('no-scrolling');
+      } );
+    }
+
+    function goTop() {
+  		window.scrollTo(0,0);
+  	}
+
+  	function defineFitToViewportHeight( $elem ) {
+    		var height = $window.outerHeight(),
+            $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
+
+        // console.log('sf');
+    		$fitToViewportHeight.each( function() {
+      			var $this = $(this),
+                originalHeight = 0;
+
+      			$this.css('height', '');
+      			originalHeight = $this.outerHeight();
+
+      			if ( Utility.isBreakpointDown('lg') ) return;
+
+      			if ( originalHeight < height ) {
+      				$this.css('height', height + 'px');
+      			}
+    		} );
+  	}
+
+
+    init();
+
+    window.Main = {
+        fullpageSectionsSelector: fullpageSectionsSelector,
+        fullpageIgnoreSelector: fullpageIgnoreSelector,
+        fullpageOptions: fullpageOptions,
+        defineFitToViewportHeight: defineFitToViewportHeight
+    };
 });
 
 
