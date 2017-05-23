@@ -100,7 +100,7 @@
         </section>
       </div>
 
-      <!-- <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
+      <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
           <section class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
@@ -117,7 +117,7 @@
                   </div>
               </div>
           </section>
-      </div> -->
+      </div>
 
       <div class="section-wrapper bg-dark" data-fp-section data-floating-nav="team" data-floating-element-class="theme-light" data-fit-to-viewport-height>
           <section class="section">
@@ -241,6 +241,7 @@
 <script src="./bower_components/scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
 <script src="./js/words-carousel.js"></script>
 <script src="./js/Utility.js"></script>
+<script src="./js/AnimationFlow.js"></script>
 <script src="./js/main.js"></script>
 
 <script>
@@ -267,7 +268,21 @@ $( function() {
       $section = null,
       $originalPrevSibling = null,
 
-      hiddenClass = 'hidden-xs-up';
+      hiddenClass = 'hidden-xs-up',
+
+      fullpageOptions = {
+          hybrid: true,
+          scrollingSpeed: Main.fullpageOptions.scrollingSpeed,
+          // bigSectionsDestination: 'bottom',
+          responsiveWidth: Main.fullpageOptions.responsiveWidth,
+          verticalCentered: false,
+          fitToSection: false,
+          sectionSelector: Main.fullpageOptions.sectionSelector,
+          onLeave: onLeave
+      },
+
+      sectionDescriptionFlow = new AnimationFlow( 'section-description' ),
+      sectionHeadingWordFlow = new AnimationFlow( 'section-heading-word' );
 
   function init() {
       $section = $( Main.fullpageIgnoreSelector ).first();
@@ -276,12 +291,18 @@ $( function() {
       updateSectionsVisibility();
 
       initEventListeners();
+
+      window.sectionDescriptionFlow = sectionDescriptionFlow;
+      window.sectionHeadingWordFlow = sectionHeadingWordFlow;
   }
 
   function initFullpage() {
-      $fullpage.fullpage( Main.fullpageOptions );
+      $fullpage.fullpage( fullpageOptions );
 
       $('.fp-auto-height').css('height', '');
+      $(window).resize( function() {
+        $('.fp-auto-height').css('height', '');
+      } );
   }
 
   function rebuildFullpage() {
@@ -341,12 +362,12 @@ $( function() {
           timerId = setTimeout( preventScollingTimeout, Main.fullpageOptions.scrollingSpeed);
 
           if ( direction === 'down' ) {
-            window.sectionDescriptionFlow.next();
-            window.sectionHeadingWordFlow.next();
+            sectionDescriptionFlow.next();
+            sectionHeadingWordFlow.next();
           }
           else {
-            window.sectionDescriptionFlow.prev();
-            window.sectionHeadingWordFlow.prev();
+            sectionDescriptionFlow.prev();
+            sectionHeadingWordFlow.prev();
           }
 
           function preventScollingTimeout() {
