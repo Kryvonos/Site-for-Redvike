@@ -291,9 +291,6 @@ $( function() {
       updateSectionsVisibility();
 
       initEventListeners();
-
-      window.sectionDescriptionFlow = sectionDescriptionFlow;
-      window.sectionHeadingWordFlow = sectionHeadingWordFlow;
   }
 
   function initFullpage() {
@@ -319,7 +316,11 @@ $( function() {
 
 
   function initEventListeners() {
-      $window.resize( updateSectionsVisibility );
+      $window.resize( function() {
+        updateSectionsVisibility();
+        sectionDescriptionFlow.rebuild();
+        sectionHeadingWordFlow.rebuild();
+      });
   }
 
 
@@ -349,8 +350,8 @@ $( function() {
       timerId = null;
 
   function onLeave(index, nextIndex, direction) {
-      if ( (index === 2 && direction === 'down' && window.sectionDescriptionFlow.hasNext()) ||
-           (index === 2 && direction === 'up' && window.sectionDescriptionFlow.hasPrev()) ) {
+      if ( (index === 2 && direction === 'down' && sectionDescriptionFlow.hasNext()) ||
+           (index === 2 && direction === 'up' && sectionDescriptionFlow.hasPrev()) ) {
 
         preventSectionScrolling = true;
       }

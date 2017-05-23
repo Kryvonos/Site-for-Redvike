@@ -58,6 +58,17 @@ function AnimationFlow( flowName ) {
     $elems.removeClass( contentClass ).removeClass( itemClass );
   }
 
+  function rebuild() {
+    var $content = $elems.filter( '.' + contentClass ),
+        index = $content.index();
+
+    setContent( initialElement() );
+    $wrapper.css({'height': '', "width": ''});
+    createTimeline();
+    setContent( $content );
+    timeline.seek( 'label-' + index );
+  }
+
   function createTimeline() {
       if ( ! $elems.length ) return;
 
@@ -68,6 +79,7 @@ function AnimationFlow( flowName ) {
       timeline = new TimelineMax({paused: true});
       // TimelineLite.ease = Power2.easeInOut;
 
+      console.log('sdf');
       for (var i = 0; i < $elems.length - 1; ++i) {
           var $startItem = $elems.eq(i),
               $endItem = $elems.eq(i + 1),
@@ -231,5 +243,5 @@ function AnimationFlow( flowName ) {
   this.prev = prev;
   this.hasNext = hasNext;
   this.hasPrev = hasPrev;
-  // this.rebuild = reduild();
+  this.rebuild = rebuild;
 }
