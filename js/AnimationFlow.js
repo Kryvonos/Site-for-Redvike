@@ -1,5 +1,6 @@
 function AnimationFlow( flowName ) {
   var timeline = null,
+      $window = $(window),
       $wrapper = null,
       $elems = null,
 
@@ -17,10 +18,21 @@ function AnimationFlow( flowName ) {
     createWrapper();
     fillWrapper();
     createTimeline();
+    initEventListeners();
+  }
+
+  function initEventListeners() {
+    $window.resize( rebuild );
   }
 
   function initAnimationFlowElems() {
-      $elems = $( '[data-animation-flow="{0}"]'.format( flowName ) );
+      var $originalElems = $( '[data-animation-flow="{0}"]'.format( flowName ) );
+
+      $elems = $originalElems.map( function(index) {
+        if ( index === 0 ) return this;
+
+        return this.cloneNode(true);
+      } );
   }
 
   function createWrapper() {
@@ -77,9 +89,7 @@ function AnimationFlow( flowName ) {
           onLabelCompleteDone = false;
 
       timeline = new TimelineMax({paused: true});
-      // TimelineLite.ease = Power2.easeInOut;
 
-      console.log('sdf');
       for (var i = 0; i < $elems.length - 1; ++i) {
           var $startItem = $elems.eq(i),
               $endItem = $elems.eq(i + 1),
