@@ -139,6 +139,11 @@
       }
     }
 
+    &-words-carousel {
+      overflow: hidden;
+      vertical-align: bottom;
+      color: color(brand);
+    }
   }
 }
 

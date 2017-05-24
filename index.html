@@ -68,16 +68,17 @@
           <div class="bg-photo-1"></div>
 
           <section class="first-section section">
-            <h1 class="h1">
-              Creating Software <br>People <!--<span class="color-brand">Love</span>-->
+            <h1 class="first-section-heading h1">
+              Creating Software <br>People
 
-              <span class="words-carousel color-brand">
-                <span class="words-carousel-item">Love</span>
-                <!-- <span class="words-carousel-item">Enjoy</span> -->
-                <!-- <span class="words-carousel-item">Adore</span> -->
-              </span>
+              <span class="color-brand" data-animation-flow="words-carousel">Love</span>
             </h1>
           </section>
+
+          <div class="out-of-page">
+            <span data-animation-flow="words-carousel">Enjoy</span>
+            <span data-animation-flow="words-carousel">Adore</span>
+          </div>
 
       </div>
 
@@ -286,16 +287,33 @@ $( function() {
           onLeave: onLeave
       },
 
-      sectionDescriptionFlow = new AnimationFlow( 'section-description' ),
-      sectionHeadingWordFlow = new AnimationFlow( 'section-heading-word' );
+      wordsCarousel = null,
+      sectionDescriptionFlow = new AnimationFlow( {name: 'section-description', delay: .2} ),
+      sectionHeadingWordFlow = new AnimationFlow( {name: 'section-heading-word', delay: .2} );
 
   function init() {
       $section = $( Main.fullpageIgnoreSelector ).first();
 
+      initWordsCarousel();
       initFullpage();
       updateSectionsVisibility();
-
       initEventListeners();
+
+      $body.click( function() {
+        wordsCarousel.next();
+      } );
+  }
+
+  function initWordsCarousel() {
+    wordsCarousel = new AnimationFlow( {
+      name: 'words-carousel',
+      wrapperClass: 'first-section-words-carousel',
+      loop: true,
+      y: 100,
+      duration: .5
+    } );
+
+    setInterval( wordsCarousel.next.bind( wordsCarousel ), 1000 );
   }
 
   function initFullpage() {

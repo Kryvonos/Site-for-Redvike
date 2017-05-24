@@ -4039,6 +4039,11 @@ html {
     .first-section {
       padding-top: 170px; } }
 
+    .first-section-words-carousel {
+      overflow: hidden;
+      vertical-align: bottom;
+      color: #F44336; }
+
 .start-section {
   display: flex;
   flex-direction: column;

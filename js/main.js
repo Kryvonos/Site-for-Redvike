@@ -327,15 +327,12 @@ $( function() {
           });
 
       scene.addTo( controller );
-        // .addIndicators();
-
       scenes.push( scene );
     } );
   }
 
   function initEventListeners() {
     $navMarker.on('click', onNavMarkerClick);
-    // new ResizeSensor($elems, updateScenesDuration);
 
     scenes.forEach( function( scene ) {
         scene.on('enter', onSceneEnter)

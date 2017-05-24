@@ -1,11 +1,23 @@
-function AnimationFlow( flowName ) {
+function AnimationFlow( options ) {
+
+
+  options = $.extend( {
+    name: 'default',
+    wrapperClass: '',
+    loop: false,
+    duration: .6,
+    delay: 0,
+    y: 50
+  }, options );
+
+
   var $window = $(window),
       $wrapper = null,
-      $elems = null,
+      $elems = null;
 
-      timeline = null,
+  var timeline = null;
 
-      wrapperClass = 'animation-flow-wrapper',
+  var wrapperClass = 'animation-flow-wrapper',
       contentClass = 'animation-flow-content',
       itemClass = 'animation-flow-item',
       inlineBlockClass = 'animation-flow-d-inline-block';
@@ -19,7 +31,7 @@ function AnimationFlow( flowName ) {
   }
 
   function initAnimationFlowElems() {
-      var $originalElems = $( '[data-animation-flow="{0}"]'.format( flowName ) );
+      var $originalElems = $( '[data-animation-flow="{0}"]'.format( options.name ) );
 
       $elems = $originalElems.map( function(index) {
         if ( index === 0 ) return this;
@@ -37,7 +49,7 @@ function AnimationFlow( flowName ) {
         displayClass = inlineBlockClass;
       }
 
-      initialElement().wrap( '<div class="{0} {1}"></div>'.format( wrapperClass, displayClass ) );
+      initialElement().wrap( '<div class="{0} {1} {2}"></div>'.format( wrapperClass, displayClass, options.wrapperClass ) );
       $wrapper = initialElement().parent();
   }
 
@@ -73,8 +85,8 @@ function AnimationFlow( flowName ) {
 
     var wrapperWidth = null,
         wrapperHeight = null,
-        duration = .6,
-        delay = .2;
+        duration = options.duration,
+        delay = options.delay;
 
     setContent( $endItem );
     wrapperWidth = $wrapper.outerWidth();
@@ -84,10 +96,10 @@ function AnimationFlow( flowName ) {
     timeline = new TimelineMax({paused: true});
 
     timeline
-      .fromTo($startItem, duration, {y: 0}, {y: -50, ease: Power2.easeInOut}, 'startItem')
+      .fromTo($startItem, duration, {y: 0}, {y: -options.y, ease: Power2.easeInOut}, 'startItem')
       .set($startItem, {y: 0})
       .fromTo($startItem, duration - delay, {opacity: 1}, {opacity: 0, ease: Power2.easeInOut}, 'startItem+=' + delay)
-      .fromTo($endItem, duration, {y: 50}, {y: 0, ease: Power2.easeInOut}, 'startItem')
+      .fromTo($endItem, duration, {y: options.y}, {y: 0, ease: Power2.easeInOut}, 'startItem')
       .fromTo($endItem, duration - delay, {opacity: 0}, {opacity: 1, ease: Power2.easeInOut}, 'startItem+=' + delay)
       .to($wrapper, duration, {width: wrapperWidth, height: wrapperHeight, ease: Power2.easeInOut}, 'startItem')
       .eventCallback('onReverseComplete', onLabelComplete, ['REVERSE'])
@@ -121,25 +133,24 @@ function AnimationFlow( flowName ) {
   }
 
   function next() {
-    if ( ! hasNext() ) return;
+    if ( ! options.loop && ! hasNext() ) return;
+    if ( timeline.isActive() ) return;
 
-    if ( timeline.isActive() ) {
-      return;
+    var $content = contentElement(),
+        $next = $content.next();
+
+    if ( ! $next.length  ) {
+      $next = $elems.first();
     }
 
-    var $content = contentElement();
-
-    animate( $content, $content.next() );
+    animate( $content, $next );
   }
 
   function prev() {
-    if ( ! hasPrev() ) return;
+    if ( ! options.loop && ! hasPrev() ) return;
+    if ( timeline.isActive() ) return false;
 
     var $content = contentElement();
-
-    if ( timeline.isActive() ) {
-      return false;
-    }
 
     animate( $content.prev(), $content, true );
   }
