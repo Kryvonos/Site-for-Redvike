@@ -515,9 +515,9 @@ $( function() {
     clearContacts();
     scenario.restoreValue( 'product-type', productType );
     scenario.showNextItem();
-    scenario.showNextItem();
+    scenario.showNextItem( false, false);
 
-    Utility.scrollTo( $contacts );
+    // Utility.scrollTo( $contacts );
   }
 
   function onContactsInputBlur( event ) {
@@ -537,7 +537,7 @@ $( function() {
           shownClass = 'contacts-group-shown';
 
 
-      function showNextItem( $elem ) {
+      function showNextItem( $elem, needFocus ) {
           var $scenarioItem = null;
 
           if ( ! $elem ) {
@@ -559,8 +559,20 @@ $( function() {
 
           $scenarioItem.addClass( shownClass );
 
+          if ( needFocus === false ) {
+            return;
+          }
+
           setTimeout( function() {
+
             $scenarioItem.find('.contacts-input').focus();
+
+            setTimeout( function() {
+              var offset = $scenarioItem.offset(),
+                  top = offset.top - ( $window.outerHeight() - $scenarioItem.outerHeight() ) / 2;
+
+              $('html, body').animate( {scrollTop: top}, 300 );
+            }, 500 );
           }, 10 );
       }
 
