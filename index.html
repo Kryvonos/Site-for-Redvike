@@ -126,10 +126,10 @@
                   <div class="section-content col-12 col-lg">
                       <header class="section-header">
                         <h2 class="section-heading h2 color-light">Meet Redvike</h2>
-                        <p class="h3">It`s about more than just design and development</p>
+                        <p class="h3 color-light">It`s about more than just design and development</p>
                       </header>
 
-                      <p class="section-text">At Redvike, we pride ourselves in helping our clients grow by becoming an outsourced part of your technical team. Our passionate team infuses elegant design principles with excellent user experience to develop web based platforms that people will remember.</p>
+                      <p class="section-text color-light-text">At Redvike, we pride ourselves in helping our clients grow by becoming an outsourced part of your technical team. Our passionate team infuses elegant design principles with excellent user experience to develop web based platforms that people will remember.</p>
                   </div>
 
                   <div class="col-12 col-lg-auto section-btn-wrapper">
@@ -169,7 +169,7 @@
                   </div>
 
                   <div class="col-12 col-lg-auto section-btn-wrapper">
-                    <a class="btn btn-primary" href="./services.html">Work with us</a>
+                    <a class="btn btn-primary" href="./products.html">Work with us</a>
                   </div>
               </div>
           </section>
@@ -298,10 +298,6 @@ $( function() {
       initFullpage();
       updateSectionsVisibility();
       initEventListeners();
-
-      $body.click( function() {
-        wordsCarousel.next();
-      } );
   }
 
   function initWordsCarousel() {
@@ -313,7 +309,7 @@ $( function() {
       duration: .5
     } );
 
-    setInterval( wordsCarousel.next.bind( wordsCarousel ), 1000 );
+    setInterval( wordsCarousel.next.bind( wordsCarousel ), 2000 );
   }
 
   function initFullpage() {

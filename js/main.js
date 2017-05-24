@@ -201,7 +201,6 @@ if ( ! String.prototype.format ) {
 
 // Floating menu
 ;$(function() {
-  // return;
 	var $header = $('#header'),
       $menuItems = $('[data-menu-item]'),
 	    $floatingMenu = $('#floatingMenu'),

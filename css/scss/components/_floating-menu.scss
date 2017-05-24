@@ -1,0 +1,50 @@
+.floating-menu {
+  $floating-menu-link-padding-y: .15em;
+  $floating-menu-transition-duration: 300ms;
+  $floating-menu-transition-timing-function: ease-in-out;
+
+  display: inline-block;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: -999999px;
+  padding-top: 100px;
+  min-height: 50vh;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+
+  &.visible:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: $container-wrapper-max-width - 1px) {
+    left: -9999999px !important;
+  }
+
+  .logo-emblem-shape {
+    fill: color(dark);
+    transition: fill $floating-menu-transition-duration $floating-menu-transition-timing-function;
+  }
+
+  &-emblem {
+    margin-bottom: 0.8rem;
+  }
+
+  &-nav {
+    padding-left: .5em;
+
+    .list-link {
+      font-weight: bold;
+      transform: translateX(0);
+      opacity: .8;
+      transition: transform $floating-menu-transition-duration $floating-menu-transition-timing-function,
+                  opacity $floating-menu-transition-duration $floating-menu-transition-timing-function,
+                  color $floating-menu-transition-duration $floating-menu-transition-timing-function;
+
+      &:hover {
+        transform: translateX(.5em);
+        opacity: 1;
+      }
+    }
+  }
+}

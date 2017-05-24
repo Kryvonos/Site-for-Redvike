@@ -4237,87 +4237,6 @@ a {
     padding-left: 0;
     padding-right: 0; }
 
-.floating-menu {
-  display: inline-block;
-  position: fixed;
-  z-index: 100;
-  top: 0px;
-  left: -999999px;
-  padding-top: 100px;
-  min-height: 50vh;
-  opacity: 0;
-  transition: opacity 500ms ease-in-out; }
-  .floating-menu.visible:hover {
-    opacity: 1; }
-  @media (max-width: 1359px) {
-    .floating-menu {
-      left: -9999999px !important; } }
-  .floating-menu .logo-emblem-shape {
-    fill: #212121;
-    transition: fill 300ms ease-in-out; }
-  .floating-menu-emblem {
-    margin-bottom: 0.8rem; }
-  .floating-menu-nav {
-    padding-left: .5em; }
-    .floating-menu-nav .list-link {
-      font-weight: bold;
-      transform: translateX(0);
-      opacity: .8;
-      transition: transform 300ms ease-in-out, opacity 300ms ease-in-out, color 300ms ease-in-out; }
-      .floating-menu-nav .list-link:hover {
-        transform: translateX(0.5em);
-        opacity: 1; }
-
-.floating-nav {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  position: fixed;
-  top: 100px;
-  right: 0px;
-  font-size: 14px;
-  color: #212121;
-  opacity: 0;
-  transition: opacity 300ms ease-in-out, color 300ms ease-in-out; }
-  @media (max-width: 991px) {
-    .floating-nav {
-      display: none; } }
-  .floating-nav.shown {
-    opacity: 1; }
-  .floating-nav-text {
-    display: inline-block;
-    margin-left: 0.7em;
-    margin-right: 2.8em;
-    font-weight: bold;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 300ms ease-in-out; }
-  .floating-nav-item {
-    display: inline-block;
-    position: relative;
-    margin-bottom: -11px;
-    margin-left: auto;
-    max-width: 1.8em;
-    transition: max-width 300ms ease-in-out; }
-    .floating-nav-item:before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      border-radius: 100px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-      height: 2px;
-      width: 100%;
-      background: #212121;
-      transition: background-color 300ms ease-in-out; }
-    .floating-nav-item:last-child {
-      margin-bottom: 0; }
-    .floating-nav-item.active {
-      max-width: 18em; }
-      .floating-nav-item.active .floating-nav-text {
-        opacity: 1; }
-
 .nav-marker {
   position: absolute;
   bottom: 0;
@@ -5010,6 +4929,87 @@ a {
   100% {
     opacity: 1;
     transform: translateY(0); } }
+.floating-menu {
+  display: inline-block;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  left: -999999px;
+  padding-top: 100px;
+  min-height: 50vh;
+  opacity: 0;
+  transition: opacity 500ms ease-in-out; }
+  .floating-menu.visible:hover {
+    opacity: 1; }
+  @media (max-width: 1359px) {
+    .floating-menu {
+      left: -9999999px !important; } }
+  .floating-menu .logo-emblem-shape {
+    fill: #212121;
+    transition: fill 300ms ease-in-out; }
+  .floating-menu-emblem {
+    margin-bottom: 0.8rem; }
+  .floating-menu-nav {
+    padding-left: .5em; }
+    .floating-menu-nav .list-link {
+      font-weight: bold;
+      transform: translateX(0);
+      opacity: .8;
+      transition: transform 300ms ease-in-out, opacity 300ms ease-in-out, color 300ms ease-in-out; }
+      .floating-menu-nav .list-link:hover {
+        transform: translateX(0.5em);
+        opacity: 1; }
+
+.floating-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: 100px;
+  right: 0px;
+  font-size: 14px;
+  color: #212121;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out, color 300ms ease-in-out; }
+  @media (max-width: 991px) {
+    .floating-nav {
+      display: none; } }
+  .floating-nav.shown {
+    opacity: 1; }
+  .floating-nav-text {
+    display: inline-block;
+    margin-left: 0.7em;
+    margin-right: 2.8em;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out; }
+  .floating-nav-item {
+    display: inline-block;
+    position: relative;
+    margin-bottom: -11px;
+    margin-left: auto;
+    max-width: 1.8em;
+    transition: max-width 300ms ease-in-out; }
+    .floating-nav-item:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      border-radius: 100px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      height: 2px;
+      width: 100%;
+      background: #212121;
+      transition: background-color 300ms ease-in-out; }
+    .floating-nav-item:last-child {
+      margin-bottom: 0; }
+    .floating-nav-item.active {
+      max-width: 18em; }
+      .floating-nav-item.active .floating-nav-text {
+        opacity: 1; }
+
 * {
   box-sizing: border-box; }
 
