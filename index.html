@@ -343,6 +343,7 @@ $( function() {
         sectionHeadingWordFlow.reset();
 
         $originalPrevSibling = null;
+        $.fn.fullpage.destroy('all');
       }
       else if ( $body.hasClass('fp-responsive') ) {
         $.fn.fullpage.destroy('all');
