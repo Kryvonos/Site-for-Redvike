@@ -68,7 +68,6 @@ function AnimationFlow( flowName ) {
     $elems.removeClass( contentClass ).removeClass( itemClass );
   }
 
-
   function animate($startItem, $endItem, playReverse) {
     if ( ! $elems.length ) return;
 
@@ -122,8 +121,11 @@ function AnimationFlow( flowName ) {
   }
 
   function next() {
-    console.log('next');
     if ( ! hasNext() ) return;
+
+    if ( timeline.isActive() ) {
+      return;
+    }
 
     var $content = contentElement();
 
@@ -131,7 +133,6 @@ function AnimationFlow( flowName ) {
   }
 
   function prev() {
-    console.log('prev');
     if ( ! hasPrev() ) return;
 
     var $content = contentElement();

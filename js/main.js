@@ -23,7 +23,7 @@ if ( ! String.prototype.format ) {
         fullpageIgnoreSelector =  '[data-fp-ignore]',
 
         fullpageOptions = {
-            scrollingSpeed: 600,
+            scrollingSpeed: 500,
             // scrollOverflow: true,
             // fixedElements: '#header',
             bigSectionsDestination: 'bottom',
@@ -105,7 +105,6 @@ if ( ! String.prototype.format ) {
     		var height = $window.outerHeight(),
             $elems = ( $elem === undefined ? $fitToViewportHeight : $elem );
 
-        // console.log('sf');
     		$fitToViewportHeight.each( function() {
       			var $this = $(this),
                 originalHeight = 0;
