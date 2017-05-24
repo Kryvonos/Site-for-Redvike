@@ -317,7 +317,7 @@ $( function() {
 
   function initEventListeners() {
       $window.resize( function() {
-        // updateSectionsVisibility();
+        updateSectionsVisibility();
       });
   }
 
@@ -358,15 +358,15 @@ $( function() {
           if ( timerId != null ) return false;
 
           var toIndex = (direction === 'down' ? index + 1 : index - 1);
-          timerId = setTimeout( preventScollingTimeout, Main.fullpageOptions.scrollingSpeed);
+          timerId = setTimeout( preventScollingTimeout, Main.fullpageOptions.scrollingSpeed + 100);
 
           if ( direction === 'down' ) {
             sectionDescriptionFlow.next();
-            // sectionHeadingWordFlow.next();
+            sectionHeadingWordFlow.next();
           }
           else {
             sectionDescriptionFlow.prev();
-            // sectionHeadingWordFlow.prev();
+            sectionHeadingWordFlow.prev();
           }
 
           function preventScollingTimeout() {

@@ -74,7 +74,7 @@ function AnimationFlow( flowName ) {
 
     var wrapperWidth = null,
         wrapperHeight = null,
-        duration = .9,
+        duration = .6,
         delay = .2;
 
     setContent( $endItem );
@@ -82,7 +82,9 @@ function AnimationFlow( flowName ) {
     wrapperHeight = $wrapper.outerHeight();
     setContent( $startItem );
 
-    timeline.clear().progress(0)
+    timeline = new TimelineMax({paused: true});
+
+    timeline
       .fromTo($startItem, duration, {y: 0}, {y: -50, ease: Power2.easeInOut}, 'startItem')
       .set($startItem, {y: 0})
       .fromTo($startItem, duration - delay, {opacity: 1}, {opacity: 0, ease: Power2.easeInOut}, 'startItem+=' + delay)
@@ -93,7 +95,6 @@ function AnimationFlow( flowName ) {
       .eventCallback('onComplete', onLabelComplete, ['FORWARD'])
     ;
 
-    console.log( playReverse );
     if ( playReverse === true ) {
       timeline.reverse(0);
     } else {
@@ -101,14 +102,11 @@ function AnimationFlow( flowName ) {
     }
 
     function onLabelComplete( arg ) {
-        console.log( 'complete', arg );
 
         if ( playReverse ) {
-          console.log('complete reverse');
           setContent( $startItem );
         } else {
           setContent( $endItem );
-          // console.log( 'complete' );
         }
 
         window.requestAnimationFrame( function() {
@@ -124,24 +122,23 @@ function AnimationFlow( flowName ) {
   }
 
   function next() {
+    console.log('next');
     if ( ! hasNext() ) return;
 
     var $content = contentElement();
-
-    if ( timeline.isActive() ) {
-      timeline.pause();
-
-      TweenMax.to(timeline, .2, {progress: 1});
-      return;
-    }
 
     animate( $content, $content.next() );
   }
 
   function prev() {
+    console.log('prev');
     if ( ! hasPrev() ) return;
 
     var $content = contentElement();
+
+    if ( timeline.isActive() ) {
+      return false;
+    }
 
     animate( $content.prev(), $content, true );
   }
