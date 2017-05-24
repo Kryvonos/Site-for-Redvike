@@ -211,6 +211,7 @@
 
       <form method="post" action="mail.php" name="contactsUs" id="contactsForm">
           <p data-scenario="product-selected" class="contacts-group">Awesome! We’ll be glad<br>to help you with <span data-restore-value="product-type"></span>.<br>Let’s get aquainted:)</p>
+          <input type="hidden" name="" />
           <p data-scenario="default" class="contacts-group contacts-group-shown">Hey! Let’s get aquainted:)</p>
           <p data-scenario="default product-selected" class="contacts-group contacts-group-shown">
             Hello! My <label for="clientName">name</label> is
@@ -233,7 +234,7 @@
             Nice to meet you, <span data-restore-value="client-name"></span>.
             When do you need your project to be done?<br>
             <span class="contacts-input-wrapper">
-              <input class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <input class="contacts-input" type="text" name="deadline-selected-product" data-validation="stringValidation" />
               <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
@@ -242,7 +243,7 @@
             Nice to meet you, <span data-restore-value="client-name"></span>.<br>
             We can help you width
             <span class="contacts-input-wrapper">
-              <input data-contacts-value="product-type" class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <input data-contacts-value="product-type" class="contacts-input" type="text" name="selected-product" data-validation="stringValidation" />
               <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
@@ -250,7 +251,7 @@
           <p data-scenario="default" class="contacts-group">
             Awesome! We’ll be glad to help you with <span data-restore-value="product-type"></span>.<br>When do you need it to be done?<br>
             <span class="contacts-input-wrapper">
-              <input class="contacts-input" type="text" name="name" data-validation="stringValidation" />
+              <input class="contacts-input" type="text" name="deadline" data-validation="stringValidation" />
               <span class="contacts-input-error">Incorrect data</span>
             </span>
           </p>
@@ -414,12 +415,9 @@ $( function() {
   function onContactsInputFocus( event ) {
     var $target = $( event.target );
 
-    console.log( $target );
-    console.log( $focusedInput );
     if ( $target.is( $focusedInput ) ) return;
 
     // blurFocusedInput();
-    console.log( 'set focused input' );
     $focusedInput = $target;
     triggerElementFocus( $target );
   }
@@ -427,8 +425,7 @@ $( function() {
   function onContactsInputKeypress( event ) {
 
     if ( event.key === 'Enter' || event.keyCode === 27 ) {
-      console.log('onContactsInputKeypress');
-      // blurFocusedInput();
+      blurFocusedInput();
     }
 
   }
@@ -437,12 +434,7 @@ $( function() {
     var $target = $( event.target ),
         $contactsInput = $target.closest('.contacts-group').find('.contacts-input');
 
-    console.log( 'body' );
     if ( $focusedInput && ! $contactsInput.is( $focusedInput ) ) {
-      console.log('blur');
-      console.log( event );
-      console.log( $target );
-      // debugger;
       blurFocusedInput();
     }
   }
@@ -455,8 +447,6 @@ $( function() {
     $focusedInput.blur();
     $focusedInput.trigger( 'contacts-input:blur', { target: $focusedInput.get(0) } );
 
-    console.log( 'contacts-input:blur' );
-    console.log( $focusedInput );
     $focusedInput = null;
   }
 
@@ -488,7 +478,7 @@ $( function() {
           arrows: false,
           infinite: true,
           fade: true,
-          // autoplay: true,
+          autoplay: true,
           autoplaySpeed: 5000,
           speed: 500,
       };

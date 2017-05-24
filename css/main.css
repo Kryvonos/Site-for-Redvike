@@ -3941,7 +3941,8 @@ html {
       font-size: 20px; } }
 
 * {
-  -webkit-font-smoothing: antialiased; }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
 
 .out-of-page {
   position: absolute !important;
@@ -4433,6 +4434,10 @@ a {
 *[data-scenario] {
   display: none; }
 
+@-webkit-keyframes autofill {
+  to {
+    color: #212121;
+    background: transparent; } }
 .contacts-group {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -4456,6 +4461,9 @@ a {
   background: transparent;
   outline: none;
   color: #FFF; }
+  .contacts-input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both; }
   .contacts-input-wrapper {
     position: relative; }
   .contacts-input-shown-error .contacts-input-error {

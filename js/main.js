@@ -24,14 +24,9 @@ if ( ! String.prototype.format ) {
 
         fullpageOptions = {
             scrollingSpeed: 500,
-            // scrollOverflow: true,
-            // fixedElements: '#header',
             bigSectionsDestination: 'bottom',
             hybrid: true,
-            // autoScrolling: true,
-            // normalScrollElements: '#process',
             responsiveWidth: Utility.breakpoints.sm,
-            // scrollBar: true,
             verticalCentered: false,
             fitToSection: false,
             sectionSelector: fullpageSectionsSelector,
@@ -44,7 +39,6 @@ if ( ! String.prototype.format ) {
 
         goTop();
         removeEntranceLoader();
-        // initFullpage();
   			initEventListeners();
   			defineFitToViewportHeight();
   	};
@@ -86,8 +80,6 @@ if ( ! String.prototype.format ) {
 
     function initFullpage() {
         $fullpage.fullpage( fullpageOptions );
-
-        $('.fp-auto-height').css('height', '');
     }
 
     function removeEntranceLoader() {
@@ -502,6 +494,7 @@ $( function() {
       $contactsForm = $('#contactsForm'),
       $selectProduct = $('[data-select-product]'),
 
+      isProductSelected = false,
       formHasBeenSubmitted = false,
       manuallyRestoredValue = {};
 
@@ -520,6 +513,7 @@ $( function() {
     var $target = $( event.target ),
         productType = $target.data('selectProduct');
 
+    isProductSelected = true;
     scenario = defineScenario( 'product-selected' );
 
     clearContacts();
@@ -534,8 +528,6 @@ $( function() {
     var $target = $( event.target ),
         $scenarioItem = $target.closest('[data-scenario]');
 
-    // console.log( 'onContactsInputBlur' );
-    // console.log( event.target );
     scenario.showNextItem( $scenarioItem );
 
     if ( ! scenario.hasMoreItemsToShow() && scenario.isValidItems() && ! formHasBeenSubmitted ) {
@@ -570,8 +562,10 @@ $( function() {
           if ( $scenarioItem.hasClass( shownClass) ) return;
 
           $scenarioItem.addClass( shownClass );
-          // console.log('need to focus next item');
-          // $scenarioItem.find('.contacts-input').focus();
+
+          setTimeout( function() {
+            $scenarioItem.find('.contacts-input').focus();
+          }, 10 );
       }
 
       function getNextScenarioItem( $elem ) {
@@ -705,6 +699,11 @@ $( function() {
 
 
   function clearContacts() {
+    var $fail = $('#formSubmitFail'),
+        $ok = $('#formSubmitOk');
+
+    $ok.addClass( 'hidden-xs-up' );
+    $fail.addClass( 'hidden-xs-up' );
     $('.contacts-group-shown').removeClass( 'contacts-group-shown' );
   }
 
@@ -712,16 +711,22 @@ $( function() {
   function submitForm() {
       var $name = $contactsForm.find('input[name=name]'),
           $email = $contactsForm.find('input[name=email]'),
-          $selectedProduct = $contactsForm.find('input[name="selected-product"]'),
           $represent = $contactsForm.find('input[name=represent]'),
           $deadline = $contactsForm.find('input[name=deadline]'),
           $fail = $('#formSubmitFail'),
-          $ok = $('#formSubmitOk');
+          $ok = $('#formSubmitOk'),
+
+          selectedProductVal = $contactsForm.find('input[name="selected-product"]').val();
+
+      if ( isProductSelected ) {
+        $deadline = $contactsForm.find('input[name="deadline-selected-product"]');
+        selectedProductVal = manuallyRestoredValue['product-type'];
+      }
 
       $.post( $contactsForm.attr('action'), {
         name: $name.val(),
         email: $email.val(),
-        selectedProduct: $selectedProduct.val(),
+        selectedProduct: selectedProductVal,
         represent: $represent.val(),
         deadline: $deadline.val(),
       } )

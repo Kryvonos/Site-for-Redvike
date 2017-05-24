@@ -2,10 +2,6 @@
   position: absolute !important;
   left: -9999999px !important;
 }
-// .container {
-//   padding-left: 30px;
-//   padding-right: 30px;
-// }
 
 .container-wrapper {
   margin-left: auto;
@@ -760,6 +756,13 @@ a {
   display: none;
 }
 
+@-webkit-keyframes autofill {
+    to {
+        color: color(dark);
+        background: transparent;
+    }
+}
+
 .contacts {
   &-group {
     margin-top: 1em;
@@ -791,6 +794,11 @@ a {
     background: transparent;
     outline: none;
     color: #FFF;
+
+    &:-webkit-autofill {
+        -webkit-animation-name: autofill;
+        -webkit-animation-fill-mode: both;
+    }
 
     &-wrapper {
       position: relative;

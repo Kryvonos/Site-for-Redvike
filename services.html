@@ -62,9 +62,9 @@
     </div>
 </header>
 
-<main>
+<div id="fullpage">
 
-  <div class="start-section-wrapper bg-accent" data-show-floating-menu data-fit-to-viewport-height data-append-floating-nav-marker>
+  <div class="start-section-wrapper bg-accent" data-fp-section data-show-floating-menu data-fit-to-viewport-height data-append-floating-nav-marker>
     <div class="start-section start-section-theme-accent">
       <h1 class="start-section-heading h1">Build It With You</h1>
 
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div id="services" class="section-wrapper bg-dark" data-floating-nav="technologies" data-floating-element-class="theme-light" data-fit-to-viewport-height>
+  <div id="services" class="section-wrapper bg-dark" data-fp-section data-floating-nav="technologies" data-floating-element-class="theme-light" data-fit-to-viewport-height>
 
     <section class="tech-section section">
       <div class="tech-section-row row">
@@ -135,7 +135,42 @@
           <p class="m-0"><a class="hire-us-link heading" href="mailto:hello@redvike.com">hello@<br class="hidden-sm-up">redvike.com</a></p>
       </section>
   </div>
-</main>
+
+
+  <footer class="fp-auto-height footer" data-fp-section>
+      <div class="container-wrapper footer-content-wrapper">
+          <div class="footer-content container">
+              <div class="row">
+                <div class="footer-contacts col-12 col-md-auto">
+                  <img class="mb-3" src="./imgs/logo.svg" width="138" height="" alt="Redvike logo" />
+
+                  <p class="footer-nav fs-md">
+                    <span class="nav-link">
+                      <a class="brand-link" href="mailto:hello@redvike.com">hello@redvike.com</a>
+                    </span>
+                    <span class="nav-link">
+                      <a class="brand-link" href="tel:+48733533135">+48 733 533 135</a>
+                    </span>
+                    <span class="nav-link">Świętej Teresy 2, 31-162</span>
+                    <span class="nav-link">Kraków, Poland</span>
+                  </p>
+                </div>
+
+                <div class="col-12 col-md-auto">
+                  <p class="footer-menu-label"><strong class="fs-md text-uppercase">Menu</strong></p>
+
+                  <p class="footer-nav fs-sm text-uppercase">
+                    <a class="nav-link" href="./services.html">Services</a>
+                    <a class="nav-link" href="./products.html">Products</a>
+                    <a class="nav-link" href="./career.html">Career</a>
+                  </p>
+                </div>
+              </div>
+          </div>
+      </div>
+  </footer>
+
+</div>
 
 <div class="floating-menu theme-dark" id="floatingMenu">
   <a class="floating-menu-emblem logo" href="./">
@@ -206,6 +241,10 @@ var controller = new ScrollMagic.Controller(),
 servicesScene.addTo( controller )
   .setTween('#servicesLabel', {y: '50%', ease: Linear.easeNone})
 ;
+
+$( function() {
+  Main.initFullpage();
+} );
 </script>
 
 </body>
