@@ -79,11 +79,10 @@
             </h1>
           </section>
 
-          <!-- <span class="nav-marker">services</span> -->
       </div>
 
       <div class="section-wrapper" data-floating-nav="services" data-fp-section data-show-floating-menu data-fit-to-viewport-height>
-        <section class="section" id="serviceSection">
+        <section id="serviceSection" class="section">
             <div class="row">
                 <div class="section-content col-12 col-lg">
                     <h2 class="section-heading h2" id="heading">Build It <span class="color-brand" data-animation-flow="section-heading-word">With</span> You</h2>
@@ -95,14 +94,14 @@
                 </div>
 
                 <div class="col-12 col-lg-auto section-btn-wrapper">
-                  <a class="btn btn-primary" href="./services.html">Learn more</a>
+                  <a id="servicesLink" class="btn btn-primary" href="./services.html">Learn more</a>
                 </div>
             </div>
         </section>
       </div>
 
       <div class="section-wrapper" data-fp-ignore="md-up" data-fit-to-viewport-height>
-          <section class="section">
+          <section id="productSection" class="section">
               <div class="row">
                   <div class="section-content col-12 col-lg">
                       <h2 class="section-heading h2">Build It <span class="color-brand" data-animation-flow="section-heading-word">For</span> You</h2>
@@ -114,7 +113,7 @@
                   </div>
 
                   <div class="col-12 col-lg-auto section-btn-wrapper">
-                    <a class="btn btn-primary" href="./products.html">Learn more</a>
+                    <a id="productLink" class="btn btn-primary" href="./products.html">Learn more</a>
                   </div>
               </div>
           </section>
@@ -268,6 +267,11 @@ $( function() {
       $fullpage = $('#fullpage'),
       $section = null,
       $originalPrevSibling = null,
+      $servicesLink = $('#servicesLink'),
+      $productLink = $('#productLink'),
+
+      servicesLink = $servicesLink.attr('href'),
+      productLink = $productLink.attr('href'),
 
       hiddenClass = 'hidden-xs-up',
 
@@ -296,13 +300,6 @@ $( function() {
 
   function initFullpage() {
       $fullpage.fullpage( fullpageOptions );
-
-      // $('.fp-auto-height').css('height', '');
-      // $(window).resize( function() {
-      //   setTimeout( function() {
-      //     $('.fp-auto-height').css('height', '');
-      //   }, 1000);
-      // } );
   }
 
   function rebuildFullpage() {
@@ -372,10 +369,12 @@ $( function() {
           if ( direction === 'down' ) {
             sectionDescriptionFlow.next();
             sectionHeadingWordFlow.next();
+            $servicesLink.attr('href', productLink);
           }
           else {
             sectionDescriptionFlow.prev();
             sectionHeadingWordFlow.prev();
+            $servicesLink.attr('href', servicesLink);
           }
 
           function preventScollingTimeout() {
