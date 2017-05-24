@@ -4939,7 +4939,7 @@ a {
   min-height: 50vh;
   opacity: 0;
   transition: opacity 500ms ease-in-out; }
-  .floating-menu.visible:hover {
+  .floating-menu.visible {
     opacity: 1; }
   @media (max-width: 1359px) {
     .floating-menu {

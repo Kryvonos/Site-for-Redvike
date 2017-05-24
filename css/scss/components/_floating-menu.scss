@@ -13,7 +13,7 @@
   opacity: 0;
   transition: opacity 500ms ease-in-out;
 
-  &.visible:hover {
+  &.visible {
     opacity: 1;
   }
 

@@ -236,12 +236,13 @@ if ( ! String.prototype.format ) {
   function initScene() {
     scene = new ScrollMagic.Scene({
         triggerElement: $('[data-show-floating-menu]'),
-        triggerHook: 'onLeave',
+        triggerHook: 0.001,
         duration: 0,
       });
 
-    scene.addTo( controller );
-  	  // .addIndicators();
+    scene.addTo( controller )
+  	  // .addIndicators()
+    ;
   }
 
   function initEventListeners() {
@@ -251,7 +252,7 @@ if ( ! String.prototype.format ) {
 
 	function onSceneStart( event ) {
 	  var left = '',
-	      indent = 30; // px
+	      indent = 40; // px
 
 	  if ( event.scrollDirection === 'FORWARD' ) {
 	    $floatingMenu.addClass('visible');
@@ -431,6 +432,7 @@ $( function() {
 
     showFloatingNav();
 
+    $floatingNav.find('.active').removeClass('active');
     $floatingMenu.addClass( triggerElementClass );
     $floatingNav.addClass( triggerElementClass );
 
