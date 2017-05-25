@@ -4065,8 +4065,7 @@ html {
   .start-section-wrapper {
     position: relative;
     display: flex;
-    flex-direction: column;
-    max-height: 800px; }
+    flex-direction: column; }
   .start-section-heading {
     margin-bottom: .7em; }
   .start-section-text {
