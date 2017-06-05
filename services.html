@@ -7,6 +7,8 @@
   <title>Redvike</title>
 
   <link rel="stylesheet" href="./bower_components/normalize-css/normalize.css" />
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick.css"/>
+  <link rel="stylesheet" href="./bower_components/slick-carousel/slick/slick-theme.css"/>
   <link rel="stylesheet" href="./bower_components/fullpage.js/jquery.fullPage.css" />
   <link rel="stylesheet" href="./css/main.css" />
 </head>
@@ -131,6 +133,51 @@
     <span id="servicesLabel" class="parallax-label">Services</span>
   </div>
 
+  <div class="section-wrapper" data-fp-section data-floating-nav="feedback" data-fit-to-viewport-height>
+      <section class="section">
+          <div class="row">
+              <div class="section-content col-12 col-lg">
+                  <header class="section-header">
+                    <h2 class="section-heading h2">Testimotionals</h2>
+                  </header>
+
+                  <div class="feedbacks slick-custom" id="feedbacks">
+                        <blockquote class="quote">
+                          <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                          <p>...due to constant communication, it felt like they are a part of our technical team. They are more flexible than other contractors we have worked with. They understand challenges that start-ups are facing and trying to adapt their development process based on the requirements.</p>
+
+                          <footer>
+                            <p class="quote-author"><strong>Andrew Tkachiv, CTO of Call Page</strong></p>
+                          </footer>
+                        </blockquote>
+
+                        <blockquote class="quote">
+                          <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                          <p>Redvike has client-oriented culture. Team members are well motivated to do all the best to finish the project in time and deliver the best quality possible.</p>
+
+                          <footer>
+                            <p class="quote-author"><strong>Yauhen Rachkouski, Project Manager @ LeadR</strong></p>
+                          </footer>
+                        </blockquote>
+
+                        <blockquote class="quote">
+                          <img class="quote-icon" src="./imgs/icons/quotes.svg" alt="Quotes icon" width="" height="" />
+                          <p>...awesome work. Great guys. Highly appreciated.</p>
+
+                          <footer>
+                            <p class="quote-author"><strong>Ronen Yuval - Hoch, CTO of Shoptagr LTD</strong></p>
+                          </footer>
+                        </blockquote>
+                  </div>
+              </div>
+
+              <div class="col-12 col-lg-auto section-btn-wrapper">
+                <a class="btn btn-primary" href="#contacts">Work with us</a>
+              </div>
+          </div>
+      </section>
+  </div>
+
   <div class="section-wrapper bg-gradient-brand" data-fp-section data-floating-nav="contacts" data-floating-element-class="theme-light" data-fit-to-viewport-height>
       <section class="section hire-us-section">
           <h2 class="hire-us-heading heading">Hire Us</h2>
@@ -189,9 +236,20 @@
   <nav class="floating-menu-nav fs-sm"></nav>
 </div>
 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ ga('create', 'UA-82175074-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 <script src="./js/modernizr-custom.js"></script>
 <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+<script src="./bower_components/slick-carousel/slick/slick.min.js"></script>
 <script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
 <script src="bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
 <script src="./bower_components/fullpage.js/dist/jquery.fullpage.min.js"></script>
@@ -203,19 +261,44 @@
 <script src="./js/main.js"></script>
 
 <script>
-var controller = new ScrollMagic.Controller(),
-    servicesScene = new ScrollMagic.Scene( {
-      triggerElement: '#services',
-      triggerHook: 'onEnter',
-      duration: '200%'
-    } );
-
-servicesScene.addTo( controller )
-  .setTween('#servicesLabel', {y: '50%', ease: Linear.easeNone})
-;
 
 $( function() {
+
+  var slickProps = {
+      dots: true,
+      inifinite: true,
+      speed: 500,
+      fade: true,
+      autoplay: true,
+      autoplaySpeed: 2000,
+    },
+
+    $feedbacks = $('#feedbacks');
+
+  $feedbacks.slick( slickProps );
+} );
+
+
+$( function() {
+
+  var controller = new ScrollMagic.Controller(),
+      servicesScene = new ScrollMagic.Scene( {
+        triggerElement: '#services',
+        triggerHook: 'onEnter',
+        duration: '200%'
+      } );
+
+  servicesScene.addTo( controller )
+    .setTween('#servicesLabel', {y: '50%', ease: Linear.easeNone})
+  ;
+
+} );
+
+
+$( function() {
+
   Main.initFullpage();
+
 } );
 </script>
 
